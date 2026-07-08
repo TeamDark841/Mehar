@@ -10,7 +10,7 @@
      since balances/tasks/withdrawals must never be served stale.
    ============================================================ */
 
-const CACHE_VERSION = "earnpkr-v2";
+const CACHE_VERSION = "earnpkr-v3";
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 
 const SHELL_ASSETS = [
