@@ -1,7 +1,0 @@
-User-agent: *
-Allow: /index.html
-Disallow: /auth.html
-Disallow: /app.html
-Disallow: /admin.html
-
-Sitemap: https://earnpkrauf.shop/sitemap.xml
