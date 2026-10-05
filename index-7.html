@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WILD — Into the Untamed</title>
+<meta name="description" content="Explore the wild. Discover wildlife, forests, oceans and the untamed beauty of nature.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+:root{--bg:#08110d;--green:#76d36b;--green2:#b7f29d;--text:#f3f8f1;--muted:#a9b7ad;--glass:rgba(255,255,255,.075);--border:rgba(255,255,255,.14);--shadow:0 20px 60px rgba(0,0,0,.35);--soft:12px 12px 30px rgba(0,0,0,.45),-8px -8px 25px rgba(255,255,255,.025)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:"DM Sans",sans-serif;background:radial-gradient(circle at 10% 10%,rgba(91,180,92,.12),transparent 30%),radial-gradient(circle at 90% 30%,rgba(38,130,72,.12),transparent 30%),linear-gradient(135deg,#050b08,#0a1510 50%,#07100c);color:var(--text);overflow-x:hidden}a{text-decoration:none;color:inherit}button{font-family:inherit}.container{width:min(1180px,92%);margin:auto}
+.navbar{position:fixed;top:18px;left:50%;transform:translateX(-50%);width:min(1150px,92%);padding:13px 18px;border:1px solid var(--border);background:rgba(10,22,15,.65);backdrop-filter:blur(20px);border-radius:22px;box-shadow:var(--shadow);z-index:1000}.nav-inner{display:flex;align-items:center;justify-content:space-between}.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:2px}.logo-mark{width:39px;height:39px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(145deg,#163722,#0a1d11);box-shadow:var(--soft);color:var(--green2);font-size:19px}.logo span{color:var(--green2)}.nav-links{display:flex;gap:28px;align-items:center}.nav-links a{color:#c9d4cb;font-size:14px;transition:.3s}.nav-links a:hover{color:var(--green2)}.nav-btn{padding:10px 18px;border-radius:14px;border:1px solid rgba(150,240,132,.25);background:rgba(116,211,107,.1);color:var(--green2)}.menu-btn{display:none;width:42px;height:42px;border:0;border-radius:13px;background:var(--glass);color:white;font-size:20px}
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:100px}.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border:1px solid var(--border);border-radius:100px;background:var(--glass);backdrop-filter:blur(15px);color:var(--green2);font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-bottom:25px}.badge i{width:7px;height:7px;background:#80e77a;border-radius:50%;box-shadow:0 0 14px #80e77a}.hero h1{font-family:"Playfair Display",serif;font-size:clamp(60px,8vw,105px);line-height:.9;letter-spacing:-4px;margin-bottom:30px}.hero h1 span{color:var(--green);font-style:italic}.hero-text{color:var(--muted);font-size:17px;line-height:1.8;max-width:590px}.hero-actions{display:flex;gap:15px;margin-top:35px;flex-wrap:wrap}.primary-btn,.secondary-btn{padding:15px 23px;border-radius:17px;font-weight:700;border:1px solid transparent;transition:.3s;display:inline-flex;align-items:center;gap:9px}.primary-btn{color:#061006;background:var(--green2);box-shadow:8px 8px 20px rgba(0,0,0,.35),-5px -5px 15px rgba(255,255,255,.04)}.primary-btn:hover,.secondary-btn:hover{transform:translateY(-3px)}.secondary-btn{color:white;background:var(--glass);border-color:var(--border);backdrop-filter:blur(15px)}
+.hero-visual{position:relative;height:600px}.hero-image{position:absolute;inset:25px 0 25px 35px;border-radius:45px;overflow:hidden;background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.8)),url("https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1200&q=85") center/cover;box-shadow:25px 30px 70px rgba(0,0,0,.5),-10px -10px 35px rgba(255,255,255,.025)}.floating-card{position:absolute;padding:18px;border-radius:22px;background:rgba(9,22,14,.68);border:1px solid var(--border);backdrop-filter:blur(20px);box-shadow:var(--shadow)}.card-top{top:20px;right:-20px;width:190px}.card-bottom{left:-25px;bottom:50px;width:220px}.floating-card small{color:#93a397;font-size:11px}.floating-card strong{display:block;margin-top:5px;font-size:21px;color:var(--green2)}.animal-icon{font-size:30px;margin-bottom:5px}
+section{padding:115px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:45px}.section-label{color:var(--green);font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}.section-title{font-family:"Playfair Display",serif;font-size:clamp(38px,5vw,65px);line-height:1}.section-description{color:var(--muted);max-width:450px;line-height:1.7}
+.stats{padding-top:30px}.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.stat{padding:30px;border-radius:25px;background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid var(--border);box-shadow:var(--soft)}.stat-number{font-family:"Playfair Display",serif;font-size:43px;color:var(--green2)}.stat p{color:var(--muted);margin-top:7px;font-size:13px}
+.animal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.animal-card{min-height:430px;position:relative;overflow:hidden;border-radius:30px;border:1px solid var(--border);background:#101b14;box-shadow:var(--soft);transition:.45s}.animal-card:hover{transform:translateY(-10px)}.animal-img{position:absolute;inset:0;background-size:cover;background-position:center;transition:.6s}.animal-card:hover .animal-img{transform:scale(1.08)}.animal-card:nth-child(1) .animal-img{background-image:url("https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=900&q=80")}.animal-card:nth-child(2) .animal-img{background-image:url("https://images.unsplash.com/photo-1535338454770-8be927b5a00b?auto=format&fit=crop&w=900&q=80")}.animal-card:nth-child(3) .animal-img{background-image:url("https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=900&q=80")}.animal-card::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 20%,rgba(0,0,0,.9) 100%)}.animal-info{position:absolute;left:25px;right:25px;bottom:25px;z-index:2}.animal-tag{display:inline-block;padding:6px 10px;border-radius:20px;background:rgba(116,211,107,.14);border:1px solid rgba(116,211,107,.25);color:var(--green2);font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}.animal-info h3{font-family:"Playfair Display",serif;font-size:32px}.animal-info p{color:#b8c3ba;font-size:13px;line-height:1.6;margin-top:7px}
+.glass-box{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;border-radius:35px;background:rgba(255,255,255,.055);border:1px solid var(--border);backdrop-filter:blur(25px);box-shadow:var(--shadow)}.glass-content{padding:60px}.glass-content h2{font-family:"Playfair Display",serif;font-size:55px;line-height:1;margin-bottom:22px}.glass-content p{color:var(--muted);line-height:1.8}.feature-list{margin-top:30px;display:grid;gap:14px}.feature{display:flex;gap:14px;align-items:center}.feature-icon{width:42px;height:42px;flex:none;display:grid;place-items:center;border-radius:14px;background:rgba(118,211,107,.09);box-shadow:var(--soft)}.feature span{color:#c8d1ca;font-size:14px}.glass-image{min-height:500px;background:linear-gradient(90deg,rgba(9,19,13,.2),transparent),url("https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1200&q=85") center/cover}
+.eco-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.eco{min-height:250px;padding:25px;border-radius:27px;border:1px solid var(--border);background:rgba(255,255,255,.045);box-shadow:var(--soft);display:flex;flex-direction:column;justify-content:end;position:relative;overflow:hidden;transition:.4s}.eco:hover{transform:translateY(-7px);border-color:rgba(118,211,107,.35)}.eco-icon{position:absolute;top:22px;right:22px;font-size:42px;opacity:.85}.eco h3{font-size:21px;margin-bottom:7px}.eco p{color:var(--muted);font-size:12px;line-height:1.5}
+.quote-section{text-align:center}.quote{max-width:950px;margin:auto}.quote-mark{font-family:serif;font-size:90px;color:var(--green);height:65px}.quote p{font-family:"Playfair Display",serif;font-size:clamp(30px,4vw,55px);line-height:1.2}.quote small{display:block;color:var(--muted);margin-top:25px}
+.conservation{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}.conservation-image{min-height:550px;border-radius:35px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.5)),url("https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1100&q=85") center/cover;box-shadow:var(--shadow)}.progress-list{display:grid;gap:27px;margin-top:35px}.progress-item{display:grid;gap:10px}.progress-top{display:flex;justify-content:space-between;color:#d9e2da;font-size:13px}.progress-bar{height:7px;background:rgba(255,255,255,.08);border-radius:20px;overflow:hidden}.progress-fill{height:100%;width:var(--width);background:linear-gradient(90deg,#5ba858,#b7f29d);border-radius:20px}
+.gallery{display:grid;grid-template-columns:1.4fr .8fr .8fr;grid-auto-rows:240px;gap:15px}.gallery-item{border-radius:25px;overflow:hidden;position:relative;border:1px solid var(--border)}.gallery-item img{width:100%;height:100%;object-fit:cover;transition:.5s}.gallery-item:hover img{transform:scale(1.07)}.gallery-item:first-child{grid-row:span 2}
+.newsletter{text-align:center;padding:75px 30px;border-radius:35px;background:radial-gradient(circle at center,rgba(118,211,107,.1),transparent 55%),rgba(255,255,255,.045);border:1px solid var(--border);box-shadow:var(--shadow)}.newsletter h2{font-family:"Playfair Display",serif;font-size:50px}.newsletter p{color:var(--muted);margin:15px auto 30px;max-width:520px;line-height:1.7}.email-form{width:min(500px,100%);margin:auto;display:flex;gap:10px;padding:7px;border:1px solid var(--border);background:rgba(0,0,0,.2);border-radius:18px}.email-form input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:white;padding:12px;font-size:14px}.email-form button{border:0;padding:12px 19px;border-radius:13px;background:var(--green2);color:#081108;font-weight:700;cursor:pointer}
+footer{padding:55px 0 30px}.footer-top{display:flex;justify-content:space-between;gap:30px;padding-bottom:35px;border-bottom:1px solid rgba(255,255,255,.08)}.footer-brand{max-width:330px}.footer-brand p{color:var(--muted);line-height:1.7;font-size:13px;margin-top:15px}.footer-links{display:flex;gap:60px}.footer-links div{display:grid;gap:10px}.footer-links strong{font-size:13px}.footer-links a{color:#87958a;font-size:12px}.footer-links a:hover{color:var(--green2)}.copyright{display:flex;justify-content:space-between;color:#68756b;font-size:11px;padding-top:22px}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}.reveal.active{opacity:1;transform:none}
+@media(max-width:950px){.nav-links{position:absolute;top:70px;left:0;right:0;padding:20px;border-radius:20px;background:rgba(8,18,12,.95);border:1px solid var(--border);backdrop-filter:blur(20px);display:none;flex-direction:column}.nav-links.open{display:flex}.menu-btn{display:block}.nav-btn{display:none}.hero-grid{grid-template-columns:1fr}.hero{padding-top:120px}.hero-visual{height:500px}.stats-grid{grid-template-columns:repeat(2,1fr)}.animal-grid{grid-template-columns:1fr 1fr}.eco-grid{grid-template-columns:1fr 1fr}.glass-box,.conservation{grid-template-columns:1fr}.glass-image{min-height:400px}.conservation-image{min-height:450px}}
+@media(max-width:650px){section{padding:80px 0}.hero h1{font-size:64px;letter-spacing:-3px}.hero-visual{height:400px}.hero-image{inset:10px 0;border-radius:30px}.card-top{right:-5px;top:0}.card-bottom{left:-5px;bottom:15px}.section-head{display:block}.section-description{margin-top:18px}.stats-grid,.animal-grid,.eco-grid{grid-template-columns:1fr}.animal-card{min-height:400px}.glass-content{padding:35px 25px}.glass-content h2{font-size:42px}.gallery{grid-template-columns:1fr 1fr;grid-auto-rows:180px}.gallery-item:first-child{grid-row:span 1}.gallery-item:last-child{grid-column:span 2}.newsletter h2{font-size:38px}.email-form{flex-direction:column;background:transparent;border:0;padding:0}.email-form input{width:100%;border:1px solid var(--border);background:rgba(255,255,255,.05);border-radius:15px}.email-form button{width:100%}.footer-top{display:block}.footer-links{margin-top:35px;gap:40px;flex-wrap:wrap}.copyright{display:block;line-height:2}}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+<div class="nav-inner">
+<a href="#home" class="logo"><div class="logo-mark">◈</div><div>W<span>ILD</span></div></a>
+<nav class="nav-links" id="navLinks">
+<a href="#home">Home</a><a href="#animals">Animals</a><a href="#ecosystems">Ecosystems</a><a href="#conservation">Conservation</a><a href="#gallery">Gallery</a>
+</nav>
+<a href="#explore" class="nav-btn">Explore Wild</a>
+<button class="menu-btn" id="menuBtn">☰</button>
+</div>
+</header>
+
+<main>
+<section class="hero" id="home">
+<div class="container hero-grid">
+<div class="hero-content reveal">
+<div class="badge"><i></i>Discover the untamed</div>
+<h1>Into the<br><span>Wild.</span></h1>
+<p class="hero-text">Step beyond the ordinary and discover a world where forests breathe, oceans move, mountains stand tall, and every creature has a story.</p>
+<div class="hero-actions"><a href="#animals" class="primary-btn">Explore Wildlife →</a><a href="#conservation" class="secondary-btn">Protect Nature</a></div>
+</div>
+<div class="hero-visual reveal">
+<div class="hero-image"></div>
+<div class="floating-card card-top"><div class="animal-icon">🐆</div><small>Featured creature</small><strong>Wild Leopard</strong></div>
+<div class="floating-card card-bottom"><small>Earth's living network</small><strong>Nature is home.</strong></div>
+</div>
+</div>
+</section>
+
+<section class="stats"><div class="container"><div class="stats-grid">
+<div class="stat reveal"><div class="stat-number">80%</div><p>Life on Earth found in nature</p></div>
+<div class="stat reveal"><div class="stat-number">8.7M+</div><p>Estimated species worldwide</p></div>
+<div class="stat reveal"><div class="stat-number">5</div><p>Major ocean systems</p></div>
+<div class="stat reveal"><div class="stat-number">24/7</div><p>Nature never stops</p></div>
+</div></div></section>
+
+<section id="animals"><div class="container">
+<div class="section-head reveal"><div><div class="section-label">Wild souls</div><h2 class="section-title">Meet the<br>untamed.</h2></div><p class="section-description">From silent predators to enormous giants, every creature plays a role in the balance of our planet.</p></div>
+<div class="animal-grid">
+<article class="animal-card reveal"><div class="animal-img"></div><div class="animal-info"><span class="animal-tag">Predator</span><h3>Leopard</h3><p>A master of stealth, patience and adaptation.</p></div></article>
+<article class="animal-card reveal"><div class="animal-img"></div><div class="animal-info"><span class="animal-tag">Apex</span><h3>Wolf</h3><p>Intelligent, social and deeply connected to its pack.</p></div></article>
+<article class="animal-card reveal"><div class="animal-img"></div><div class="animal-info"><span class="animal-tag">Giant</span><h3>Elephant</h3><p>A symbol of memory, family and ancient wisdom.</p></div></article>
+</div>
+</div></section>
+
+<section id="explore"><div class="container"><div class="glass-box reveal">
+<div class="glass-content"><div class="section-label">The living planet</div><h2>Nature is<br>not silent.</h2><p>Every leaf, river, animal and mountain is part of a complex system. What looks like wilderness is actually one giant conversation between life and its environment.</p>
+<div class="feature-list">
+<div class="feature"><div class="feature-icon">🌱</div><span>Forests regulate our planet.</span></div>
+<div class="feature"><div class="feature-icon">💧</div><span>Rivers connect ecosystems.</span></div>
+<div class="feature"><div class="feature-icon">🐾</div><span>Animals maintain natural balance.</span></div>
+<div class="feature"><div class="feature-icon">🌎</div><span>Everything is connected.</span></div>
+</div></div>
+<div class="glass-image"></div>
+</div></div></section>
+
+<section id="ecosystems"><div class="container">
+<div class="section-head reveal"><div><div class="section-label">Explore habitats</div><h2 class="section-title">Four worlds.<br>One planet.</h2></div><p class="section-description">Different environments create different forms of life. Explore the places where wild creatures make their homes.</p></div>
+<div class="eco-grid">
+<div class="eco reveal"><div class="eco-icon">🌲</div><h3>Forests</h3><p>Dense worlds filled with ancient trees, predators and hidden life.</p></div>
+<div class="eco reveal"><div class="eco-icon">🌊</div><h3>Oceans</h3><p>Vast blue ecosystems covering most of our planet.</p></div>
+<div class="eco reveal"><div class="eco-icon">🏔️</div><h3>Mountains</h3><p>Extreme landscapes where life learns to adapt.</p></div>
+<div class="eco reveal"><div class="eco-icon">🏜️</div><h3>Deserts</h3><p>Harsh environments where survival becomes an art.</p></div>
+</div>
+</div></section>
+
+<section class="quote-section"><div class="container"><div class="quote reveal"><div class="quote-mark">“</div><p>The wild is not a place to visit. It is the part of ourselves we must never lose.</p><small>— WILD philosophy</small></div></div></section>
+
+<section id="conservation"><div class="container conservation">
+<div class="conservation-image reveal"></div>
+<div class="reveal"><div class="section-label">Protect the wild</div><h2 class="section-title">The future<br>is still alive.</h2><p class="section-description" style="margin-top:22px">Protecting wildlife means protecting the systems that make life possible. Forests, oceans, wetlands and grasslands all need space to survive.</p>
+<div class="progress-list">
+<div class="progress-item"><div class="progress-top"><span>Forest protection</span><span>78%</span></div><div class="progress-bar"><div class="progress-fill" style="--width:78%"></div></div></div>
+<div class="progress-item"><div class="progress-top"><span>Ocean conservation</span><span>64%</span></div><div class="progress-bar"><div class="progress-fill" style="--width:64%"></div></div></div>
+<div class="progress-item"><div class="progress-top"><span>Wildlife awareness</span><span>91%</span></div><div class="progress-bar"><div class="progress-fill" style="--width:91%"></div></div></div>
+</div></div>
+</div></section>
+
+<section id="gallery"><div class="container">
+<div class="section-head reveal"><div><div class="section-label">Visual stories</div><h2 class="section-title">Wild<br>moments.</h2></div><p class="section-description">A small glimpse into the beauty and raw power of the natural world.</p></div>
+<div class="gallery">
+<div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=85" alt="Mountain landscape"></div>
+<div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1519052537078-e6302a4968d4?auto=format&fit=crop&w=800&q=85" alt="Wild animal"></div>
+<div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=85" alt="Forest"></div>
+<div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85" alt="Ocean"></div>
+<div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=900&q=85" alt="Nature"></div>
+</div>
+</div></section>
+
+<section><div class="container"><div class="newsletter reveal"><div class="section-label">Stay connected</div><h2>Keep the wild close.</h2><p>Get stories about wildlife, nature and conservation delivered to your inbox.</p><form class="email-form" id="emailForm"><input type="email" id="email" placeholder="Your email address" required><button type="submit">Join the wild</button></form></div></div></section>
+</main>
+
+<footer><div class="container"><div class="footer-top">
+<div class="footer-brand"><a href="#home" class="logo"><div class="logo-mark">◈</div><div>W<span>ILD</span></div></a><p>A digital journey into the world's wild places, incredible creatures and the people working to protect them.</p></div>
+<div class="footer-links"><div><strong>Explore</strong><a href="#animals">Animals</a><a href="#ecosystems">Ecosystems</a><a href="#gallery">Gallery</a></div><div><strong>Learn</strong><a href="#conservation">Conservation</a><a href="#explore">Nature</a><a href="#home">Stories</a></div><div><strong>Connect</strong><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Contact</a></div></div>
+</div><div class="copyright"><span>© 2026 WILD. Made for the untamed.</span><span>Respect nature. Protect life.</span></div></div></footer>
+
+<script>
+const menuBtn=document.getElementById("menuBtn"),navLinks=document.getElementById("navLinks");
+menuBtn.addEventListener("click",()=>{navLinks.classList.toggle("open");menuBtn.textContent=navLinks.classList.contains("open")?"×":"☰"});
+document.querySelectorAll(".nav-links a").forEach(link=>link.addEventListener("click",()=>{navLinks.classList.remove("open");menuBtn.textContent="☰"}));
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add("active")}),{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+document.getElementById("emailForm").addEventListener("submit",e=>{e.preventDefault();alert("Welcome to WILD 🌿\n\nYou are now connected with the wild.");e.target.reset()});
+document.querySelectorAll("a[href^='#']").forEach(anchor=>anchor.addEventListener("click",function(e){const target=document.querySelector(this.getAttribute("href"));if(target){e.preventDefault();target.scrollIntoView({behavior:"smooth"})}}));
+</script>
+</body>
+</html>
