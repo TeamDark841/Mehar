@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WILD — Into the Wild</title>
+<meta name="description" content="A premium wildlife and conservation experience.">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{
+ --bg:#07100c;--bg2:#0b1711;--panel:rgba(17,35,25,.66);--line:rgba(183,242,157,.16);
+ --green:#76d36b;--green2:#b7f29d;--text:#eef9ed;--muted:#a9b8ad;--danger:#ff7777;
+ --shadow:0 24px 70px rgba(0,0,0,.42)
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:
+radial-gradient(circle at 15% 10%,rgba(70,145,77,.18),transparent 35%),
+radial-gradient(circle at 85% 20%,rgba(24,92,53,.2),transparent 30%),var(--bg);
+color:var(--text);font-family:Inter,system-ui,Arial,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}.wrap{width:min(1180px,92%);margin:auto}
+nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:20;width:min(1180px,92%);
+display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border:1px solid var(--line);
+background:rgba(7,16,12,.62);backdrop-filter:blur(18px);border-radius:22px;box-shadow:var(--shadow)}
+.logo{font-weight:900;letter-spacing:2px;color:var(--green2)}nav .links{display:flex;gap:8px;align-items:center}
+nav a,button{border:0;color:var(--text);background:transparent;cursor:pointer;font:inherit}
+nav a{padding:10px 13px;border-radius:13px}nav a:hover{background:rgba(118,211,107,.1)}
+.adminBtn,.primary{background:linear-gradient(135deg,var(--green),#3f9d59);color:#061008!important;font-weight:800;
+box-shadow:0 10px 30px rgba(118,211,107,.16)}.adminBtn{padding:10px 14px;border-radius:13px}
+.menu{display:none;font-size:24px}
+.hero{min-height:100vh;display:grid;place-items:center;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:-10%;background:
+linear-gradient(180deg,rgba(4,13,8,.15),rgba(4,13,8,.94)),
+url("https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=2200&q=85") center/cover;
+filter:saturate(.85);transform:scale(1.08);animation:drift 14s ease-in-out infinite alternate}
+@keyframes drift{to{transform:scale(1.16) translateY(-12px)}}
+.hero .content{position:relative;z-index:2;text-align:center;max-width:850px;padding-top:80px}
+.eyebrow{color:var(--green2);letter-spacing:4px;font-size:12px;font-weight:800}.hero h1{font-size:clamp(58px,11vw,145px);line-height:.82;margin:18px 0;
+letter-spacing:-7px;text-shadow:0 18px 60px #000}.hero p{font-size:clamp(16px,2vw,21px);color:#d2ded4;max-width:670px;margin:25px auto}
+.cta{display:inline-flex;padding:14px 20px;border-radius:16px}.scroll{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:12px}
+section{padding:100px 0}.sectionHead{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:30px}
+h2{font-size:clamp(34px,5vw,60px);margin:0;letter-spacing:-2px}.muted{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card,.glass{border:1px solid var(--line);background:linear-gradient(145deg,rgba(22,46,31,.74),rgba(8,19,13,.56));
+backdrop-filter:blur(18px);border-radius:25px;box-shadow:var(--shadow);overflow:hidden}
+.card img{width:100%;height:260px;object-fit:cover}.cardBody{padding:22px}.pill{display:inline-block;padding:7px 10px;border-radius:999px;background:rgba(118,211,107,.1);color:var(--green2);font-size:12px}
+.eco{padding:25px;min-height:200px}.eco strong{font-size:25px}.bar{height:9px;border-radius:20px;background:#15251b;overflow:hidden;margin-top:18px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--green2));border-radius:inherit}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.stat{padding:25px;text-align:center;border:1px solid var(--line);border-radius:22px;background:rgba(12,28,18,.65)}
+.stat b{display:block;font-size:40px;color:var(--green2)}.gallery{columns:3 260px;column-gap:15px}.gallery img{width:100%;margin:0 0 15px;border-radius:20px;display:block;border:1px solid var(--line)}
+.newsletter{padding:35px;display:flex;align-items:center;justify-content:space-between;gap:25px}.newsletter form{display:flex;gap:10px}.input{width:100%;padding:14px 15px;border:1px solid var(--line);border-radius:14px;background:#09140e;color:white;outline:none}.newsletter .input{width:280px}
+footer{padding:50px 0;border-top:1px solid var(--line);color:var(--muted)}
+.toast{position:fixed;right:18px;bottom:18px;z-index:100;padding:14px 17px;border:1px solid var(--line);border-radius:15px;background:#102018;box-shadow:var(--shadow);display:none}
+.modal{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.72);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:20px}
+.modal.show{display:flex}.modalBox{width:min(440px,100%);padding:28px;border-radius:26px;border:1px solid var(--line);background:#0b1811;box-shadow:var(--shadow)}
+.modalBox h2{font-size:32px;margin-bottom:8px}.modalBox form{display:grid;gap:12px}.close{float:right;font-size:24px;color:var(--muted)}
+#adminApp{display:none;min-height:100vh;padding:30px}.adminShell{max-width:1250px;margin:auto}.adminTop{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px}
+.adminGrid{display:grid;grid-template-columns:220px 1fr;gap:18px}.side,.mainPanel{border:1px solid var(--line);background:var(--panel);backdrop-filter:blur(18px);border-radius:25px;padding:18px}
+.side button{width:100%;text-align:left;padding:13px;border-radius:12px;margin-bottom:6px}.side button.active,.side button:hover{background:rgba(118,211,107,.1)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.kpi{padding:20px;border-radius:18px;border:1px solid var(--line);background:rgba(8,20,13,.55)}.kpi b{font-size:30px;display:block;color:var(--green2)}
+.adminSection{display:none}.adminSection.active{display:block}.row{display:flex;gap:10px;align-items:center}.between{justify-content:space-between}
+.tableWrap{overflow:auto;margin-top:15px}.table{width:100%;border-collapse:collapse;min-width:650px}.table th,.table td{padding:12px;border-bottom:1px solid var(--line);text-align:left}
+.formGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.formGrid .full{grid-column:1/-1}
+.danger{color:#ffd1d1!important;background:rgba(255,80,80,.12)!important}.small{font-size:12px;color:var(--muted)}
+.hidden{display:none!important}
+@media(max-width:800px){nav .links{display:none}.menu{display:block}.grid,.stats,.kpis{grid-template-columns:1fr}.newsletter{display:block}.newsletter form{margin-top:20px}.newsletter .input{width:100%}.adminGrid{grid-template-columns:1fr}.hero h1{letter-spacing:-4px}.formGrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div id="siteApp">
+<nav>
+ <a class="logo" href="#home">WILD</a>
+ <div class="links" id="navLinks">
+  <a href="#wildlife">Wildlife</a><a href="#ecosystems">Ecosystems</a><a href="#gallery">Gallery</a>
+  <button class="adminBtn" onclick="openAdmin()">Admin</button>
+ </div>
+ <button class="menu" onclick="toggleMenu()">☰</button>
+</nav>
+
+<div class="hero" id="home">
+ <div class="content">
+  <div class="eyebrow">ONE PLANET · MANY STORIES</div>
+  <h1>THE WILD</h1>
+  <p>Explore extraordinary animals, fragile ecosystems and the people working to protect them.</p>
+  <a class="cta primary" href="#wildlife">Explore the wild ↓</a>
+ </div>
+ <div class="scroll">SCROLL TO DISCOVER</div>
+</div>
+
+<section id="wildlife"><div class="wrap">
+ <div class="sectionHead"><div><div class="eyebrow">01 / WILDLIFE</div><h2>Meet the wild.</h2></div><p class="muted">Powered by your Supabase database.</p></div>
+ <div class="grid" id="wildlifeGrid"></div>
+</div></section>
+
+<section id="ecosystems"><div class="wrap">
+ <div class="sectionHead"><div><div class="eyebrow">02 / ECOSYSTEMS</div><h2>Living worlds.</h2></div></div>
+ <div class="grid" id="ecosystemGrid"></div>
+</div></section>
+
+<section><div class="wrap"><div class="glass" style="padding:28px">
+ <div class="sectionHead"><div><div class="eyebrow">03 / CONSERVATION</div><h2>Protect what remains.</h2></div></div>
+ <div class="stats"><div class="stat"><b>80%</b><span class="muted">of land mammals live in forests</span></div><div class="stat"><b>1M+</b><span class="muted">species face extinction risk</span></div><div class="stat"><b>30%</b><span class="muted">of land is forested</span></div></div>
+</div></div></section>
+
+<section id="gallery"><div class="wrap">
+ <div class="sectionHead"><div><div class="eyebrow">04 / GALLERY</div><h2>Frames from nature.</h2></div></div>
+ <div class="gallery">
+  <img src="https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=900&q=85">
+  <img src="https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=900&q=85">
+  <img src="https://images.unsplash.com/photo-1552410260-0fd9b577afa6?auto=format&fit=crop&w=900&q=85">
+  <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=900&q=85">
+  <img src="https://images.unsplash.com/photo-1535338454770-8be927b5a00b?auto=format&fit=crop&w=900&q=85">
+ </div>
+</div></section>
+
+<section><div class="wrap"><div class="glass newsletter">
+ <div><div class="eyebrow">STAY WILD</div><h2 style="font-size:35px;margin:8px 0">Get field notes.</h2><p class="muted">Occasional stories and conservation updates.</p></div>
+ <form onsubmit="subscribe(event)"><input class="input" id="subEmail" type="email" required placeholder="you@example.com"><button class="primary cta">Subscribe</button></form>
+ </div></div></section>
+<footer><div class="wrap">© 2026 WILD · Built for the planet.</div></footer>
+</div>
+
+<div id="adminApp">
+ <div class="adminShell">
+  <div class="adminTop"><div><div class="eyebrow">WILD / ADMIN</div><h1 style="margin:5px 0">Control center</h1><div class="small" id="adminEmail"></div></div><button class="adminBtn" onclick="logout()">Logout</button></div>
+  <div class="adminGrid">
+   <aside class="side">
+    <button class="active" data-tab="overview" onclick="tab('overview',this)">Overview</button>
+    <button data-tab="wildlife" onclick="tab('wildlife',this)">Wildlife</button>
+    <button data-tab="ecosystems" onclick="tab('ecosystems',this)">Ecosystems</button>
+    <button data-tab="subscribers" onclick="tab('subscribers',this)">Subscribers</button>
+   </aside>
+   <main class="mainPanel">
+    <section class="adminSection active" id="a-overview">
+      <h2 style="font-size:35px">Overview</h2><div class="kpis">
+       <div class="kpi"><span class="small">Wildlife</span><b id="kWild">0</b></div>
+       <div class="kpi"><span class="small">Ecosystems</span><b id="kEco">0</b></div>
+       <div class="kpi"><span class="small">Subscribers</span><b id="kSub">0</b></div>
+       <div class="kpi"><span class="small">Status</span><b style="font-size:20px">LIVE</b></div>
+      </div>
+    </section>
+
+    <section class="adminSection" id="a-wildlife">
+      <div class="row between"><div><h2 style="font-size:35px">Wildlife</h2><div class="small">Add or remove public wildlife cards.</div></div><button class="primary cta" onclick="showForm('wildlife')">+ Add</button></div>
+      <div id="wildForm" class="glass" style="display:none;margin-top:15px;padding:18px">
+       <form onsubmit="addWildlife(event)" class="formGrid">
+        <input class="input" id="wName" required placeholder="Name">
+        <input class="input" id="wCategory" required placeholder="Category">
+        <input class="input full" id="wDesc" required placeholder="Description">
+        <input class="input full" id="wImage" required placeholder="Image URL">
+        <button class="primary cta full">Save wildlife</button>
+       </form>
+      </div>
+      <div class="tableWrap"><table class="table"><thead><tr><th>Name</th><th>Category</th><th>Action</th></tr></thead><tbody id="wildTable"></tbody></table></div>
+    </section>
+
+    <section class="adminSection" id="a-ecosystems">
+      <div class="row between"><div><h2 style="font-size:35px">Ecosystems</h2><div class="small">Manage ecosystem cards.</div></div><button class="primary cta" onclick="showForm('ecosystem')">+ Add</button></div>
+      <div id="ecoForm" class="glass" style="display:none;margin-top:15px;padding:18px">
+       <form onsubmit="addEcosystem(event)" class="formGrid">
+        <input class="input" id="eName" required placeholder="Ecosystem name">
+        <input class="input" id="eProgress" type="number" min="0" max="100" required placeholder="Progress %">
+        <input class="input full" id="eDesc" required placeholder="Description">
+        <button class="primary cta full">Save ecosystem</button>
+       </form>
+      </div>
+      <div class="tableWrap"><table class="table"><thead><tr><th>Name</th><th>Progress</th><th>Action</th></tr></thead><tbody id="ecoTable"></tbody></table></div>
+    </section>
+
+    <section class="adminSection" id="a-subscribers">
+      <div class="row between"><div><h2 style="font-size:35px">Subscribers</h2><div class="small">Only authenticated admins can view these records.</div></div></div>
+      <div class="tableWrap"><table class="table"><thead><tr><th>Email</th><th>Date</th><th>Action</th></tr></thead><tbody id="subTable"></tbody></table></div>
+    </section>
+   </main>
+  </div>
+ </div>
+</div>
+
+<div class="modal" id="loginModal">
+ <div class="modalBox">
+  <button class="close" onclick="closeAdmin()">×</button>
+  <div class="eyebrow">SECURE ADMIN</div><h2>Sign in</h2><p class="muted">Use the admin email/password created in Supabase Authentication.</p>
+  <form onsubmit="login(event)">
+   <input class="input" id="loginEmail" type="email" required placeholder="Admin email">
+   <input class="input" id="loginPassword" type="password" required placeholder="Password">
+   <button class="primary cta">Sign in</button>
+  </form>
+ </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const SUPABASE_URL = "https://wxeoxeahtfizaecjlhvj.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4ZW94ZWFodGZpemFlY2psaHZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTExODMyMDAsImV4cCI6MjEwNjc1OTIwMH0.fUMYpwSwf_LY_FD1KfCv2dmSgVTSaIInlLrQItDak0";
+const { createClient } = supabase;
+const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const $=id=>document.getElementById(id);
+function toast(msg){const t=$("toast");t.textContent=msg;t.style.display="block";setTimeout(()=>t.style.display="none",2800)}
+function toggleMenu(){const n=$("navLinks");n.style.display=n.style.display==="flex"?"none":"flex";n.style.position="absolute";n.style.right="12px";n.style.top="65px";n.style.flexDirection="column";n.style.background="#0b1811";n.style.padding="12px";n.style.borderRadius="16px"}
+function openAdmin(){$("loginModal").classList.add("show")}
+function closeAdmin(){$("loginModal").classList.remove("show")}
+async function login(e){
+ e.preventDefault();
+ const email=$("loginEmail").value.trim(), password=$("loginPassword").value;
+ const {data,error}=await db.auth.signInWithPassword({email,password});
+ if(error){toast(error.message);return}
+ const {data:admin,error:ae}=await db.from("admin_users").select("user_id").eq("user_id",data.user.id).maybeSingle();
+ if(ae||!admin){await db.auth.signOut();toast("This account is not an admin.");return}
+ closeAdmin(); $("siteApp").style.display="none"; $("adminApp").style.display="block"; $("adminEmail").textContent=email;
+ await refreshAdmin(); window.scrollTo(0,0);
+}
+async function logout(){await db.auth.signOut();$("adminApp").style.display="none";$("siteApp").style.display="block";toast("Logged out")}
+function tab(name,btn){document.querySelectorAll(".side button").forEach(x=>x.classList.remove("active"));btn.classList.add("active");document.querySelectorAll(".adminSection").forEach(x=>x.classList.remove("active"));$("a-"+name).classList.add("active")}
+function showForm(type){$(type==="wildlife"?"wildForm":"ecoForm").style.display="block"}
+async function loadPublic(){
+ const {data:w,error:we}=await db.from("wildlife").select("*").order("created_at",{ascending:false});
+ const {data:e,error:ee}=await db.from("ecosystems").select("*").order("created_at",{ascending:false});
+ if(we) toast("Could not load wildlife. Check Supabase policies.");
+ $("wildlifeGrid").innerHTML=(w||[]).map(x=>`<article class="card"><img src="${esc(x.image_url||x.image||'')}" alt=""><div class="cardBody"><span class="pill">${esc(x.category||'Wildlife')}</span><h3>${esc(x.name)}</h3><p class="muted">${esc(x.description||'')}</p></div></article>`).join("")||`<div class="muted">No wildlife added yet.</div>`;
+ $("ecosystemGrid").innerHTML=(e||[]).map(x=>`<article class="card eco"><span class="pill">ECOSYSTEM</span><h3>${esc(x.name)}</h3><p class="muted">${esc(x.description||'')}</p><div class="bar"><i style="width:${Math.max(0,Math.min(100,Number(x.progress||0)))}%"></i></div><div class="small" style="margin-top:8px">${Number(x.progress||0)}% protected / tracked</div></article>`).join("")||`<div class="muted">No ecosystems added yet.</div>`;
+}
+async function subscribe(e){
+ e.preventDefault();const email=$("subEmail").value.trim();
+ const {error}=await db.from("subscribers").insert({email});
+ if(error){toast(error.code==="23505"?"Already subscribed.":error.message);return}
+ $("subEmail").value="";toast("Subscribed successfully.")
+}
+async function addWildlife(e){
+ e.preventDefault();
+ const payload={name:$("wName").value.trim(),category:$("wCategory").value.trim(),description:$("wDesc").value.trim(),image_url:$("wImage").value.trim()};
+ const {error}=await db.from("wildlife").insert(payload);
+ if(error){toast(error.message);return} e.target.reset();$("wildForm").style.display="none";toast("Wildlife added");refreshAdmin();loadPublic();
+}
+async function addEcosystem(e){
+ e.preventDefault();
+ const payload={name:$("eName").value.trim(),description:$("eDesc").value.trim(),progress:Number($("eProgress").value)};
+ const {error}=await db.from("ecosystems").insert(payload);
+ if(error){toast(error.message);return} e.target.reset();$("ecoForm").style.display="none";toast("Ecosystem added");refreshAdmin();loadPublic();
+}
+async function removeRow(table,id){if(!confirm("Delete this item?"))return;const {error}=await db.from(table).delete().eq("id",id);if(error){toast(error.message);return}toast("Deleted");refreshAdmin();loadPublic()}
+async function removeSub(id){if(!confirm("Delete subscriber?"))return;const {error}=await db.from("subscribers").delete().eq("id",id);if(error){toast(error.message);return}toast("Deleted");refreshAdmin()}
+async function refreshAdmin(){
+ const [w,e,s]=await Promise.all([
+  db.from("wildlife").select("*").order("created_at",{ascending:false}),
+  db.from("ecosystems").select("*").order("created_at",{ascending:false}),
+  db.from("subscribers").select("*").order("created_at",{ascending:false})
+ ]);
+ $("kWild").textContent=(w.data||[]).length;$("kEco").textContent=(e.data||[]).length;$("kSub").textContent=(s.data||[]).length;
+ $("wildTable").innerHTML=(w.data||[]).map(x=>`<tr><td>${esc(x.name)}</td><td>${esc(x.category||"")}</td><td><button class="cta danger" onclick="removeRow('wildlife','${x.id}')">Delete</button></td></tr>`).join("");
+ $("ecoTable").innerHTML=(e.data||[]).map(x=>`<tr><td>${esc(x.name)}</td><td>${Number(x.progress||0)}%</td><td><button class="cta danger" onclick="removeRow('ecosystems','${x.id}')">Delete</button></td></tr>`).join("");
+ $("subTable").innerHTML=(s.data||[]).map(x=>`<tr><td>${esc(x.email)}</td><td>${x.created_at?new Date(x.created_at).toLocaleString():""}</td><td><button class="cta danger" onclick="removeSub('${x.id}')">Delete</button></td></tr>`).join("");
+}
+function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+async function boot(){
+ const {data:{session}}=await db.auth.getSession();
+ if(session){
+  const {data:admin}=await db.from("admin_users").select("user_id").eq("user_id",session.user.id).maybeSingle();
+  if(admin){$("siteApp").style.display="none";$("adminApp").style.display="block";$("adminEmail").textContent=session.user.email||"";refreshAdmin()}
+ }
+ await loadPublic();
+}
+db.auth.onAuthStateChange((_event,session)=>{if(!session){$("adminApp").style.display="none";$("siteApp").style.display="block"}});
+boot();
+</script>
+</body>
+</html>
