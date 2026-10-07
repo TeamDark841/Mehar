@@ -3,459 +3,1398 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EarnApp — Turn spare minutes into Rupees</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#061c15">
+<meta name="description" content="EarnApp — Turn spare minutes into Rupees.">
+<title>EarnApp — Turn Spare Minutes into Rupees</title>
+
 <style>
-  :root{
-    --bg: #0d2019;
-    --surface: #122e24;
-    --surface-2: #16392a;
-    --gold: #c9a227;
-    --gold-bright: #e9c766;
-    --cream: #f3efe4;
-    --sage: #a7c0b3;
-    --sage-dim: #72897c;
-    --line: rgba(243,239,228,0.1);
+:root{
+  --bg:#061c15;
+  --bg2:#09271e;
+  --gold:#e9bd3e;
+  --gold2:#ffd968;
+  --text:#f7f4e9;
+  --muted:#9fb0a9;
+  --glass:rgba(20,66,52,.42);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 15% 8%,rgba(233,189,62,.10),transparent 28%),
+    radial-gradient(circle at 88% 28%,rgba(38,116,82,.18),transparent 34%),
+    linear-gradient(145deg,var(--bg),#04140f 55%,#071f17);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  overflow-x:hidden;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  background-image:
+    linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+  background-size:42px 42px;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+.container{
+  width:min(1120px,calc(100% - 32px));
+  margin:auto;
+}
+
+/* Floating background orbs */
+
+.orb{
+  position:absolute;
+  border-radius:50%;
+  pointer-events:none;
+  border:1px solid rgba(255,220,111,.10);
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      rgba(255,220,111,.16),
+      rgba(24,102,74,.08) 42%,
+      transparent 70%
+    );
+  box-shadow:
+    inset 0 0 45px rgba(255,255,255,.03),
+    0 0 70px rgba(20,120,83,.08);
+}
+
+.orb.one{
+  width:300px;
+  height:300px;
+  left:-130px;
+  top:180px;
+}
+
+.orb.two{
+  width:220px;
+  height:220px;
+  right:-90px;
+  top:620px;
+}
+
+.orb.three{
+  width:150px;
+  height:150px;
+  left:12%;
+  top:1200px;
+}
+
+/* NAVBAR */
+
+.nav{
+  position:relative;
+  z-index:10;
+  padding:24px 0;
+}
+
+.navbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 14px 12px 18px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:24px;
+  background:rgba(7,34,26,.52);
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+  box-shadow:0 18px 55px rgba(0,0,0,.20);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-family:Georgia,serif;
+  font-weight:700;
+  font-size:22px;
+}
+
+.logo{
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  color:var(--gold);
+  font-size:24px;
+  border:1px solid rgba(233,189,62,.45);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(233,189,62,.16),
+      rgba(255,255,255,.04)
+    );
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.14),
+    0 8px 25px rgba(0,0,0,.22);
+}
+
+.rating{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  color:#e7e2d2;
+  font-size:14px;
+  padding:9px 12px;
+  border-radius:14px;
+  background:rgba(255,255,255,.045);
+}
+
+.rating b{
+  color:var(--gold2);
+}
+
+/* HERO */
+
+.hero{
+  position:relative;
+  padding:52px 0 80px;
+  min-height:760px;
+  display:flex;
+  align-items:center;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.02fr .98fr;
+  gap:44px;
+  align-items:center;
+}
+
+.kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid rgba(233,189,62,.22);
+  background:rgba(233,189,62,.07);
+  color:#e7d58c;
+  font-size:13px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.kicker i{
+  width:7px;
+  height:7px;
+  background:var(--gold);
+  border-radius:50%;
+  box-shadow:0 0 15px var(--gold);
+}
+
+h1{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(54px,7vw,92px);
+  line-height:.91;
+  letter-spacing:-.055em;
+  margin:22px 0 28px;
+}
+
+h1 span{
+  color:var(--gold2);
+  font-style:italic;
+}
+
+.hero-copy{
+  font-size:20px;
+  line-height:1.7;
+  color:#aebcb6;
+  max-width:640px;
+  margin:0 0 30px;
+}
+
+.hero-actions{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.download{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  min-height:62px;
+  padding:0 27px;
+  border-radius:20px;
+  font-size:18px;
+  font-weight:800;
+  color:#0a2118;
+  background:linear-gradient(135deg,#ffe17a,#dcae29);
+  border:1px solid rgba(255,231,145,.75);
+  box-shadow:
+    0 14px 40px rgba(222,174,40,.20),
+    inset 0 1px rgba(255,255,255,.75);
+  transition:.25s;
+}
+
+.download:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 48px rgba(222,174,40,.28);
+}
+
+.download svg{
+  width:21px;
+}
+
+.secondary{
+  min-height:62px;
+  padding:0 22px;
+  border-radius:20px;
+  display:inline-flex;
+  align-items:center;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.045);
+  color:#d9e1dc;
+  font-weight:700;
+  backdrop-filter:blur(16px);
+}
+
+.meta{
+  margin-top:14px;
+  color:#7f938b;
+  font-size:14px;
+  text-align:center;
+  max-width:400px;
+}
+
+/* PHONE */
+
+.visual-wrap{
+  position:relative;
+  display:grid;
+  place-items:center;
+  min-height:590px;
+}
+
+.glow{
+  position:absolute;
+  width:390px;
+  height:390px;
+  border-radius:50%;
+  background:rgba(47,143,98,.12);
+  filter:blur(55px);
+}
+
+.phone{
+  width:min(360px,82vw);
+  aspect-ratio:.52;
+  border-radius:48px;
+  padding:14px;
+  position:relative;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.14),
+      rgba(255,255,255,.025)
+    );
+  border:1px solid rgba(255,255,255,.17);
+  box-shadow:
+    0 24px 80px rgba(0,0,0,.38),
+    inset 0 0 0 1px rgba(255,255,255,.04);
+  transform:
+    perspective(1100px)
+    rotateY(-10deg)
+    rotateX(4deg);
+  transition:transform .15s ease-out;
+}
+
+.phone:before{
+  content:"";
+  position:absolute;
+  inset:9px;
+  border-radius:40px;
+  border:1px solid rgba(255,255,255,.08);
+  pointer-events:none;
+}
+
+.screen{
+  height:100%;
+  border-radius:38px;
+  padding:26px 20px;
+  overflow:hidden;
+  position:relative;
+  background:
+    radial-gradient(
+      circle at 20% 12%,
+      rgba(255,215,90,.11),
+      transparent 30%
+    ),
+    linear-gradient(160deg,#0a3427,#062018 70%);
+}
+
+.notch{
+  width:90px;
+  height:20px;
+  background:#04130e;
+  border-radius:30px;
+  margin:-15px auto 25px;
+}
+
+.screen-top{
+  display:flex;
+  justify-content:space-between;
+  color:#92a79f;
+  font-size:11px;
+}
+
+.balance-label{
+  margin-top:38px;
+  color:#8fa69d;
+  font-size:11px;
+  letter-spacing:.08em;
+}
+
+.balance{
+  font-family:Georgia,serif;
+  color:var(--gold2);
+  font-size:36px;
+  font-weight:700;
+  margin:7px 0 20px;
+}
+
+.mini-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.mini{
+  padding:14px;
+  border-radius:16px;
+  background:rgba(27,94,68,.35);
+  border:1px solid rgba(255,255,255,.055);
+  font-size:11px;
+  color:#7f9990;
+}
+
+.mini b{
+  display:block;
+  color:#e8eee9;
+  font-size:15px;
+  margin-bottom:3px;
+}
+
+.check{
+  margin-top:13px;
+  padding:17px;
+  border-radius:18px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,207,65,.13),
+      rgba(25,104,75,.30)
+    );
+  border:1px solid rgba(255,211,75,.12);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.check-dot{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  background:var(--gold);
+  box-shadow:0 5px 20px rgba(233,189,62,.2);
+}
+
+.check b{
+  font-size:13px;
+}
+
+.check small{
+  display:block;
+  color:#91a89e;
+  margin-top:3px;
+}
+
+.floating{
+  position:absolute;
+  right:-8px;
+  top:105px;
+  padding:14px 16px;
+  border-radius:18px;
+  background:rgba(13,54,42,.62);
+  border:1px solid rgba(255,255,255,.11);
+  backdrop-filter:blur(20px);
+  box-shadow:0 20px 45px rgba(0,0,0,.25);
+}
+
+.floating strong{
+  color:var(--gold2);
+  font-size:18px;
+}
+
+.floating small{
+  display:block;
+  color:#82978f;
+  margin-top:2px;
+}
+
+/* SECTIONS */
+
+.section{
+  padding:85px 0;
+}
+
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:30px;
+  margin-bottom:30px;
+}
+
+.eyebrow{
+  color:var(--gold);
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-weight:800;
+}
+
+h2{
+  font:700 clamp(38px,5vw,58px)/1 Georgia,serif;
+  margin:8px 0 0;
+  letter-spacing:-.04em;
+}
+
+.section-intro{
+  color:#8ea39b;
+  max-width:550px;
+  line-height:1.7;
+}
+
+/* STATS */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-top:1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.stat{
+  padding:34px 24px;
+  text-align:center;
+  border-right:1px solid rgba(255,255,255,.08);
+}
+
+.stat:last-child{
+  border-right:0;
+}
+
+.stat strong{
+  display:block;
+  color:var(--gold2);
+  font:700 54px Georgia,serif;
+}
+
+.stat span{
+  color:#80938c;
+  line-height:1.45;
+  display:block;
+  margin-top:5px;
+}
+
+/* GLASS CARDS */
+
+.glass-card{
+  border:1px solid rgba(255,255,255,.09);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.065),
+      rgba(255,255,255,.025)
+    );
+  box-shadow:
+    0 24px 70px rgba(0,0,0,.22),
+    inset 0 1px rgba(255,255,255,.06);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border-radius:30px;
+}
+
+/* STEPS */
+
+.steps{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.step{
+  padding:30px;
+  min-height:235px;
+  position:relative;
+  overflow:hidden;
+}
+
+.step-num{
+  font:700 48px Georgia,serif;
+  color:rgba(233,189,62,.18);
+  position:absolute;
+  right:22px;
+  top:12px;
+}
+
+.step-dot{
+  width:12px;
+  height:12px;
+  background:var(--gold);
+  border-radius:50%;
+  box-shadow:0 0 20px rgba(233,189,62,.35);
+  margin-bottom:28px;
+}
+
+.step h3{
+  font-size:21px;
+  margin:0 0 10px;
+}
+
+.step p{
+  color:#8fa29b;
+  line-height:1.7;
+  margin:0;
+}
+
+/* QUOTE */
+
+.quote{
+  margin-top:28px;
+  padding:42px;
+  position:relative;
+  overflow:hidden;
+}
+
+.quote:before{
+  content:"“";
+  position:absolute;
+  font:900 180px Georgia,serif;
+  color:rgba(233,189,62,.07);
+  right:20px;
+  top:-45px;
+}
+
+.quote p{
+  font:italic 25px/1.55 Georgia,serif;
+  margin:0;
+  max-width:760px;
+}
+
+.quote cite{
+  display:block;
+  color:#82958d;
+  margin-top:20px;
+  font-style:normal;
+}
+
+/* DOWNLOAD PANEL */
+
+.download-panel{
+  padding:48px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.download-panel:before{
+  content:"";
+  position:absolute;
+  width:330px;
+  height:330px;
+  border-radius:50%;
+  background:rgba(233,189,62,.08);
+  filter:blur(45px);
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+}
+
+.download-panel>*{
+  position:relative;
+}
+
+.download-panel h2{
+  margin-bottom:14px;
+}
+
+.download-panel p{
+  color:#90a49d;
+  max-width:620px;
+  margin:0 auto 28px;
+  line-height:1.7;
+}
+
+.download-panel .download{
+  min-width:min(430px,100%);
+}
+
+/* FOOTER */
+
+.footer{
+  padding:35px 0 50px;
+  color:#657a72;
+  text-align:center;
+  font-size:13px;
+}
+
+.footer strong{
+  color:#9aac9f;
+}
+
+/* REVEAL */
+
+.reveal{
+  opacity:0;
+  transform:translateY(30px);
+  transition:
+    opacity .75s ease,
+    transform .75s ease;
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:none;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+  .hero{
+    padding-top:30px;
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html, body {
-    background: var(--bg);
-    color: var(--cream);
-    font-family: 'Work Sans', sans-serif;
-    min-height: 100%;
+  .hero-grid{
+    grid-template-columns:1fr;
   }
 
-  body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-x: hidden;
-    position: relative;
-    background:
-      radial-gradient(60% 45% at 80% -5%, rgba(201,162,39,0.14), transparent 60%),
-      radial-gradient(70% 55% at 10% 15%, rgba(22,57,42,0.9), transparent 60%),
-      var(--bg);
+  .hero-copy{
+    font-size:18px;
   }
 
-  /* drifting coin glyphs, purely decorative */
-  .drift { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-  .drift span {
-    position: absolute;
-    font-family: 'Fraunces', serif;
-    color: rgba(228,193,92,0.08);
-    font-size: 54px;
-    font-weight: 600;
-    animation: float-up linear infinite;
-  }
-  @keyframes float-up {
-    from { transform: translateY(10vh) rotate(0deg); }
-    to   { transform: translateY(-120vh) rotate(18deg); }
+  .visual-wrap{
+    min-height:520px;
+    order:-1;
   }
 
-  .wrap {
-    width: 100%;
-    max-width: 480px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    padding: 28px 24px 40px;
-    position: relative;
-    z-index: 1;
+  .phone{
+    width:300px;
   }
 
-  /* ---------- Wordmark ---------- */
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    opacity: 0;
-    animation: rise 700ms ease forwards;
+  .floating{
+    right:3%;
+    top:75px;
   }
 
-  .brand { display: flex; align-items: center; gap: 10px; }
-  .coin { width: 30px; height: 30px; flex-shrink: 0; }
-  .wordmark { font-family: 'Fraunces', serif; font-weight: 600; font-size: 19px; letter-spacing: 0.01em; }
-
-  .rating {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.78rem;
-    color: var(--sage);
-  }
-  .rating svg { width: 13px; height: 13px; }
-
-  /* ---------- Hero ---------- */
-  .hero { margin-top: 7vh; text-align: left; }
-
-  .hero h1 {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: clamp(2.3rem, 9vw, 3.1rem);
-    line-height: 1.07;
-    letter-spacing: -0.01em;
-    opacity: 0;
-    animation: rise 750ms ease forwards 120ms;
-  }
-  .hero h1 em { font-style: italic; font-weight: 500; color: var(--gold-bright); }
-
-  .hero p {
-    margin-top: 18px;
-    max-width: 34ch;
-    font-size: 1.05rem;
-    line-height: 1.55;
-    color: var(--sage);
-    opacity: 0;
-    animation: rise 750ms ease forwards 260ms;
+  .steps{
+    grid-template-columns:1fr;
   }
 
-  /* ---------- Phone mockup ---------- */
-  .phone-stage {
-    margin-top: 34px;
-    display: flex;
-    justify-content: center;
-    opacity: 0;
-    animation: rise 850ms ease forwards 340ms;
+  .stats{
+    grid-template-columns:1fr;
   }
 
-  .phone {
-    width: 206px;
-    border-radius: 30px;
-    background: linear-gradient(165deg, #173a2a, #0f271c);
-    border: 1px solid rgba(233,199,102,0.18);
-    padding: 10px;
-    box-shadow:
-      0 30px 60px -20px rgba(0,0,0,0.55),
-      0 0 0 1px rgba(255,255,255,0.03) inset;
-    transform: rotate(-2deg);
+  .stat{
+    border-right:0;
+    border-bottom:1px solid rgba(255,255,255,.08);
   }
 
-  .phone-screen {
-    background: var(--surface);
-    border-radius: 21px;
-    padding: 18px 16px 16px;
-    position: relative;
-    overflow: hidden;
+  .stat:last-child{
+    border-bottom:0;
   }
 
-  .phone-notch {
-    width: 46px; height: 5px;
-    background: rgba(243,239,228,0.15);
-    border-radius: 3px;
-    margin: 0 auto 14px;
+  .section-head{
+    display:block;
   }
 
-  .ps-label { font-size: 0.62rem; color: var(--sage-dim); letter-spacing: 0.02em; }
-  .ps-balance {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 1.7rem;
-    color: var(--gold-bright);
-    margin-top: 3px;
+  .section-intro{
+    margin-top:16px;
+  }
+}
+
+@media(max-width:520px){
+
+  .container{
+    width:min(100% - 22px,1120px);
   }
 
-  .ps-row {
-    margin-top: 16px;
-    display: flex;
-    gap: 8px;
-  }
-  .ps-pill {
-    flex: 1;
-    background: var(--surface-2);
-    border-radius: 10px;
-    padding: 9px 8px;
-    text-align: center;
-  }
-  .ps-pill .pn { font-size: 0.78rem; font-weight: 600; color: var(--cream); }
-  .ps-pill .pl { font-size: 0.58rem; color: var(--sage-dim); margin-top: 2px; }
-
-  .ps-task {
-    margin-top: 14px;
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    background: var(--surface-2);
-    border-radius: 11px;
-    padding: 9px 10px;
-  }
-  .ps-dot {
-    width: 26px; height: 26px; border-radius: 8px;
-    background: linear-gradient(160deg, var(--gold-bright), var(--gold));
-    flex-shrink: 0;
-  }
-  .ps-task .pt-txt { font-size: 0.66rem; color: var(--sage); line-height: 1.3; }
-  .ps-task .pt-txt b { color: var(--cream); display: block; font-size: 0.72rem; }
-
-  /* ---------- Download button ---------- */
-  .download-area {
-    margin-top: 32px;
-    opacity: 0;
-    animation: rise 750ms ease forwards 460ms;
+  .nav{
+    padding-top:12px;
   }
 
-  .btn-download {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    padding: 19px 24px;
-    border-radius: 14px;
-    border: none;
-    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
-    color: #15291e;
-    font-family: 'Work Sans', sans-serif;
-    font-weight: 600;
-    font-size: 1.05rem;
-    letter-spacing: 0.01em;
-    cursor: pointer;
-    overflow: hidden;
-    box-shadow: 0 1px 0 rgba(255,255,255,0.35) inset, 0 16px 34px -14px rgba(201,162,39,0.6);
-    transition: transform 160ms ease;
-  }
-  .btn-download:active { transform: scale(0.97); }
-  .btn-download svg { width: 19px; height: 19px; flex-shrink: 0; }
-
-  .btn-download::before {
-    content: "";
-    position: absolute;
-    top: 0; left: -60%;
-    width: 40%; height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.55), transparent);
-    transform: skewX(-20deg);
-    animation: shimmer 2600ms ease-in-out infinite;
-    animation-delay: 1200ms;
-  }
-  @keyframes shimmer {
-    0%   { left: -60%; }
-    40%  { left: 120%; }
-    100% { left: 120%; }
+  .navbar{
+    border-radius:20px;
   }
 
-  .btn-download.pulse::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 14px;
-    box-shadow: 0 0 0 0 rgba(233,199,102,0.55);
-    animation: pulse-ring 1900ms ease-out 1;
-  }
-  @keyframes pulse-ring {
-    0%   { box-shadow: 0 0 0 0 rgba(233,199,102,0.5); }
-    100% { box-shadow: 0 0 0 18px rgba(233,199,102,0); }
+  .brand{
+    font-size:19px;
   }
 
-  .meta-line { margin-top: 14px; text-align: center; font-size: 0.8rem; color: var(--sage-dim); }
-  .meta-line span { color: var(--sage); }
-
-  /* ---------- Stats ---------- */
-  .stats {
-    margin-top: 44px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    opacity: 0;
-    animation: rise 750ms ease forwards 560ms;
-  }
-  .stat { padding: 20px 6px; text-align: center; border-right: 1px solid var(--line); }
-  .stat:last-child { border-right: none; }
-  .stat .num { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.5rem; color: var(--gold-bright); }
-  .stat .label { margin-top: 4px; font-size: 0.72rem; color: var(--sage-dim); line-height: 1.4; }
-
-  /* ---------- How it works ---------- */
-  .how { margin-top: 48px; opacity: 0; animation: rise 750ms ease forwards 660ms; }
-  .how-title { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 600; color: var(--cream); }
-  .steps { margin-top: 18px; display: flex; flex-direction: column; gap: 2px; }
-  .step { display: flex; align-items: flex-start; gap: 14px; padding: 14px 4px; border-bottom: 1px solid var(--line); }
-  .step:last-child { border-bottom: none; }
-  .step .mark { width: 7px; height: 7px; margin-top: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
-  .step .txt { font-size: 0.93rem; line-height: 1.5; color: var(--sage); }
-  .step .txt b { color: var(--cream); font-weight: 500; }
-
-  /* ---------- Testimonial ---------- */
-  .quote {
-    margin-top: 44px;
-    padding: 20px;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    opacity: 0;
-    animation: rise 750ms ease forwards 760ms;
-  }
-  .quote p {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 1rem;
-    line-height: 1.55;
-    color: var(--cream);
-  }
-  .quote .who {
-    margin-top: 12px;
-    font-size: 0.78rem;
-    color: var(--sage-dim);
+  .rating{
+    font-size:12px;
   }
 
-  /* ---------- Footer ---------- */
-  footer {
-    margin-top: auto;
-    padding-top: 48px;
-    text-align: center;
-    font-size: 0.75rem;
-    color: var(--sage-dim);
-    opacity: 0;
-    animation: rise 750ms ease forwards 860ms;
-  }
-  footer a { color: var(--sage); text-decoration: none; }
-
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
+  .hero{
+    padding-bottom:35px;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    * { animation-duration: 1ms !important; animation-delay: 0ms !important; }
-    .drift { display: none; }
+  .hero-actions{
+    display:grid;
   }
+
+  .download,
+  .secondary{
+    width:100%;
+  }
+
+  h1{
+    font-size:56px;
+  }
+
+  .hero-copy{
+    font-size:17px;
+  }
+
+  .visual-wrap{
+    min-height:470px;
+  }
+
+  .phone{
+    width:270px;
+    border-radius:40px;
+  }
+
+  .screen{
+    border-radius:31px;
+  }
+
+  .floating{
+    right:0;
+    font-size:12px;
+  }
+
+  .quote{
+    padding:28px;
+  }
+
+  .quote p{
+    font-size:21px;
+  }
+
+  .download-panel{
+    padding:35px 20px;
+  }
+
+  .download-panel .download{
+    min-width:0;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  html{
+    scroll-behavior:auto;
+  }
+
+  .reveal{
+    transition:none;
+  }
+
+  .phone,
+  .floating{
+    transform:none;
+  }
+}
 </style>
 </head>
+
 <body>
 
-<div class="drift" id="drift"></div>
+<div class="orb one"></div>
+<div class="orb two"></div>
+<div class="orb three"></div>
 
-<div class="wrap">
+<header class="nav">
+  <div class="container">
 
-  <header>
-    <div class="brand">
-      <svg class="coin" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="16" cy="16" r="15" stroke="#c9a227" stroke-width="1.6"/>
-        <circle cx="16" cy="16" r="10.5" stroke="#e9c766" stroke-width="1.2"/>
-        <path d="M16 10.5v11M12.8 13.2c0-1.4 1.4-2.2 3.2-2.2s3.2.9 3.2 2.1c0 3.1-6.4 1.6-6.4 4.7 0 1.3 1.4 2.2 3.2 2.2s3.2-.8 3.2-2.1" stroke="#e9c766" stroke-width="1.2" stroke-linecap="round"/>
-      </svg>
-      <span class="wordmark">EarnApp</span>
-    </div>
-    <div class="rating">
-      <svg viewBox="0 0 20 20" fill="#e9c766"><path d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.9L10 1.5z"/></svg>
-      4.8 rating
-    </div>
-  </header>
+    <div class="navbar">
 
-  <div class="hero">
-    <h1>Turn spare<br>minutes into <em>Rupees</em>.</h1>
-    <p>Complete simple tasks, check in daily, and cash out straight to your account — no laptop, no catch.</p>
-  </div>
+      <a class="brand" href="#">
+        <span class="logo">₱</span>
+        <span>EarnApp</span>
+      </a>
 
-  <div class="phone-stage">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-notch"></div>
-        <div class="ps-label">YOUR BALANCE</div>
-        <div class="ps-balance">Rs 2,450</div>
-        <div class="ps-row">
-          <div class="ps-pill"><div class="pn">Day 4</div><div class="pl">streak</div></div>
-          <div class="ps-pill"><div class="pn">12</div><div class="pl">offers done</div></div>
-        </div>
-        <div class="ps-task">
-          <div class="ps-dot"></div>
-          <div class="pt-txt"><b>Daily check-in</b>+300 pts ready</div>
-        </div>
+      <div class="rating">
+        <b>★</b> 4.8 rating
       </div>
+
     </div>
-  </div>
 
-  <div class="download-area">
-    <button class="btn-download pulse" id="downloadBtn" type="button">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14" stroke="#15291e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span id="btnLabel">Download for Android</span>
-    </button>
-    <div class="meta-line">Free &middot; <span>v1.0</span> &middot; Android 6.0+</div>
   </div>
+</header>
 
-  <div class="stats">
-    <div class="stat"><div class="num" data-count="400">0</div><div class="label">Rs daily<br>withdrawal cap</div></div>
-    <div class="stat"><div class="num" data-count="7">0</div><div class="label">day streak<br>rewards</div></div>
-    <div class="stat"><div class="num" data-count="100">0</div><div class="label">% real<br>payouts</div></div>
-  </div>
 
-  <div class="how">
-    <div class="how-title">How it works</div>
-    <div class="steps">
-      <div class="step"><div class="mark"></div><div class="txt"><b>Install the app</b> and open it — no sign-up forms, your device is your account.</div></div>
-      <div class="step"><div class="mark"></div><div class="txt"><b>Complete offers</b> or check in daily to earn points.</div></div>
-      <div class="step"><div class="mark"></div><div class="txt"><b>Redeem your balance</b> to your preferred account once approved.</div></div>
-    </div>
-  </div>
+<main>
 
-  <div class="quote">
-    <p>"Mainay first week mein hi apna pehla withdrawal receive kar liya. Bilkul asaan hai."</p>
-    <div class="who">— Early EarnApp user</div>
-  </div>
+<!-- HERO -->
 
-  <footer>
-    Having trouble installing? Allow "unknown sources" in your phone settings.<br>
-    <a href="https://earnpkrauf.shop">earnpkrauf.shop</a>
-  </footer>
+<section class="hero">
+
+<div class="container hero-grid">
+
+<div class="reveal">
+
+<div class="kicker">
+  <i></i>
+  Earn • Check in • Redeem
+</div>
+
+<h1>
+Turn spare<br>
+minutes into<br>
+<span>Rupees.</span>
+</h1>
+
+<p class="hero-copy">
+Complete simple tasks, check in daily, and cash out straight to your account — no laptop, no catch.
+</p>
+
+<div class="hero-actions">
+
+<!-- APK LINK -->
+<a class="download"
+   href="app-release.apk"
+   download>
+
+<svg viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2.5">
+
+<path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/>
+
+</svg>
+
+Download for Android
+
+</a>
+
+<a class="secondary" href="#how">
+How it works ↓
+</a>
 
 </div>
 
+<div class="meta">
+Free · v1.0 · Android 6.0+
+</div>
+
+</div>
+
+
+<!-- PHONE MOCKUP -->
+
+<div class="visual-wrap reveal" id="visual">
+
+<div class="glow"></div>
+
+<div class="phone" id="phone">
+
+<div class="screen">
+
+<div class="notch"></div>
+
+<div class="screen-top">
+<span>EarnApp</span>
+<span>● Online</span>
+</div>
+
+<div class="balance-label">
+YOUR BALANCE
+</div>
+
+<div class="balance">
+Rs 2,450
+</div>
+
+<div class="mini-grid">
+
+<div class="mini">
+<b>Day 4</b>
+streak
+</div>
+
+<div class="mini">
+<b>12</b>
+offers done
+</div>
+
+</div>
+
+<div class="check">
+
+<div class="check-dot"></div>
+
+<div>
+<b>Daily check-in</b>
+<small>+300 pts ready</small>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="floating" id="floatCard">
+<strong>+300 pts</strong>
+<small>Daily reward</small>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- STATS -->
+
+<section class="section reveal">
+
+<div class="container">
+
+<div class="stats">
+
+<div class="stat">
+<strong>400</strong>
+<span>
+Rs daily<br>
+withdrawal cap
+</span>
+</div>
+
+<div class="stat">
+<strong>7</strong>
+<span>
+day streak<br>
+rewards
+</span>
+</div>
+
+<div class="stat">
+<strong>100</strong>
+<span>
+% real<br>
+payouts
+</span>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+
+<section class="section" id="how">
+
+<div class="container">
+
+<div class="section-head reveal">
+
+<div>
+
+<div class="eyebrow">
+Simple process
+</div>
+
+<h2>
+How it works
+</h2>
+
+</div>
+
+<p class="section-intro">
+Everything is designed to stay simple on mobile. Install, earn points, then redeem your balance once approved.
+</p>
+
+</div>
+
+
+<div class="steps">
+
+
+<article class="glass-card step reveal">
+
+<span class="step-num">01</span>
+
+<div class="step-dot"></div>
+
+<h3>
+Install the app
+</h3>
+
+<p>
+Install the app and open it — no sign-up forms, your device is your account.
+</p>
+
+</article>
+
+
+<article class="glass-card step reveal">
+
+<span class="step-num">02</span>
+
+<div class="step-dot"></div>
+
+<h3>
+Complete simple tasks
+</h3>
+
+<p>
+Complete offers or check in daily to earn points and build your streak.
+</p>
+
+</article>
+
+
+<article class="glass-card step reveal">
+
+<span class="step-num">03</span>
+
+<div class="step-dot"></div>
+
+<h3>
+Redeem your balance
+</h3>
+
+<p>
+Redeem your balance to your preferred account once your withdrawal is approved.
+</p>
+
+</article>
+
+
+</div>
+
+
+<!-- TESTIMONIAL -->
+
+<div class="glass-card quote reveal">
+
+<p>
+“Mainay first week mein hi apna pehla withdrawal receive kar liya. Bilkul asaan hai.”
+</p>
+
+<cite>
+— Early EarnApp user
+</cite>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- DOWNLOAD -->
+
+<section class="section reveal">
+
+<div class="container">
+
+<div class="glass-card download-panel">
+
+<div class="eyebrow">
+Android app
+</div>
+
+<h2>
+Ready to start earning?
+</h2>
+
+<p>
+Download EarnApp for Android and turn your spare minutes into rewards. Free to install and built for Android 6.0+.
+</p>
+
+<a class="download"
+   href="app-release.apk"
+   download>
+
+<svg viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2.5">
+
+<path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/>
+
+</svg>
+
+Download for Android
+
+</a>
+
+<div class="meta">
+Free · v1.0 · Android 6.0+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- INSTALLATION HELP -->
+
+<section class="section" style="padding-top:0">
+
+<div class="container">
+
+<div class="glass-card reveal"
+style="padding:28px 30px">
+
+<div class="eyebrow">
+Installation help
+</div>
+
+<h2 style="font-size:32px">
+Having trouble installing?
+</h2>
+
+<p style="color:#8fa39b;line-height:1.7;margin-bottom:0">
+
+If Android blocks the installation, allow
+<strong style="color:#dce5df">
+“Install unknown apps”
+</strong>
+
+for the browser or file manager you used to download the APK.
+
+Only install APK files you trust.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+<div class="container">
+
+<strong>
+earnpkrauf.shop
+</strong>
+
+<br>
+
+© <span id="year"></span>
+EarnApp · All rights reserved.
+
+</div>
+
+</footer>
+
+
 <script>
-  // Replace this with the real hosted APK link
-  var APK_URL = "https://earnpkrauf.shop/EarnApp.apk";
 
-  var btn = document.getElementById('downloadBtn');
-  var label = document.getElementById('btnLabel');
+/* REVEAL ANIMATION */
 
-  btn.addEventListener('click', function () {
-    label.textContent = "Starting download…";
-    btn.classList.remove('pulse');
-    window.location.href = APK_URL;
-    setTimeout(function () {
-      label.textContent = "Download for Android";
-    }, 2500);
-  });
+const observer = new IntersectionObserver(
+(entries) => {
 
-  // Count-up animation for stats, once on load
-  function countUp(el, target, duration) {
-    var startTime = null;
-    function step(ts) {
-      if (!startTime) startTime = ts;
-      var progress = Math.min((ts - startTime) / duration, 1);
-      el.textContent = Math.floor(progress * target);
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      } else {
-        el.textContent = target;
-      }
-    }
-    requestAnimationFrame(step);
-  }
+entries.forEach(
+(e) => {
 
-  window.addEventListener('load', function () {
-    document.querySelectorAll('.stat .num').forEach(function (el) {
-      var target = parseInt(el.getAttribute('data-count'), 10);
-      setTimeout(function () { countUp(el, target, 900); }, 650);
-    });
+if(e.isIntersecting){
 
-    // decorative drifting rupee glyphs
-    var driftEl = document.getElementById('drift');
-    var glyphs = ['₨', '৳', '$'];
-    for (var i = 0; i < 5; i++) {
-      var s = document.createElement('span');
-      s.textContent = glyphs[i % glyphs.length];
-      s.style.left = (10 + Math.random() * 80) + 'vw';
-      s.style.top = (20 + Math.random() * 60) + 'vh';
-      s.style.animationDuration = (14 + Math.random() * 10) + 's';
-      s.style.animationDelay = (-Math.random() * 12) + 's';
-      driftEl.appendChild(s);
-    }
-  });
+e.target.classList.add("visible");
+
+observer.unobserve(e.target);
+
+}
+
+});
+
+},
+{
+threshold:.12
+}
+);
+
+
+document
+.querySelectorAll(".reveal")
+.forEach(el => observer.observe(el));
+
+
+
+/* PARALLAX */
+
+const phone =
+document.getElementById("phone");
+
+const floatCard =
+document.getElementById("floatCard");
+
+const visual =
+document.getElementById("visual");
+
+
+function parallax(x,y){
+
+if(!phone || !floatCard)
+return;
+
+const px =
+(x - .5) * 16;
+
+const py =
+(y - .5) * 16;
+
+
+phone.style.transform =
+`
+perspective(1100px)
+rotateY(${(-10 + px*.45)}deg)
+rotateX(${(4 - py*.2)}deg)
+translateY(${py}px)
+`;
+
+
+floatCard.style.transform =
+`translateY(${-py*1.6}px)`;
+
+}
+
+
+visual.addEventListener(
+"pointermove",
+(e) => {
+
+const r =
+visual.getBoundingClientRect();
+
+parallax(
+(e.clientX-r.left)/r.width,
+(e.clientY-r.top)/r.height
+);
+
+}
+);
+
+
+visual.addEventListener(
+"pointerleave",
+() => {
+
+phone.style.transform = "";
+
+floatCard.style.transform = "";
+
+}
+);
+
+
+
+/* SCROLL PARALLAX */
+
+window.addEventListener(
+"scroll",
+() => {
+
+const y =
+window.scrollY;
+
+document
+.querySelectorAll(".orb")
+.forEach((el,i) => {
+
+const speeds =
+[.12,-.08,.06];
+
+el.style.transform =
+`translate3d(0,${y*speeds[i]}px,0)`;
+
+});
+
+},
+{
+passive:true
+}
+);
+
+
+
+/* DOWNLOAD BUTTON EFFECT */
+
+document
+.querySelectorAll("a.download")
+.forEach(btn => {
+
+btn.addEventListener(
+"click",
+() => {
+
+btn.style.transform =
+"scale(.98)";
+
+setTimeout(
+() => {
+btn.style.transform="";
+},
+150
+);
+
+});
+
+});
+
+
+
+/* YEAR */
+
+document.getElementById("year")
+.textContent =
+new Date().getFullYear();
+
 </script>
 
 </body>
