@@ -3,860 +3,1082 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#061c15">
-<meta name="description" content="EarnApp — Turn spare minutes into Rupees.">
+<meta name="theme-color" content="#061b14">
+
 <title>EarnApp — Turn Spare Minutes into Rupees</title>
 
 <style>
-:root{
-  --bg:#061c15;
-  --bg2:#09271e;
-  --gold:#e9bd3e;
-  --gold2:#ffd968;
-  --text:#f7f4e9;
-  --muted:#9fb0a9;
-  --glass:rgba(20,66,52,.42);
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-*{
-  box-sizing:border-box;
+:root{
+    --bg:#041710;
+    --bg2:#08271d;
+    --green:#0c3a2a;
+    --green2:#11543c;
+    --gold:#e7b934;
+    --gold2:#ffd965;
+    --white:#f7f4e8;
+    --muted:#9aada5;
+    --glass:rgba(255,255,255,.055);
+    --border:rgba(255,255,255,.10);
 }
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-  margin:0;
-  min-height:100vh;
-  color:var(--text);
-  background:
-    radial-gradient(circle at 15% 8%,rgba(233,189,62,.10),transparent 28%),
-    radial-gradient(circle at 88% 28%,rgba(38,116,82,.18),transparent 34%),
-    linear-gradient(145deg,var(--bg),#04140f 55%,#071f17);
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  overflow-x:hidden;
+    font-family:Inter,Arial,sans-serif;
+    color:var(--white);
+    background:
+        radial-gradient(circle at 10% 5%,rgba(229,184,47,.10),transparent 25%),
+        radial-gradient(circle at 90% 25%,rgba(20,130,84,.16),transparent 32%),
+        linear-gradient(145deg,#041710,#061d15 50%,#03120d);
+    overflow-x:hidden;
 }
 
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-1;
-  background-image:
-    linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
-  background-size:42px 42px;
+/* BACKGROUND */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.35;
+    background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+    background-size:45px 45px;
+    mask-image:linear-gradient(to bottom,black,transparent);
 }
 
-a{
-  text-decoration:none;
-  color:inherit;
+.bg-orb{
+    position:fixed;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:-1;
+    filter:blur(2px);
+    border:1px solid rgba(255,214,88,.08);
+    background:
+        radial-gradient(circle at 35% 30%,
+        rgba(255,213,88,.13),
+        rgba(12,100,68,.08) 40%,
+        transparent 70%);
 }
+
+.orb1{
+    width:320px;
+    height:320px;
+    left:-160px;
+    top:180px;
+}
+
+.orb2{
+    width:250px;
+    height:250px;
+    right:-120px;
+    top:650px;
+}
+
+.orb3{
+    width:180px;
+    height:180px;
+    left:12%;
+    top:1250px;
+}
+
+/* CONTAINER */
 
 .container{
-  width:min(1120px,calc(100% - 32px));
-  margin:auto;
-}
-
-/* Floating background orbs */
-
-.orb{
-  position:absolute;
-  border-radius:50%;
-  pointer-events:none;
-  border:1px solid rgba(255,220,111,.10);
-  background:
-    radial-gradient(
-      circle at 35% 30%,
-      rgba(255,220,111,.16),
-      rgba(24,102,74,.08) 42%,
-      transparent 70%
-    );
-  box-shadow:
-    inset 0 0 45px rgba(255,255,255,.03),
-    0 0 70px rgba(20,120,83,.08);
-}
-
-.orb.one{
-  width:300px;
-  height:300px;
-  left:-130px;
-  top:180px;
-}
-
-.orb.two{
-  width:220px;
-  height:220px;
-  right:-90px;
-  top:620px;
-}
-
-.orb.three{
-  width:150px;
-  height:150px;
-  left:12%;
-  top:1200px;
+    width:min(1120px,calc(100% - 30px));
+    margin:auto;
 }
 
 /* NAVBAR */
 
+header{
+    padding:18px 0;
+    position:relative;
+    z-index:20;
+}
+
 .nav{
-  position:relative;
-  z-index:10;
-  padding:24px 0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px 14px 12px 18px;
+    border-radius:23px;
+
+    background:rgba(6,35,25,.55);
+    border:1px solid rgba(255,255,255,.10);
+
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.25),
+        inset 0 1px rgba(255,255,255,.07);
 }
 
-.navbar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:12px 14px 12px 18px;
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:24px;
-  background:rgba(7,34,26,.52);
-  backdrop-filter:blur(22px);
-  -webkit-backdrop-filter:blur(22px);
-  box-shadow:0 18px 55px rgba(0,0,0,.20);
-}
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:12px;
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-family:Georgia,serif;
-  font-weight:700;
-  font-size:22px;
+    font-family:Georgia,serif;
+    font-size:23px;
+    font-weight:bold;
 }
 
 .logo{
-  width:42px;
-  height:42px;
-  border-radius:14px;
-  display:grid;
-  place-items:center;
-  color:var(--gold);
-  font-size:24px;
-  border:1px solid rgba(233,189,62,.45);
-  background:
-    linear-gradient(
-      145deg,
-      rgba(233,189,62,.16),
-      rgba(255,255,255,.04)
-    );
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.14),
-    0 8px 25px rgba(0,0,0,.22);
+    width:43px;
+    height:43px;
+    border-radius:14px;
+
+    display:grid;
+    place-items:center;
+
+    color:var(--gold2);
+
+    font-size:25px;
+
+    border:1px solid rgba(231,185,52,.45);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(231,185,52,.18),
+            rgba(255,255,255,.03)
+        );
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.18),
+        0 8px 25px rgba(0,0,0,.25);
 }
 
 .rating{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  color:#e7e2d2;
-  font-size:14px;
-  padding:9px 12px;
-  border-radius:14px;
-  background:rgba(255,255,255,.045);
+    padding:9px 13px;
+    border-radius:14px;
+
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.06);
+
+    font-size:14px;
 }
 
-.rating b{
-  color:var(--gold2);
+.rating span{
+    color:var(--gold2);
 }
 
 /* HERO */
 
 .hero{
-  position:relative;
-  padding:52px 0 80px;
-  min-height:760px;
-  display:flex;
-  align-items:center;
+    min-height:760px;
+    display:flex;
+    align-items:center;
+    padding:55px 0 70px;
 }
 
 .hero-grid{
-  display:grid;
-  grid-template-columns:1.02fr .98fr;
-  gap:44px;
-  align-items:center;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    align-items:center;
 }
 
-.kicker{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:8px 12px;
-  border-radius:999px;
-  border:1px solid rgba(233,189,62,.22);
-  background:rgba(233,189,62,.07);
-  color:#e7d58c;
-  font-size:13px;
-  letter-spacing:.08em;
-  text-transform:uppercase;
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    padding:9px 14px;
+
+    border-radius:100px;
+
+    color:#ead58d;
+    font-size:12px;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+
+    background:rgba(231,185,52,.07);
+    border:1px solid rgba(231,185,52,.22);
 }
 
-.kicker i{
-  width:7px;
-  height:7px;
-  background:var(--gold);
-  border-radius:50%;
-  box-shadow:0 0 15px var(--gold);
+.badge i{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 16px var(--gold);
 }
 
 h1{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(54px,7vw,92px);
-  line-height:.91;
-  letter-spacing:-.055em;
-  margin:22px 0 28px;
+    margin:25px 0 28px;
+
+    font-family:Georgia,serif;
+    font-size:clamp(55px,7vw,91px);
+    line-height:.91;
+    letter-spacing:-5px;
 }
 
-h1 span{
-  color:var(--gold2);
-  font-style:italic;
+h1 em{
+    color:var(--gold2);
+    font-style:italic;
 }
 
-.hero-copy{
-  font-size:20px;
-  line-height:1.7;
-  color:#aebcb6;
-  max-width:640px;
-  margin:0 0 30px;
+.hero-text{
+    max-width:620px;
+
+    color:#a9bab3;
+    font-size:20px;
+    line-height:1.7;
+
+    margin-bottom:30px;
 }
 
-.hero-actions{
-  display:flex;
-  gap:14px;
-  flex-wrap:wrap;
+.buttons{
+    display:flex;
+    gap:13px;
+    flex-wrap:wrap;
 }
 
 .download{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  min-height:62px;
-  padding:0 27px;
-  border-radius:20px;
-  font-size:18px;
-  font-weight:800;
-  color:#0a2118;
-  background:linear-gradient(135deg,#ffe17a,#dcae29);
-  border:1px solid rgba(255,231,145,.75);
-  box-shadow:
-    0 14px 40px rgba(222,174,40,.20),
-    inset 0 1px rgba(255,255,255,.75);
-  transition:.25s;
+    min-height:62px;
+    padding:0 26px;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+
+    color:#082117;
+
+    font-size:17px;
+    font-weight:800;
+
+    border-radius:19px;
+
+    background:
+        linear-gradient(135deg,#ffe486,#dcae29);
+
+    border:1px solid rgba(255,236,145,.7);
+
+    box-shadow:
+        0 15px 45px rgba(225,174,40,.20),
+        inset 0 1px rgba(255,255,255,.8);
+
+    transition:.25s;
 }
 
 .download:hover{
-  transform:translateY(-4px);
-  box-shadow:0 18px 48px rgba(222,174,40,.28);
+    transform:translateY(-4px);
+    box-shadow:
+        0 22px 55px rgba(225,174,40,.30);
 }
 
 .download svg{
-  width:21px;
+    width:21px;
 }
 
-.secondary{
-  min-height:62px;
-  padding:0 22px;
-  border-radius:20px;
-  display:inline-flex;
-  align-items:center;
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.045);
-  color:#d9e1dc;
-  font-weight:700;
-  backdrop-filter:blur(16px);
+.how-btn{
+    min-height:62px;
+    padding:0 23px;
+
+    display:inline-flex;
+    align-items:center;
+
+    border-radius:19px;
+
+    color:#dbe5df;
+
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.12);
+
+    backdrop-filter:blur(18px);
+
+    font-weight:700;
 }
 
-.meta{
-  margin-top:14px;
-  color:#7f938b;
-  font-size:14px;
-  text-align:center;
-  max-width:400px;
+.version{
+    margin-top:13px;
+    color:#758b82;
+    font-size:14px;
 }
 
 /* PHONE */
 
-.visual-wrap{
-  position:relative;
-  display:grid;
-  place-items:center;
-  min-height:590px;
+.phone-area{
+    min-height:600px;
+
+    position:relative;
+
+    display:grid;
+    place-items:center;
 }
 
-.glow{
-  position:absolute;
-  width:390px;
-  height:390px;
-  border-radius:50%;
-  background:rgba(47,143,98,.12);
-  filter:blur(55px);
+.phone-glow{
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    border-radius:50%;
+
+    background:rgba(34,137,92,.14);
+
+    filter:blur(60px);
 }
 
 .phone{
-  width:min(360px,82vw);
-  aspect-ratio:.52;
-  border-radius:48px;
-  padding:14px;
-  position:relative;
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.14),
-      rgba(255,255,255,.025)
-    );
-  border:1px solid rgba(255,255,255,.17);
-  box-shadow:
-    0 24px 80px rgba(0,0,0,.38),
-    inset 0 0 0 1px rgba(255,255,255,.04);
-  transform:
-    perspective(1100px)
-    rotateY(-10deg)
-    rotateX(4deg);
-  transition:transform .15s ease-out;
+    position:relative;
+
+    width:min(355px,82vw);
+    aspect-ratio:.52;
+
+    padding:13px;
+
+    border-radius:48px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.15),
+            rgba(255,255,255,.025)
+        );
+
+    border:1px solid rgba(255,255,255,.18);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.42),
+        inset 0 0 0 1px rgba(255,255,255,.05);
+
+    transform:
+        perspective(1200px)
+        rotateY(-11deg)
+        rotateX(4deg);
+
+    transition:transform .15s ease-out;
 }
 
-.phone:before{
-  content:"";
-  position:absolute;
-  inset:9px;
-  border-radius:40px;
-  border:1px solid rgba(255,255,255,.08);
-  pointer-events:none;
-}
+.phone-screen{
+    height:100%;
 
-.screen{
-  height:100%;
-  border-radius:38px;
-  padding:26px 20px;
-  overflow:hidden;
-  position:relative;
-  background:
-    radial-gradient(
-      circle at 20% 12%,
-      rgba(255,215,90,.11),
-      transparent 30%
-    ),
-    linear-gradient(160deg,#0a3427,#062018 70%);
+    border-radius:38px;
+
+    padding:25px 20px;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 20% 10%,
+            rgba(255,216,86,.13),
+            transparent 30%
+        ),
+        linear-gradient(
+            160deg,
+            #0b3628,
+            #061e15
+        );
 }
 
 .notch{
-  width:90px;
-  height:20px;
-  background:#04130e;
-  border-radius:30px;
-  margin:-15px auto 25px;
+    width:90px;
+    height:19px;
+
+    margin:-14px auto 25px;
+
+    border-radius:30px;
+
+    background:#03120d;
 }
 
-.screen-top{
-  display:flex;
-  justify-content:space-between;
-  color:#92a79f;
-  font-size:11px;
+.phone-top{
+    display:flex;
+    justify-content:space-between;
+
+    color:#8da69c;
+
+    font-size:11px;
 }
 
 .balance-label{
-  margin-top:38px;
-  color:#8fa69d;
-  font-size:11px;
-  letter-spacing:.08em;
+    margin-top:40px;
+
+    color:#8da79d;
+
+    font-size:11px;
+    letter-spacing:.1em;
 }
 
 .balance{
-  font-family:Georgia,serif;
-  color:var(--gold2);
-  font-size:36px;
-  font-weight:700;
-  margin:7px 0 20px;
+    margin:6px 0 22px;
+
+    color:var(--gold2);
+
+    font-family:Georgia,serif;
+
+    font-size:37px;
+    font-weight:bold;
 }
 
-.mini-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
+.phone-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
 }
 
-.mini{
-  padding:14px;
-  border-radius:16px;
-  background:rgba(27,94,68,.35);
-  border:1px solid rgba(255,255,255,.055);
-  font-size:11px;
-  color:#7f9990;
+.phone-box{
+    padding:14px;
+
+    border-radius:16px;
+
+    background:rgba(27,94,68,.35);
+    border:1px solid rgba(255,255,255,.06);
+
+    color:#819990;
+
+    font-size:11px;
 }
 
-.mini b{
-  display:block;
-  color:#e8eee9;
-  font-size:15px;
-  margin-bottom:3px;
+.phone-box strong{
+    display:block;
+
+    color:#e8eee9;
+
+    font-size:15px;
+
+    margin-bottom:3px;
 }
 
 .check{
-  margin-top:13px;
-  padding:17px;
-  border-radius:18px;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,207,65,.13),
-      rgba(25,104,75,.30)
-    );
-  border:1px solid rgba(255,211,75,.12);
-  display:flex;
-  align-items:center;
-  gap:12px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    margin-top:13px;
+    padding:17px;
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,207,65,.14),
+            rgba(25,104,75,.30)
+        );
+
+    border:1px solid rgba(255,211,75,.13);
 }
 
-.check-dot{
-  width:38px;
-  height:38px;
-  border-radius:12px;
-  background:var(--gold);
-  box-shadow:0 5px 20px rgba(233,189,62,.2);
+.check-icon{
+    width:38px;
+    height:38px;
+
+    border-radius:12px;
+
+    background:var(--gold);
+
+    box-shadow:
+        0 5px 22px rgba(233,189,62,.22);
 }
 
-.check b{
-  font-size:13px;
+.check strong{
+    font-size:13px;
 }
 
 .check small{
-  display:block;
-  color:#91a89e;
-  margin-top:3px;
+    display:block;
+    margin-top:3px;
+
+    color:#91a89e;
 }
 
-.floating{
-  position:absolute;
-  right:-8px;
-  top:105px;
-  padding:14px 16px;
-  border-radius:18px;
-  background:rgba(13,54,42,.62);
-  border:1px solid rgba(255,255,255,.11);
-  backdrop-filter:blur(20px);
-  box-shadow:0 20px 45px rgba(0,0,0,.25);
+.float-card{
+    position:absolute;
+
+    right:-5px;
+    top:100px;
+
+    padding:14px 17px;
+
+    border-radius:18px;
+
+    background:rgba(13,54,42,.65);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:0 20px 50px rgba(0,0,0,.3);
+
+    transition:.15s;
 }
 
-.floating strong{
-  color:var(--gold2);
-  font-size:18px;
+.float-card strong{
+    color:var(--gold2);
+    font-size:18px;
 }
 
-.floating small{
-  display:block;
-  color:#82978f;
-  margin-top:2px;
+.float-card small{
+    display:block;
+    color:#82978f;
+    margin-top:3px;
 }
 
-/* SECTIONS */
+/* SECTION */
 
-.section{
-  padding:85px 0;
+section{
+    padding:85px 0;
 }
 
-.section-head{
-  display:flex;
-  align-items:end;
-  justify-content:space-between;
-  gap:30px;
-  margin-bottom:30px;
+.section-title{
+    margin-bottom:35px;
 }
 
 .eyebrow{
-  color:var(--gold);
-  font-size:13px;
-  text-transform:uppercase;
-  letter-spacing:.14em;
-  font-weight:800;
+    color:var(--gold);
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:.15em;
+    text-transform:uppercase;
 }
 
 h2{
-  font:700 clamp(38px,5vw,58px)/1 Georgia,serif;
-  margin:8px 0 0;
-  letter-spacing:-.04em;
+    margin-top:8px;
+
+    font-family:Georgia,serif;
+    font-size:clamp(38px,5vw,58px);
+    line-height:1;
 }
 
-.section-intro{
-  color:#8ea39b;
-  max-width:550px;
-  line-height:1.7;
+.section-description{
+    max-width:600px;
+
+    color:#8fa49c;
+
+    line-height:1.7;
+
+    margin-top:16px;
 }
 
 /* STATS */
 
 .stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  border-top:1px solid rgba(255,255,255,.08);
-  border-bottom:1px solid rgba(255,255,255,.08);
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+
+    border-top:1px solid rgba(255,255,255,.08);
+    border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 .stat{
-  padding:34px 24px;
-  text-align:center;
-  border-right:1px solid rgba(255,255,255,.08);
+    text-align:center;
+
+    padding:35px 20px;
+
+    border-right:1px solid rgba(255,255,255,.08);
 }
 
 .stat:last-child{
-  border-right:0;
+    border-right:0;
 }
 
 .stat strong{
-  display:block;
-  color:var(--gold2);
-  font:700 54px Georgia,serif;
+    display:block;
+
+    color:var(--gold2);
+
+    font-family:Georgia,serif;
+
+    font-size:55px;
 }
 
 .stat span{
-  color:#80938c;
-  line-height:1.45;
-  display:block;
-  margin-top:5px;
+    display:block;
+
+    color:#81958d;
+
+    line-height:1.45;
+
+    margin-top:5px;
 }
 
-/* GLASS CARDS */
+/* GLASS */
 
-.glass-card{
-  border:1px solid rgba(255,255,255,.09);
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.065),
-      rgba(255,255,255,.025)
-    );
-  box-shadow:
-    0 24px 70px rgba(0,0,0,.22),
-    inset 0 1px rgba(255,255,255,.06);
-  backdrop-filter:blur(24px);
-  -webkit-backdrop-filter:blur(24px);
-  border-radius:30px;
+.glass{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.065),
+            rgba(255,255,255,.025)
+        );
+
+    border:1px solid rgba(255,255,255,.09);
+
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.23),
+        inset 0 1px rgba(255,255,255,.06);
 }
 
-/* STEPS */
+/* HOW */
 
 .steps{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
 }
 
 .step{
-  padding:30px;
-  min-height:235px;
-  position:relative;
-  overflow:hidden;
+    min-height:245px;
+
+    padding:30px;
+
+    border-radius:30px;
+
+    position:relative;
+    overflow:hidden;
 }
 
-.step-num{
-  font:700 48px Georgia,serif;
-  color:rgba(233,189,62,.18);
-  position:absolute;
-  right:22px;
-  top:12px;
+.number{
+    position:absolute;
+    right:20px;
+    top:10px;
+
+    color:rgba(233,189,62,.15);
+
+    font-family:Georgia,serif;
+    font-size:52px;
+    font-weight:bold;
 }
 
-.step-dot{
-  width:12px;
-  height:12px;
-  background:var(--gold);
-  border-radius:50%;
-  box-shadow:0 0 20px rgba(233,189,62,.35);
-  margin-bottom:28px;
+.dot{
+    width:12px;
+    height:12px;
+
+    margin-bottom:28px;
+
+    border-radius:50%;
+
+    background:var(--gold);
+
+    box-shadow:0 0 22px rgba(233,189,62,.4);
 }
 
 .step h3{
-  font-size:21px;
-  margin:0 0 10px;
+    font-size:21px;
+    margin-bottom:11px;
 }
 
 .step p{
-  color:#8fa29b;
-  line-height:1.7;
-  margin:0;
+    color:#8ea29a;
+    line-height:1.7;
 }
 
 /* QUOTE */
 
 .quote{
-  margin-top:28px;
-  padding:42px;
-  position:relative;
-  overflow:hidden;
+    margin-top:25px;
+
+    padding:42px;
+
+    border-radius:30px;
+
+    position:relative;
+    overflow:hidden;
 }
 
-.quote:before{
-  content:"“";
-  position:absolute;
-  font:900 180px Georgia,serif;
-  color:rgba(233,189,62,.07);
-  right:20px;
-  top:-45px;
+.quote::before{
+    content:"“";
+
+    position:absolute;
+
+    right:20px;
+    top:-55px;
+
+    color:rgba(233,189,62,.07);
+
+    font-family:Georgia,serif;
+
+    font-size:180px;
 }
 
 .quote p{
-  font:italic 25px/1.55 Georgia,serif;
-  margin:0;
-  max-width:760px;
+    max-width:780px;
+
+    font-family:Georgia,serif;
+
+    font-size:25px;
+    font-style:italic;
+
+    line-height:1.55;
 }
 
-.quote cite{
-  display:block;
-  color:#82958d;
-  margin-top:20px;
-  font-style:normal;
+.quote small{
+    display:block;
+
+    color:#80958c;
+
+    margin-top:20px;
 }
 
-/* DOWNLOAD PANEL */
+/* FEATURES */
 
-.download-panel{
-  padding:48px;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
+.features{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
 }
 
-.download-panel:before{
-  content:"";
-  position:absolute;
-  width:330px;
-  height:330px;
-  border-radius:50%;
-  background:rgba(233,189,62,.08);
-  filter:blur(45px);
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
+.feature{
+    padding:30px;
+
+    border-radius:28px;
 }
 
-.download-panel>*{
-  position:relative;
+.feature-icon{
+    width:50px;
+    height:50px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:15px;
+
+    color:var(--gold2);
+
+    background:rgba(231,185,52,.10);
+
+    border:1px solid rgba(231,185,52,.18);
+
+    font-size:22px;
+
+    margin-bottom:20px;
 }
 
-.download-panel h2{
-  margin-bottom:14px;
+.feature h3{
+    font-size:21px;
+    margin-bottom:10px;
 }
 
-.download-panel p{
-  color:#90a49d;
-  max-width:620px;
-  margin:0 auto 28px;
-  line-height:1.7;
+.feature p{
+    color:#8da19a;
+    line-height:1.7;
 }
 
-.download-panel .download{
-  min-width:min(430px,100%);
+/* FAQ */
+
+.faq{
+    display:grid;
+    gap:12px;
+}
+
+details{
+    padding:22px 24px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(15px);
+}
+
+summary{
+    cursor:pointer;
+
+    font-weight:700;
+
+    list-style:none;
+}
+
+summary::-webkit-details-marker{
+    display:none;
+}
+
+details p{
+    color:#8ea29a;
+
+    line-height:1.7;
+
+    margin-top:15px;
+}
+
+/* DOWNLOAD BOX */
+
+.download-box{
+    padding:55px 30px;
+
+    border-radius:32px;
+
+    text-align:center;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.download-box::before{
+    content:"";
+
+    position:absolute;
+
+    width:350px;
+    height:350px;
+
+    border-radius:50%;
+
+    background:rgba(233,189,62,.08);
+
+    filter:blur(55px);
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+}
+
+.download-box > *{
+    position:relative;
+}
+
+.download-box h2{
+    margin-bottom:15px;
+}
+
+.download-box p{
+    max-width:650px;
+
+    margin:0 auto 28px;
+
+    color:#90a49d;
+
+    line-height:1.7;
+}
+
+.download-box .download{
+    min-width:min(430px,100%);
+}
+
+/* INSTALL */
+
+.install{
+    padding:30px;
+
+    border-radius:28px;
+}
+
+.install p{
+    margin-top:13px;
+
+    color:#8ea39b;
+
+    line-height:1.7;
 }
 
 /* FOOTER */
 
-.footer{
-  padding:35px 0 50px;
-  color:#657a72;
-  text-align:center;
-  font-size:13px;
+footer{
+    padding:40px 0 55px;
+
+    text-align:center;
+
+    color:#657a72;
+
+    font-size:13px;
 }
 
-.footer strong{
-  color:#9aac9f;
+footer strong{
+    color:#a1b2aa;
 }
 
-/* REVEAL */
+/* ANIMATION */
 
 .reveal{
-  opacity:0;
-  transform:translateY(30px);
-  transition:
-    opacity .75s ease,
-    transform .75s ease;
+    opacity:0;
+    transform:translateY(30px);
+
+    transition:
+        opacity .7s ease,
+        transform .7s ease;
 }
 
-.reveal.visible{
-  opacity:1;
-  transform:none;
+.reveal.show{
+    opacity:1;
+    transform:none;
 }
 
 /* MOBILE */
 
 @media(max-width:850px){
 
-  .hero{
-    padding-top:30px;
-  }
+    .hero-grid{
+        grid-template-columns:1fr;
+    }
 
-  .hero-grid{
-    grid-template-columns:1fr;
-  }
+    .phone-area{
+        min-height:510px;
+        order:-1;
+    }
 
-  .hero-copy{
-    font-size:18px;
-  }
+    .phone{
+        width:300px;
+    }
 
-  .visual-wrap{
-    min-height:520px;
-    order:-1;
-  }
+    .steps{
+        grid-template-columns:1fr;
+    }
 
-  .phone{
-    width:300px;
-  }
+    .stats{
+        grid-template-columns:1fr;
+    }
 
-  .floating{
-    right:3%;
-    top:75px;
-  }
+    .stat{
+        border-right:0;
+        border-bottom:1px solid rgba(255,255,255,.08);
+    }
 
-  .steps{
-    grid-template-columns:1fr;
-  }
+    .stat:last-child{
+        border-bottom:0;
+    }
 
-  .stats{
-    grid-template-columns:1fr;
-  }
-
-  .stat{
-    border-right:0;
-    border-bottom:1px solid rgba(255,255,255,.08);
-  }
-
-  .stat:last-child{
-    border-bottom:0;
-  }
-
-  .section-head{
-    display:block;
-  }
-
-  .section-intro{
-    margin-top:16px;
-  }
+    .features{
+        grid-template-columns:1fr;
+    }
 }
 
 @media(max-width:520px){
 
-  .container{
-    width:min(100% - 22px,1120px);
-  }
+    .container{
+        width:calc(100% - 22px);
+    }
 
-  .nav{
-    padding-top:12px;
-  }
+    header{
+        padding-top:10px;
+    }
 
-  .navbar{
-    border-radius:20px;
-  }
+    .nav{
+        border-radius:20px;
+    }
 
-  .brand{
-    font-size:19px;
-  }
+    .logo-area{
+        font-size:19px;
+    }
 
-  .rating{
-    font-size:12px;
-  }
+    .rating{
+        font-size:12px;
+    }
 
-  .hero{
-    padding-bottom:35px;
-  }
+    h1{
+        font-size:56px;
+        letter-spacing:-3px;
+    }
 
-  .hero-actions{
-    display:grid;
-  }
+    .hero-text{
+        font-size:17px;
+    }
 
-  .download,
-  .secondary{
-    width:100%;
-  }
+    .buttons{
+        display:grid;
+    }
 
-  h1{
-    font-size:56px;
-  }
+    .download,
+    .how-btn{
+        width:100%;
+    }
 
-  .hero-copy{
-    font-size:17px;
-  }
+    .phone-area{
+        min-height:470px;
+    }
 
-  .visual-wrap{
-    min-height:470px;
-  }
+    .phone{
+        width:270px;
+        border-radius:40px;
+    }
 
-  .phone{
-    width:270px;
-    border-radius:40px;
-  }
+    .phone-screen{
+        border-radius:31px;
+    }
 
-  .screen{
-    border-radius:31px;
-  }
+    .float-card{
+        right:0;
+    }
 
-  .floating{
-    right:0;
-    font-size:12px;
-  }
+    .quote{
+        padding:28px;
+    }
 
-  .quote{
-    padding:28px;
-  }
+    .quote p{
+        font-size:21px;
+    }
 
-  .quote p{
-    font-size:21px;
-  }
+    .download-box{
+        padding:40px 20px;
+    }
 
-  .download-panel{
-    padding:35px 20px;
-  }
-
-  .download-panel .download{
-    min-width:0;
-  }
+    .download-box .download{
+        min-width:0;
+    }
 }
 
 @media(prefers-reduced-motion:reduce){
 
-  html{
-    scroll-behavior:auto;
-  }
+    html{
+        scroll-behavior:auto;
+    }
 
-  .reveal{
-    transition:none;
-  }
+    .reveal{
+        transition:none;
+    }
 
-  .phone,
-  .floating{
-    transform:none;
-  }
+    .phone{
+        transform:none;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="orb one"></div>
-<div class="orb two"></div>
-<div class="orb three"></div>
+<!-- BACKGROUND -->
+<div class="bg-orb orb1"></div>
+<div class="bg-orb orb2"></div>
+<div class="bg-orb orb3"></div>
 
-<header class="nav">
-  <div class="container">
 
-    <div class="navbar">
+<!-- HEADER -->
 
-      <a class="brand" href="#">
-        <span class="logo">₱</span>
-        <span>EarnApp</span>
-      </a>
+<header>
+<div class="container">
 
-      <div class="rating">
-        <b>★</b> 4.8 rating
-      </div>
+<nav class="nav">
 
-    </div>
+<div class="logo-area">
 
-  </div>
+<div class="logo">
+₱
+</div>
+
+<span>EarnApp</span>
+
+</div>
+
+<div class="rating">
+<span>★</span> 4.8 rating
+</div>
+
+</nav>
+
+</div>
 </header>
+
 
 
 <main>
@@ -867,28 +1089,32 @@ h2{
 
 <div class="container hero-grid">
 
+
 <div class="reveal">
 
-<div class="kicker">
-  <i></i>
-  Earn • Check in • Redeem
+<div class="badge">
+<i></i>
+Earn • Check in • Redeem
 </div>
+
 
 <h1>
 Turn spare<br>
 minutes into<br>
-<span>Rupees.</span>
+<em>Rupees.</em>
 </h1>
 
-<p class="hero-copy">
+
+<p class="hero-text">
 Complete simple tasks, check in daily, and cash out straight to your account — no laptop, no catch.
 </p>
 
-<div class="hero-actions">
 
-<!-- APK LINK -->
-<a class="download"
-   href="app-release.apk"
+<div class="buttons">
+
+<!-- APK DOWNLOAD -->
+<a href="EarnApp.apk"
+   class="download"
    download>
 
 <svg viewBox="0 0 24 24"
@@ -896,7 +1122,9 @@ fill="none"
 stroke="currentColor"
 stroke-width="2.5">
 
-<path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/>
+<path d="M12 3v12"/>
+<path d="m8 11 4 4 4-4"/>
+<path d="M5 21h14"/>
 
 </svg>
 
@@ -904,77 +1132,92 @@ Download for Android
 
 </a>
 
-<a class="secondary" href="#how">
+
+<a href="#how" class="how-btn">
 How it works ↓
 </a>
 
 </div>
 
-<div class="meta">
+
+<div class="version">
 Free · v1.0 · Android 6.0+
 </div>
 
 </div>
 
 
-<!-- PHONE MOCKUP -->
 
-<div class="visual-wrap reveal" id="visual">
+<!-- PHONE -->
 
-<div class="glow"></div>
+<div class="phone-area reveal" id="phoneArea">
+
+<div class="phone-glow"></div>
+
 
 <div class="phone" id="phone">
 
-<div class="screen">
+<div class="phone-screen">
 
 <div class="notch"></div>
 
-<div class="screen-top">
+
+<div class="phone-top">
 <span>EarnApp</span>
 <span>● Online</span>
 </div>
+
 
 <div class="balance-label">
 YOUR BALANCE
 </div>
 
+
 <div class="balance">
 Rs 2,450
 </div>
 
-<div class="mini-grid">
 
-<div class="mini">
-<b>Day 4</b>
+<div class="phone-grid">
+
+<div class="phone-box">
+<strong>Day 4</strong>
 streak
 </div>
 
-<div class="mini">
-<b>12</b>
+<div class="phone-box">
+<strong>12</strong>
 offers done
 </div>
 
 </div>
 
+
 <div class="check">
 
-<div class="check-dot"></div>
+<div class="check-icon"></div>
 
 <div>
-<b>Daily check-in</b>
+<strong>Daily check-in</strong>
 <small>+300 pts ready</small>
 </div>
 
 </div>
 
-</div>
 
 </div>
 
+</div>
 
-<div class="floating" id="floatCard">
+
+<div class="float-card" id="floatCard">
+
 <strong>+300 pts</strong>
-<small>Daily reward</small>
+
+<small>
+Daily reward
+</small>
+
 </div>
 
 </div>
@@ -984,9 +1227,10 @@ offers done
 </section>
 
 
+
 <!-- STATS -->
 
-<section class="section reveal">
+<section class="reveal">
 
 <div class="container">
 
@@ -1000,6 +1244,7 @@ withdrawal cap
 </span>
 </div>
 
+
 <div class="stat">
 <strong>7</strong>
 <span>
@@ -1007,6 +1252,7 @@ day streak<br>
 rewards
 </span>
 </div>
+
 
 <div class="stat">
 <strong>100</strong>
@@ -1023,15 +1269,14 @@ payouts
 </section>
 
 
+
 <!-- HOW IT WORKS -->
 
-<section class="section" id="how">
+<section id="how">
 
 <div class="container">
 
-<div class="section-head reveal">
-
-<div>
+<div class="section-title reveal">
 
 <div class="eyebrow">
 Simple process
@@ -1041,9 +1286,7 @@ Simple process
 How it works
 </h2>
 
-</div>
-
-<p class="section-intro">
+<p class="section-description">
 Everything is designed to stay simple on mobile. Install, earn points, then redeem your balance once approved.
 </p>
 
@@ -1053,11 +1296,11 @@ Everything is designed to stay simple on mobile. Install, earn points, then rede
 <div class="steps">
 
 
-<article class="glass-card step reveal">
+<div class="step glass reveal">
 
-<span class="step-num">01</span>
+<div class="number">01</div>
 
-<div class="step-dot"></div>
+<div class="dot"></div>
 
 <h3>
 Install the app
@@ -1067,14 +1310,14 @@ Install the app
 Install the app and open it — no sign-up forms, your device is your account.
 </p>
 
-</article>
+</div>
 
 
-<article class="glass-card step reveal">
+<div class="step glass reveal">
 
-<span class="step-num">02</span>
+<div class="number">02</div>
 
-<div class="step-dot"></div>
+<div class="dot"></div>
 
 <h3>
 Complete simple tasks
@@ -1084,14 +1327,14 @@ Complete simple tasks
 Complete offers or check in daily to earn points and build your streak.
 </p>
 
-</article>
+</div>
 
 
-<article class="glass-card step reveal">
+<div class="step glass reveal">
 
-<span class="step-num">03</span>
+<div class="number">03</div>
 
-<div class="step-dot"></div>
+<div class="dot"></div>
 
 <h3>
 Redeem your balance
@@ -1101,23 +1344,21 @@ Redeem your balance
 Redeem your balance to your preferred account once your withdrawal is approved.
 </p>
 
-</article>
+</div>
 
 
 </div>
 
 
-<!-- TESTIMONIAL -->
-
-<div class="glass-card quote reveal">
+<div class="quote glass reveal">
 
 <p>
 “Mainay first week mein hi apna pehla withdrawal receive kar liya. Bilkul asaan hai.”
 </p>
 
-<cite>
+<small>
 — Early EarnApp user
-</cite>
+</small>
 
 </div>
 
@@ -1126,28 +1367,226 @@ Redeem your balance to your preferred account once your withdrawal is approved.
 </section>
 
 
-<!-- DOWNLOAD -->
 
-<section class="section reveal">
+<!-- FEATURES -->
+
+<section>
 
 <div class="container">
 
-<div class="glass-card download-panel">
+<div class="section-title reveal">
 
 <div class="eyebrow">
-Android app
+Why EarnApp
 </div>
 
 <h2>
-Ready to start earning?
+Made for mobile.
+</h2>
+
+<p class="section-description">
+A simple experience for users who want to complete tasks, collect points and manage their rewards directly from their phone.
+</p>
+
+</div>
+
+
+<div class="features">
+
+
+<div class="feature glass reveal">
+
+<div class="feature-icon">
+✓
+</div>
+
+<h3>
+Simple tasks
+</h3>
+
+<p>
+Complete available offers and activities from your Android device without needing a laptop.
+</p>
+
+</div>
+
+
+<div class="feature glass reveal">
+
+<div class="feature-icon">
+★
+</div>
+
+<h3>
+Daily rewards
+</h3>
+
+<p>
+Check in every day and keep your streak active to unlock the available daily rewards.
+</p>
+
+</div>
+
+
+<div class="feature glass reveal">
+
+<div class="feature-icon">
+₨
+</div>
+
+<h3>
+Easy redemption
+</h3>
+
+<p>
+Once your balance is eligible, submit your withdrawal and wait for approval.
+</p>
+
+</div>
+
+
+<div class="feature glass reveal">
+
+<div class="feature-icon">
+⚡
+</div>
+
+<h3>
+Fast mobile experience
+</h3>
+
+<p>
+The website and app experience are designed around Android users and mobile screens.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- FAQ -->
+
+<section>
+
+<div class="container">
+
+<div class="section-title reveal">
+
+<div class="eyebrow">
+Questions
+</div>
+
+<h2>
+Frequently asked
+</h2>
+
+</div>
+
+
+<div class="faq">
+
+
+<details class="reveal">
+
+<summary>
+How do I download the app?
+</summary>
+
+<p>
+Tap the “Download for Android” button. The EarnApp.apk file will be downloaded to your device.
+</p>
+
+</details>
+
+
+<details class="reveal">
+
+<summary>
+Which Android version is supported?
+</summary>
+
+<p>
+The current website lists Android 6.0+ as the supported version.
+</p>
+
+</details>
+
+
+<details class="reveal">
+
+<summary>
+Do I need to create an account?
+</summary>
+
+<p>
+According to the current app flow, there are no sign-up forms and the device is used as the account.
+</p>
+
+</details>
+
+
+<details class="reveal">
+
+<summary>
+How does withdrawal work?
+</summary>
+
+<p>
+Complete available activities, build your balance and submit a redemption request. Withdrawals are processed after approval.
+</p>
+
+</details>
+
+
+<details class="reveal">
+
+<summary>
+What is the daily withdrawal cap?
+</summary>
+
+<p>
+The current website displays a Rs 400 daily withdrawal cap.
+</p>
+
+</details>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- MAIN DOWNLOAD -->
+
+<section>
+
+<div class="container">
+
+<div class="download-box glass reveal">
+
+<div class="eyebrow">
+Android application
+</div>
+
+<h2>
+Ready to start?
 </h2>
 
 <p>
-Download EarnApp for Android and turn your spare minutes into rewards. Free to install and built for Android 6.0+.
+Download EarnApp for Android and turn your spare minutes into rewards. Free · v1.0 · Android 6.0+.
 </p>
 
-<a class="download"
-   href="app-release.apk"
+
+<a href="EarnApp.apk"
+   class="download"
    download>
 
 <svg viewBox="0 0 24 24"
@@ -1155,17 +1594,15 @@ fill="none"
 stroke="currentColor"
 stroke-width="2.5">
 
-<path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/>
+<path d="M12 3v12"/>
+<path d="m8 11 4 4 4-4"/>
+<path d="M5 21h14"/>
 
 </svg>
 
 Download for Android
 
 </a>
-
-<div class="meta">
-Free · v1.0 · Android 6.0+
-</div>
 
 </div>
 
@@ -1174,14 +1611,14 @@ Free · v1.0 · Android 6.0+
 </section>
 
 
+
 <!-- INSTALLATION HELP -->
 
-<section class="section" style="padding-top:0">
+<section>
 
 <div class="container">
 
-<div class="glass-card reveal"
-style="padding:28px 30px">
+<div class="install glass reveal">
 
 <div class="eyebrow">
 Installation help
@@ -1191,17 +1628,16 @@ Installation help
 Having trouble installing?
 </h2>
 
-<p style="color:#8fa39b;line-height:1.7;margin-bottom:0">
-
+<p>
 If Android blocks the installation, allow
-<strong style="color:#dce5df">
+<strong>
 “Install unknown apps”
 </strong>
-
 for the browser or file manager you used to download the APK.
+</p>
 
-Only install APK files you trust.
-
+<p>
+Only install APK files that you trust and make sure the APK comes from your own official download source.
 </p>
 
 </div>
@@ -1213,9 +1649,10 @@ Only install APK files you trust.
 </main>
 
 
+
 <!-- FOOTER -->
 
-<footer class="footer">
+<footer>
 
 <div class="container">
 
@@ -1223,31 +1660,37 @@ Only install APK files you trust.
 earnpkrauf.shop
 </strong>
 
+<br><br>
+
+EarnApp · Android Application
+
 <br>
 
-© <span id="year"></span>
-EarnApp · All rights reserved.
+© <span id="year"></span> All rights reserved.
 
 </div>
 
 </footer>
 
 
+
 <script>
 
-/* REVEAL ANIMATION */
+/* =========================
+   SCROLL REVEAL
+========================= */
 
-const observer = new IntersectionObserver(
-(entries) => {
+const observer =
+new IntersectionObserver(
+entries => {
 
-entries.forEach(
-(e) => {
+entries.forEach(entry => {
 
-if(e.isIntersecting){
+if(entry.isIntersecting){
 
-e.target.classList.add("visible");
+entry.target.classList.add("show");
 
-observer.unobserve(e.target);
+observer.unobserve(entry.target);
 
 }
 
@@ -1262,11 +1705,17 @@ threshold:.12
 
 document
 .querySelectorAll(".reveal")
-.forEach(el => observer.observe(el));
+.forEach(element => {
+
+observer.observe(element);
+
+});
 
 
 
-/* PARALLAX */
+/* =========================
+   MOUSE PARALLAX
+========================= */
 
 const phone =
 document.getElementById("phone");
@@ -1274,86 +1723,96 @@ document.getElementById("phone");
 const floatCard =
 document.getElementById("floatCard");
 
-const visual =
-document.getElementById("visual");
+const phoneArea =
+document.getElementById("phoneArea");
 
 
-function parallax(x,y){
+phoneArea.addEventListener(
+"pointermove",
+event => {
 
-if(!phone || !floatCard)
-return;
+const rect =
+phoneArea.getBoundingClientRect();
 
-const px =
-(x - .5) * 16;
+const x =
+(event.clientX - rect.left) /
+rect.width;
 
-const py =
-(y - .5) * 16;
+const y =
+(event.clientY - rect.top) /
+rect.height;
+
+const rotateY =
+-11 + ((x-.5)*14);
+
+const rotateX =
+4 - ((y-.5)*8);
+
+const moveY =
+(y-.5)*18;
 
 
 phone.style.transform =
 `
-perspective(1100px)
-rotateY(${(-10 + px*.45)}deg)
-rotateX(${(4 - py*.2)}deg)
-translateY(${py}px)
+perspective(1200px)
+rotateY(${rotateY}deg)
+rotateX(${rotateX}deg)
+translateY(${moveY}px)
 `;
 
 
 floatCard.style.transform =
-`translateY(${-py*1.6}px)`;
-
-}
-
-
-visual.addEventListener(
-"pointermove",
-(e) => {
-
-const r =
-visual.getBoundingClientRect();
-
-parallax(
-(e.clientX-r.left)/r.width,
-(e.clientY-r.top)/r.height
-);
+`
+translateY(${-moveY*1.5}px)
+`;
 
 }
 );
 
 
-visual.addEventListener(
+phoneArea.addEventListener(
 "pointerleave",
 () => {
 
-phone.style.transform = "";
+phone.style.transform =
+`
+perspective(1200px)
+rotateY(-11deg)
+rotateX(4deg)
+`;
 
-floatCard.style.transform = "";
+floatCard.style.transform="";
 
 }
 );
 
 
 
-/* SCROLL PARALLAX */
+/* =========================
+   BACKGROUND PARALLAX
+========================= */
 
 window.addEventListener(
 "scroll",
 () => {
 
-const y =
+const scroll =
 window.scrollY;
 
 document
-.querySelectorAll(".orb")
-.forEach((el,i) => {
+.querySelector(".orb1")
+.style.transform =
+`translateY(${scroll*.10}px)`;
 
-const speeds =
-[.12,-.08,.06];
+document
+.querySelector(".orb2")
+.style.transform =
+`translateY(${scroll*-.07}px)`;
 
-el.style.transform =
-`translate3d(0,${y*speeds[i]}px,0)`;
-
-});
+document
+.querySelector(".orb3")
+.style.transform =
+`translateY(${scroll*.05}px)`;
 
 },
 {
@@ -1363,24 +1822,28 @@ passive:true
 
 
 
-/* DOWNLOAD BUTTON EFFECT */
+/* =========================
+   DOWNLOAD BUTTON EFFECT
+========================= */
 
 document
-.querySelectorAll("a.download")
-.forEach(btn => {
+.querySelectorAll(".download")
+.forEach(button => {
 
-btn.addEventListener(
+button.addEventListener(
 "click",
 () => {
 
-btn.style.transform =
-"scale(.98)";
+button.style.transform =
+"scale(.97)";
 
 setTimeout(
 () => {
-btn.style.transform="";
+
+button.style.transform="";
+
 },
-150
+160
 );
 
 });
@@ -1389,7 +1852,9 @@ btn.style.transform="";
 
 
 
-/* YEAR */
+/* =========================
+   YEAR
+========================= */
 
 document.getElementById("year")
 .textContent =
