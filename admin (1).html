@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#060a13">
+<title>Admin Panel — EarnApp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#060a13;--surface:rgba(255,255,255,.045);--border:rgba(148,170,215,.16);
+  --white:#eef3fb;--muted:#8fa0bd;--blue:#3d7bff;--cyan:#39d0e4;--red:#ff6b7a;--green:#43e08f;
+  --grad:linear-gradient(120deg,#3d7bff,#39d0e4);
+  --head:"Space Grotesk",Inter,system-ui,sans-serif;
+  --body:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+}
+html{background:var(--bg)}
+body{
+  font-family:var(--body);color:var(--white);min-height:100vh;
+  background:radial-gradient(900px 500px at 12% -5%,rgba(61,123,255,.14),transparent 60%),
+             radial-gradient(800px 500px at 95% 18%,rgba(57,208,228,.09),transparent 60%),
+             linear-gradient(180deg,#060a13,#080d1a 45%,#05080f);
+  -webkit-font-smoothing:antialiased;
+}
+button,input,textarea{font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+[hidden]{display:none!important}
+.wrap{width:min(1080px,calc(100% - 28px));margin:auto;padding:22px 0 60px}
+
+.glass{
+  background:linear-gradient(150deg,rgba(148,170,215,.08),rgba(148,170,215,.03));
+  border:1px solid var(--border);border-radius:22px;
+  box-shadow:0 10px 30px rgba(2,6,16,.35),inset 0 1px rgba(255,255,255,.06);
+}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 0 22px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;font:700 20px var(--head);background:var(--grad);box-shadow:0 8px 24px rgba(61,123,255,.3)}
+.brand b{font:700 19px var(--head);display:block;line-height:1.1}
+.brand small{color:var(--muted);font-size:12px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+.btn{
+  padding:11px 18px;border-radius:13px;border:1px solid var(--border);background:var(--surface);
+  font-weight:600;font-size:14px;cursor:pointer;transition:.2s;white-space:nowrap;
+}
+.btn:hover{background:rgba(255,255,255,.09)}
+.btn.primary{background:var(--grad);border:0;color:#fff;box-shadow:0 8px 22px rgba(61,123,255,.3)}
+.btn.primary:hover{filter:brightness(1.1)}
+.btn.danger{color:var(--red);border-color:rgba(255,107,122,.3)}
+.btn.danger:hover{background:rgba(255,107,122,.1)}
+.btn:disabled{opacity:.5;cursor:wait}
+
+/* login */
+.login{max-width:420px;margin:12vh auto 0;padding:34px 30px}
+.login h1{font:700 28px var(--head);margin:18px 0 8px}
+.login p{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:22px}
+
+label{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:16px 0 7px}
+input[type=text],input[type=password],input[type=url],input[type=number],textarea{
+  width:100%;padding:13px 14px;border-radius:13px;border:1px solid var(--border);
+  background:rgba(6,10,19,.6);outline:none;transition:border-color .2s;font-size:15px;
+}
+input:focus,textarea:focus{border-color:rgba(61,123,255,.6)}
+textarea{min-height:110px;resize:vertical;line-height:1.55}
+.msg{font-size:13.5px;margin-top:14px;min-height:20px}
+.msg.err{color:var(--red)}.msg.ok{color:var(--green)}
+
+/* dashboard */
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.bar h2{font:700 24px var(--head)}
+.list{display:grid;gap:12px}
+.item{display:grid;grid-template-columns:128px 1fr auto;gap:16px;align-items:center;padding:14px}
+.thumb{aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,rgba(61,123,255,.18),rgba(57,208,228,.1));display:grid;place-items:center;font:700 26px var(--head);color:rgba(238,243,251,.5)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.item h3{font:600 17px var(--head);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.item p{color:var(--muted);font-size:13.5px;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pill{font:700 10.5px var(--body);letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:100px}
+.pill.live{color:var(--green);background:rgba(67,224,143,.1);border:1px solid rgba(67,224,143,.3)}
+.pill.draft{color:#ffc94d;background:rgba(255,201,77,.1);border:1px solid rgba(255,201,77,.3)}
+.empty{padding:44px 20px;text-align:center;color:var(--muted)}
+
+/* editor modal */
+.overlay{position:fixed;inset:0;z-index:20;background:rgba(3,6,12,.75);backdrop-filter:blur(6px);display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:24px 14px}
+.modal{width:min(640px,100%);padding:26px 26px 24px;background:#0b1222;margin:auto}
+.modal h2{font:700 22px var(--head);margin-bottom:4px}
+.preview{margin-top:10px;aspect-ratio:16/9;max-width:320px;border-radius:14px;overflow:hidden;border:1px dashed var(--border);display:grid;place-items:center;color:var(--muted);font-size:13px;background:rgba(6,10,19,.5)}
+.preview img{width:100%;height:100%;object-fit:cover}
+.switch{display:flex;align-items:center;gap:10px;margin-top:18px;cursor:pointer;font-weight:600;font-size:14px}
+.switch input{width:18px;height:18px;accent-color:var(--blue)}
+.two{display:grid;grid-template-columns:1fr 130px;gap:12px}
+.actions{display:flex;gap:10px;justify-content:flex-end;margin-top:24px;flex-wrap:wrap}
+details.sec{margin-top:26px;padding:18px 22px}
+details.sec summary{cursor:pointer;font-weight:700;font-family:var(--head)}
+
+@media(max-width:640px){
+  .item{grid-template-columns:96px 1fr}
+  .item .row{grid-column:1/-1}
+  .two{grid-template-columns:1fr}
+  .modal{padding:22px 18px}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<main id="loginView" class="wrap" hidden>
+  <div class="glass login">
+    <div class="brand"><div class="logo">E</div><div><b>EarnApp</b><small>Admin panel</small></div></div>
+    <h1>Admin access</h1>
+    <p>Enter your admin code to manage the projects shown on your website.</p>
+    <form id="loginForm" autocomplete="off">
+      <label for="code">Admin code</label>
+      <input id="code" type="password" placeholder="Enter code" autocomplete="current-password" required>
+      <div class="msg err" id="loginMsg"></div>
+      <button class="btn primary" id="loginBtn" style="width:100%;margin-top:8px" type="submit">Unlock</button>
+    </form>
+  </div>
+</main>
+
+<!-- DASHBOARD -->
+<main id="appView" class="wrap" hidden>
+  <div class="top">
+    <div class="brand"><div class="logo">E</div><div><b>EarnApp Admin</b><small>Manage "My other projects"</small></div></div>
+    <div class="row">
+      <a class="btn" href="index.html" target="_blank" rel="noopener">View site</a>
+      <button class="btn" id="logoutBtn" type="button">Log out</button>
+    </div>
+  </div>
+
+  <div class="bar">
+    <h2>Projects <span id="count" style="color:var(--muted);font-size:16px"></span></h2>
+    <button class="btn primary" id="addBtn" type="button">+ Add project</button>
+  </div>
+  <div class="msg" id="listMsg"></div>
+  <div class="list" id="list"></div>
+
+  <details class="glass sec">
+    <summary>Change admin code</summary>
+    <form id="codeForm" autocomplete="off">
+      <label for="newCode">New code (min 6 characters)</label>
+      <input id="newCode" type="password" minlength="6" autocomplete="new-password" required>
+      <div class="msg" id="codeMsg"></div>
+      <button class="btn" type="submit" style="margin-top:6px">Update code</button>
+    </form>
+  </details>
+</main>
+
+<!-- EDITOR -->
+<div class="overlay" id="editor" hidden>
+  <form class="glass modal" id="projForm" autocomplete="off">
+    <h2 id="editorTitle">Add project</h2>
+
+    <label for="fTitle">Project name</label>
+    <input id="fTitle" type="text" maxlength="120" required>
+
+    <label for="fDesc">Details</label>
+    <textarea id="fDesc" maxlength="1200" placeholder="What is this project? What does it do?"></textarea>
+
+    <label for="fUrl">Project link (optional)</label>
+    <input id="fUrl" type="url" placeholder="https://...">
+
+    <label for="fTags">Tags (comma separated)</label>
+    <input id="fTags" type="text" placeholder="Android, Website, Tool">
+
+    <label>Thumbnail</label>
+    <div class="row">
+      <input id="fFile" type="file" accept="image/*" hidden>
+      <button class="btn" type="button" id="pickBtn">Upload image</button>
+      <button class="btn" type="button" id="clearImg">Remove</button>
+    </div>
+    <input id="fThumb" type="url" placeholder="…or paste an image link (https://…)" style="margin-top:10px">
+    <div class="preview" id="preview">No thumbnail</div>
+
+    <div class="two">
+      <div></div>
+      <div><label for="fSort">Order</label><input id="fSort" type="number" value="0"></div>
+    </div>
+
+    <label class="switch"><input type="checkbox" id="fPub" checked> Show on website</label>
+
+    <div class="msg" id="formMsg"></div>
+    <div class="actions">
+      <button class="btn" type="button" id="cancelBtn">Cancel</button>
+      <button class="btn primary" type="submit" id="saveBtn">Save project</button>
+    </div>
+  </form>
+</div>
+
+<script>
+(function(){
+  var SB_URL="https://mfmtelqbrjrhguglkhtx.supabase.co";
+  var SB_KEY="sb_publishable_FbmR9omlHWTvp3ukFgAXAQ_5EiPfXLY";
+  var SKEY="earnapp_admin_session";
+  var $=function(id){return document.getElementById(id)};
+  var code=null, projects=[], editingId=null;
+
+  /* ---------- Supabase RPC ---------- */
+  function rpc(name,args){
+    return fetch(SB_URL+"/rest/v1/rpc/"+name,{
+      method:"POST",
+      headers:{apikey:SB_KEY,"Content-Type":"application/json"},
+      body:JSON.stringify(args)
+    }).then(function(r){
+      return r.json().catch(function(){return null}).then(function(j){
+        if(!r.ok){
+          var m=(j&&j.message)||"Request failed";
+          var e=new Error(m);e.invalid=/invalid_code/.test(m);throw e;
+        }
+        return j;
+      });
+    });
+  }
+  function setMsg(el,t,cls){el.textContent=t||"";el.className="msg"+(cls?" "+cls:"")}
+
+  /* ---------- session ---------- */
+  function saveSession(c){try{sessionStorage.setItem(SKEY,c)}catch(e){}}
+  function loadSession(){try{return sessionStorage.getItem(SKEY)}catch(e){return null}}
+  function clearSession(){try{sessionStorage.removeItem(SKEY)}catch(e){}}
+
+  function showLogin(){$("appView").hidden=true;$("loginView").hidden=false;$("code").value="";$("code").focus()}
+  function showApp(){$("loginView").hidden=true;$("appView").hidden=false;load()}
+
+  $("loginForm").addEventListener("submit",function(ev){
+    ev.preventDefault();
+    var c=$("code").value.trim();
+    var b=$("loginBtn");b.disabled=true;setMsg($("loginMsg"),"");
+    rpc("admin_verify",{p_code:c}).then(function(ok){
+      if(ok===true){code=c;saveSession(c);showApp()}
+      else setMsg($("loginMsg"),"Wrong code. Try again.","err");
+    }).catch(function(){setMsg($("loginMsg"),"Could not connect. Check your internet.","err")})
+    .then(function(){b.disabled=false});
+  });
+  $("logoutBtn").addEventListener("click",function(){code=null;clearSession();showLogin()});
+
+  /* ---------- list ---------- */
+  function load(){
+    setMsg($("listMsg"),"Loading…");
+    rpc("admin_list_projects",{p_code:code}).then(function(rows){
+      projects=rows||[];render();setMsg($("listMsg"),"");
+    }).catch(function(e){
+      if(e.invalid){code=null;clearSession();showLogin();return}
+      setMsg($("listMsg"),"Could not load projects: "+e.message,"err");
+    });
+  }
+  function thumbEl(p){
+    var d=document.createElement("div");d.className="thumb";
+    if(p.thumbnail_url){var i=document.createElement("img");i.src=p.thumbnail_url;i.alt="";d.appendChild(i)}
+    else d.textContent=(p.title||"?").charAt(0).toUpperCase();
+    return d;
+  }
+  function render(){
+    var list=$("list");list.textContent="";
+    $("count").textContent="("+projects.length+")";
+    if(!projects.length){
+      var e=document.createElement("div");e.className="glass empty";
+      e.textContent="No projects yet. Tap “Add project” to create your first one.";
+      list.appendChild(e);return;
+    }
+    projects.forEach(function(p){
+      var it=document.createElement("div");it.className="glass item";
+      it.appendChild(thumbEl(p));
+      var mid=document.createElement("div");
+      var h=document.createElement("h3");h.appendChild(document.createTextNode(p.title+" "));
+      var pill=document.createElement("span");pill.className="pill "+(p.published?"live":"draft");pill.textContent=p.published?"Live":"Hidden";
+      h.appendChild(pill);mid.appendChild(h);
+      var d=document.createElement("p");d.textContent=p.description||"No details";mid.appendChild(d);
+      it.appendChild(mid);
+      var row=document.createElement("div");row.className="row";
+      var eb=document.createElement("button");eb.className="btn";eb.type="button";eb.textContent="Edit";
+      eb.onclick=function(){openEditor(p)};
+      var db=document.createElement("button");db.className="btn danger";db.type="button";db.textContent="Delete";
+      db.onclick=function(){
+        if(!confirm("Delete “"+p.title+"”? This cannot be undone."))return;
+        rpc("admin_delete_project",{p_code:code,p_id:p.id}).then(load)
+          .catch(function(e){setMsg($("listMsg"),"Delete failed: "+e.message,"err")});
+      };
+      row.appendChild(eb);row.appendChild(db);it.appendChild(row);
+      $("list").appendChild(it);
+    });
+  }
+
+  /* ---------- editor ---------- */
+  function updatePreview(){
+    var v=$("fThumb").value.trim(),pv=$("preview");pv.textContent="";
+    if(v){var i=document.createElement("img");i.src=v;i.alt="";i.onerror=function(){pv.textContent="Image could not load"};pv.appendChild(i)}
+    else pv.textContent="No thumbnail";
+  }
+  function openEditor(p){
+    editingId=p?p.id:null;
+    $("editorTitle").textContent=p?"Edit project":"Add project";
+    $("fTitle").value=p?p.title:"";
+    $("fDesc").value=p?p.description:"";
+    $("fUrl").value=p&&p.project_url||"";
+    $("fTags").value=p&&p.tags?p.tags.join(", "):"";
+    $("fThumb").value=p&&p.thumbnail_url||"";
+    $("fSort").value=p?p.sort_order:projects.length;
+    $("fPub").checked=p?p.published:true;
+    setMsg($("formMsg"),"");updatePreview();
+    $("editor").hidden=false;$("fTitle").focus();
+  }
+  function closeEditor(){$("editor").hidden=true}
+  $("addBtn").onclick=function(){openEditor(null)};
+  $("cancelBtn").onclick=closeEditor;
+  $("fThumb").addEventListener("input",updatePreview);
+  $("clearImg").onclick=function(){$("fThumb").value="";$("fFile").value="";updatePreview()};
+  $("pickBtn").onclick=function(){$("fFile").click()};
+
+  // resize uploaded image to 640x360 JPEG (keeps it small for the database)
+  $("fFile").addEventListener("change",function(){
+    var f=this.files&&this.files[0];if(!f)return;
+    if(!/^image\//.test(f.type)){setMsg($("formMsg"),"Please choose an image file.","err");return}
+    var rd=new FileReader();
+    rd.onload=function(){
+      var img=new Image();
+      img.onload=function(){
+        var W=640,H=360,c=document.createElement("canvas");c.width=W;c.height=H;
+        var x=c.getContext("2d");x.fillStyle="#0b1222";x.fillRect(0,0,W,H);
+        var s=Math.max(W/img.width,H/img.height),w=img.width*s,h=img.height*s;
+        x.drawImage(img,(W-w)/2,(H-h)/2,w,h);
+        $("fThumb").value=c.toDataURL("image/jpeg",0.82);
+        setMsg($("formMsg"),"");updatePreview();
+      };
+      img.onerror=function(){setMsg($("formMsg"),"Could not read that image.","err")};
+      img.src=rd.result;
+    };
+    rd.readAsDataURL(f);
+  });
+
+  $("projForm").addEventListener("submit",function(ev){
+    ev.preventDefault();
+    var tags=$("fTags").value.split(",").map(function(t){return t.trim()}).filter(Boolean).slice(0,8);
+    var b=$("saveBtn");b.disabled=true;setMsg($("formMsg"),"Saving…");
+    rpc("admin_save_project",{
+      p_code:code,p_id:editingId,
+      p_title:$("fTitle").value.trim(),
+      p_description:$("fDesc").value.trim(),
+      p_thumbnail_url:$("fThumb").value.trim(),
+      p_project_url:$("fUrl").value.trim(),
+      p_tags:tags,
+      p_sort_order:parseInt($("fSort").value,10)||0,
+      p_published:$("fPub").checked
+    }).then(function(){closeEditor();load()})
+    .catch(function(e){
+      if(e.invalid){closeEditor();code=null;clearSession();showLogin();return}
+      setMsg($("formMsg"),"Save failed: "+e.message,"err");
+    }).then(function(){b.disabled=false});
+  });
+  $("editor").addEventListener("mousedown",function(e){if(e.target===this)closeEditor()});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("editor").hidden)closeEditor()});
+
+  /* ---------- change code ---------- */
+  $("codeForm").addEventListener("submit",function(ev){
+    ev.preventDefault();
+    var n=$("newCode").value.trim();
+    rpc("admin_change_code",{p_code:code,p_new_code:n}).then(function(){
+      code=n;saveSession(n);$("newCode").value="";setMsg($("codeMsg"),"Admin code updated.","ok");
+    }).catch(function(e){setMsg($("codeMsg"),"Failed: "+e.message,"err")});
+  });
+
+  /* ---------- start ---------- */
+  var s=loadSession();
+  if(s){
+    rpc("admin_verify",{p_code:s}).then(function(ok){
+      if(ok===true){code=s;showApp()}else{clearSession();showLogin()}
+    }).catch(showLogin);
+  }else showLogin();
+})();
+</script>
+</body>
+</html>
