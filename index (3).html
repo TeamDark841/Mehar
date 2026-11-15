@@ -1,0 +1,3332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#060a13">
+<meta property="og:title" content="EarnApp — Turn Spare Minutes into Rupees">
+<meta property="og:description" content="Join 20,000+ users. Complete simple tasks, check in daily and redeem your balance. Free Android app. Designed by MeharRUFI1.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<title>EarnApp — Turn Spare Minutes into Rupees | Designed by MeharRUFI1</title>
+<meta name="description" content="EarnApp: complete simple tasks, check in daily and redeem your balance. 20,000+ downloads. Free Android app. Designed by MeharRUFI1.">
+
+<!-- FAVICON -->
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<!-- FONTS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#060a13;
+    --bg2:#0a1120;
+    --surface:rgba(255,255,255,.045);
+    --surface2:rgba(255,255,255,.07);
+    --border:rgba(148,170,215,.14);
+    --border-strong:rgba(148,170,215,.24);
+    --white:#eef3fb;
+    --muted:#8fa0bd;
+    --muted2:#6b7d9c;
+    --blue:#3d7bff;
+    --blue2:#5ea0ff;
+    --cyan:#39d0e4;
+    --glow:rgba(61,123,255,.22);
+    --grad:linear-gradient(120deg,#3d7bff,#39d0e4);
+    --radius:20px;
+    --font-head:"Space Grotesk",Inter,system-ui,sans-serif;
+    --font-body:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+    background:var(--bg);
+}
+
+body{
+    font-family:var(--font-body);
+    color:var(--white);
+    background:
+        radial-gradient(900px 500px at 12% -5%,rgba(61,123,255,.14),transparent 60%),
+        radial-gradient(800px 500px at 95% 18%,rgba(57,208,228,.09),transparent 60%),
+        linear-gradient(180deg,#060a13,#080d1a 45%,#05080f);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+}
+
+/* BACKGROUND GRID */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.5;
+    background-image:
+        linear-gradient(rgba(148,170,215,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(148,170,215,.035) 1px,transparent 1px);
+    background-size:48px 48px;
+    mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 40%,transparent 100%);
+    -webkit-mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 40%,transparent 100%);
+}
+
+.bg-orb{
+    position:fixed;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:-1;
+    background:radial-gradient(circle at 35% 30%,rgba(61,123,255,.12),rgba(57,208,228,.05) 45%,transparent 70%);
+    filter:blur(10px);
+}
+
+.orb1{width:340px;height:340px;left:-170px;top:200px}
+.orb2{width:260px;height:260px;right:-130px;top:700px}
+.orb3{width:190px;height:190px;left:14%;top:1350px}
+
+/* CONTAINER */
+
+.container{
+    width:min(1120px,calc(100% - 30px));
+    margin:auto;
+}
+
+/* NAVBAR */
+
+header{
+    padding:14px 0;
+    position:sticky;
+    top:0;
+    z-index:50;
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    background:rgba(6,10,19,.72);
+    border-bottom:1px solid rgba(148,170,215,.08);
+}
+
+.nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo{
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    display:grid;
+    place-items:center;
+    color:#fff;
+    font-family:var(--font-head);
+    font-size:20px;
+    font-weight:700;
+    background:var(--grad);
+    box-shadow:
+        0 8px 24px var(--glow),
+        inset 0 1px rgba(255,255,255,.35);
+}
+
+.logo-name{
+    font-family:var(--font-head);
+    font-size:20px;
+    font-weight:700;
+    letter-spacing:-.02em;
+    line-height:1.1;
+}
+
+.logo-by{
+    display:block;
+    font-family:var(--font-body);
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.02em;
+    color:var(--muted2);
+}
+
+.logo-by b{
+    color:var(--cyan);
+    font-weight:700;
+}
+
+.nav-links{
+    display:flex;
+    gap:4px;
+    align-items:center;
+}
+
+.nav-links a{
+    padding:9px 14px;
+    border-radius:12px;
+    color:#b6c4dd;
+    font-size:14px;
+    font-weight:600;
+    transition:.2s;
+}
+
+.nav-links a:hover{
+    color:#fff;
+    background:var(--surface);
+}
+
+.rating{
+    padding:9px 14px;
+    border-radius:13px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    font-size:13px;
+    font-weight:600;
+    color:#c6d2e8;
+    white-space:nowrap;
+}
+
+.rating span{
+    color:#ffc94d;
+}
+
+a{color:inherit;text-decoration:none}
+
+/* HERO */
+
+.hero{
+    min-height:720px;
+    display:flex;
+    align-items:center;
+    padding:64px 0 76px;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:44px;
+    align-items:center;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:9px 15px;
+    border-radius:100px;
+    color:#9fd4ff;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    background:rgba(61,123,255,.09);
+    border:1px solid rgba(61,123,255,.25);
+}
+
+.badge i{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#43e08f;
+    box-shadow:0 0 14px #43e08f;
+    animation:pulse 1.6s infinite;
+}
+
+@keyframes pulse{
+    50%{opacity:.35}
+}
+
+h1{
+    margin:26px 0 24px;
+    font-family:var(--font-head);
+    font-size:clamp(48px,6.6vw,84px);
+    line-height:.98;
+    letter-spacing:-.035em;
+    font-weight:700;
+}
+
+h1 em{
+    font-style:normal;
+    background:var(--grad);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero-text{
+    max-width:600px;
+    color:var(--muted);
+    font-size:19px;
+    line-height:1.7;
+    margin-bottom:32px;
+}
+
+.buttons{
+    display:flex;
+    gap:13px;
+    flex-wrap:wrap;
+}
+
+.download{
+    min-height:62px;
+    padding:0 28px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    color:#04101f;
+    font-size:16px;
+    font-weight:800;
+    border-radius:17px;
+    background:linear-gradient(135deg,#6db5ff,#3d7bff 55%,#2f6ae8);
+    border:1px solid rgba(160,200,255,.55);
+    box-shadow:
+        0 16px 44px var(--glow),
+        inset 0 1px rgba(255,255,255,.65);
+    transition:.25s;
+}
+
+.download:hover{
+    transform:translateY(-4px);
+    box-shadow:
+        0 24px 60px rgba(61,123,255,.34),
+        inset 0 1px rgba(255,255,255,.65);
+}
+
+.download svg{
+    width:21px;
+}
+
+.how-btn{
+    min-height:62px;
+    padding:0 24px;
+    display:inline-flex;
+    align-items:center;
+    border-radius:17px;
+    color:#dbe4f5;
+    background:var(--surface);
+    border:1px solid var(--border-strong);
+    font-weight:700;
+    transition:.25s;
+}
+
+.how-btn:hover{
+    background:var(--surface2);
+    transform:translateY(-4px);
+}
+
+.version{
+    margin-top:14px;
+    color:var(--muted2);
+    font-size:14px;
+}
+
+.version b{
+    color:#9fb4d6;
+    font-weight:600;
+}
+
+/* PHONE */
+
+.phone-area{
+    min-height:600px;
+    position:relative;
+    display:grid;
+    place-items:center;
+}
+
+.phone-glow{
+    position:absolute;
+    width:440px;
+    height:440px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(61,123,255,.26),rgba(57,208,228,.1) 45%,transparent 66%);
+    filter:blur(6px);
+}
+
+.phone{
+    position:relative;
+    width:min(355px,82vw);
+    aspect-ratio:.52;
+    padding:13px;
+    border-radius:48px;
+    background:linear-gradient(160deg,rgba(148,170,215,.28),rgba(148,170,215,.06));
+    border:1px solid rgba(148,170,215,.25);
+    box-shadow:
+        0 30px 70px rgba(2,6,16,.6),
+        inset 0 1px rgba(255,255,255,.18);
+    transform:perspective(1200px) rotateY(-11deg) rotateX(4deg);
+    transition:transform .5s ease;
+}
+
+.phone-screen{
+    height:100%;
+    border-radius:38px;
+    padding:25px 20px;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 20% 8%,rgba(61,123,255,.22),transparent 32%),
+        linear-gradient(165deg,#0c1526,#070c18 70%);
+}
+
+.notch{
+    width:90px;
+    height:19px;
+    margin:-13px auto 25px;
+    border-radius:30px;
+    background:#04070e;
+}
+
+.phone-top{
+    display:flex;
+    justify-content:space-between;
+    color:#7c8fb0;
+    font-size:11px;
+    font-weight:600;
+}
+
+.balance-label{
+    margin-top:42px;
+    color:#6f83a6;
+    font-size:11px;
+    letter-spacing:.12em;
+    font-weight:600;
+}
+
+.balance{
+    margin:7px 0 22px;
+    font-family:var(--font-head);
+    font-size:36px;
+    font-weight:700;
+    background:linear-gradient(120deg,#8fc0ff,#39d0e4);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.phone-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.phone-box{
+    padding:14px;
+    border-radius:16px;
+    background:rgba(61,123,255,.10);
+    border:1px solid rgba(148,170,215,.12);
+    color:#8fa2c2;
+    font-size:11px;
+}
+
+.phone-box strong{
+    display:block;
+    color:#eaf1fb;
+    font-size:15px;
+    margin-bottom:3px;
+}
+
+.check{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-top:13px;
+    padding:17px;
+    border-radius:18px;
+    background:linear-gradient(135deg,rgba(61,123,255,.20),rgba(57,208,228,.10));
+    border:1px solid rgba(61,123,255,.25);
+}
+
+.check-icon{
+    width:38px;
+    height:38px;
+    border-radius:12px;
+    background:var(--grad);
+    box-shadow:0 6px 22px var(--glow);
+}
+
+.check strong{
+    font-size:13px;
+}
+
+.check small{
+    display:block;
+    margin-top:3px;
+    color:#8fa2c2;
+}
+
+.float-card{
+    position:absolute;
+    right:-5px;
+    top:100px;
+    padding:14px 17px;
+    border-radius:18px;
+    background:rgba(12,21,38,.96);
+    border:1px solid var(--border-strong);
+    box-shadow:0 20px 50px rgba(2,6,16,.5);
+    animation:bob 4s ease-in-out infinite;
+}
+
+.float-card strong{
+    color:var(--cyan);
+    font-size:18px;
+    font-family:var(--font-head);
+}
+
+.float-card small{
+    display:block;
+    color:#8298ba;
+    margin-top:3px;
+}
+
+@keyframes bob{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-8px)}
+}
+
+/* SECTION */
+
+section{
+    padding:88px 0;
+}
+
+.section-title{
+    margin-bottom:38px;
+}
+
+.eyebrow{
+    color:var(--cyan);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+}
+
+h2{
+    margin-top:10px;
+    font-family:var(--font-head);
+    font-size:clamp(34px,4.6vw,54px);
+    line-height:1.05;
+    letter-spacing:-.02em;
+}
+
+.section-description{
+    max-width:620px;
+    color:var(--muted);
+    line-height:1.7;
+    margin-top:16px;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+}
+
+.stat{
+    text-align:center;
+    padding:38px 20px;
+    border-right:1px solid var(--border);
+}
+
+.stat:last-child{
+    border-right:0;
+}
+
+.stat strong{
+    display:block;
+    font-family:var(--font-head);
+    font-size:clamp(34px,4.5vw,54px);
+    font-weight:700;
+    background:linear-gradient(120deg,#8fc0ff,#39d0e4);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.stat span{
+    display:block;
+    color:#8398ba;
+    line-height:1.45;
+    margin-top:6px;
+    font-size:14px;
+}
+
+/* GLASS */
+
+.glass{
+    background:linear-gradient(150deg,rgba(148,170,215,.08),rgba(148,170,215,.03));
+    border:1px solid var(--border);
+    box-shadow:
+        0 10px 30px rgba(2,6,16,.35),
+        inset 0 1px rgba(255,255,255,.06);
+}
+
+/* HOW */
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.step{
+    min-height:245px;
+    padding:30px;
+    border-radius:26px;
+    position:relative;
+    overflow:hidden;
+    transition:transform .3s ease,border-color .3s ease;
+}
+
+.step:hover{
+    transform:translateY(-6px);
+    border-color:rgba(61,123,255,.4);
+}
+
+.number{
+    position:absolute;
+    right:20px;
+    top:10px;
+    color:rgba(94,160,255,.14);
+    font-family:var(--font-head);
+    font-size:56px;
+    font-weight:700;
+}
+
+.dot{
+    width:12px;
+    height:12px;
+    margin-bottom:28px;
+    border-radius:50%;
+    background:var(--cyan);
+    box-shadow:0 0 20px rgba(57,208,228,.5);
+}
+
+.step h3{
+    font-family:var(--font-head);
+    font-size:20px;
+    margin-bottom:11px;
+    letter-spacing:-.01em;
+}
+
+.step p{
+    color:var(--muted);
+    line-height:1.7;
+    font-size:15px;
+}
+
+/* QUOTE */
+
+.quote{
+    margin-top:25px;
+    padding:42px;
+    border-radius:26px;
+    position:relative;
+    overflow:hidden;
+}
+
+.quote::before{
+    content:"\201C";
+    position:absolute;
+    right:24px;
+    top:-50px;
+    color:rgba(94,160,255,.08);
+    font-family:var(--font-head);
+    font-size:190px;
+}
+
+.quote p{
+    max-width:780px;
+    font-family:var(--font-head);
+    font-size:23px;
+    font-weight:500;
+    line-height:1.55;
+}
+
+.quote small{
+    display:block;
+    color:#7e93b5;
+    margin-top:20px;
+    font-size:14px;
+}
+
+/* FEATURES */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.feature{
+    padding:30px;
+    border-radius:24px;
+    transition:transform .3s ease,border-color .3s ease;
+}
+
+.feature:hover{
+    transform:translateY(-6px);
+    border-color:rgba(61,123,255,.4);
+}
+
+.feature-icon{
+    width:50px;
+    height:50px;
+    display:grid;
+    place-items:center;
+    border-radius:14px;
+    color:var(--cyan);
+    background:rgba(61,123,255,.12);
+    border:1px solid rgba(61,123,255,.22);
+    font-size:22px;
+    margin-bottom:20px;
+}
+
+.feature h3{
+    font-family:var(--font-head);
+    font-size:20px;
+    margin-bottom:10px;
+    letter-spacing:-.01em;
+}
+
+.feature p{
+    color:var(--muted);
+    line-height:1.7;
+    font-size:15px;
+}
+
+/* FAQ */
+
+.faq{
+    display:grid;
+    gap:12px;
+}
+
+details{
+    padding:22px 24px;
+    border-radius:18px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    transition:border-color .25s;
+}
+
+details[open]{
+    border-color:rgba(61,123,255,.35);
+    background:rgba(61,123,255,.05);
+}
+
+summary{
+    cursor:pointer;
+    font-weight:700;
+    list-style:none;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:14px;
+}
+
+summary::-webkit-details-marker{
+    display:none;
+}
+
+summary::after{
+    content:"+";
+    color:var(--cyan);
+    font-size:22px;
+    transition:transform .25s;
+}
+
+details[open] summary::after{
+    transform:rotate(45deg);
+}
+
+details p{
+    color:var(--muted);
+    line-height:1.7;
+    margin-top:15px;
+    font-size:15px;
+}
+
+/* DOWNLOAD BOX */
+
+.download-box{
+    padding:58px 30px;
+    border-radius:30px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.download-box::before{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(61,123,255,.18),transparent 66%);
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+}
+
+.download-box > *{
+    position:relative;
+}
+
+.download-box h2{
+    margin-bottom:15px;
+}
+
+.download-box p{
+    max-width:640px;
+    margin:0 auto 28px;
+    color:var(--muted);
+    line-height:1.7;
+}
+
+.credit-line{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:22px;
+    padding:8px 16px;
+    border-radius:100px;
+    font-size:13px;
+    font-weight:600;
+    color:#a9d8ff;
+    background:rgba(61,123,255,.08);
+    border:1px solid rgba(61,123,255,.22);
+}
+
+.credit-line b{
+    color:var(--cyan);
+}
+
+.download-box .download{
+    min-width:min(430px,100%);
+}
+
+/* INSTALL */
+
+.install{
+    padding:32px;
+    border-radius:24px;
+}
+
+.install h2{
+    font-size:30px;
+}
+
+.install p{
+    margin-top:13px;
+    color:var(--muted);
+    line-height:1.7;
+}
+
+.install strong{
+    color:#dce6f7;
+}
+
+/* FOOTER */
+
+footer{
+    padding:44px 0 56px;
+    text-align:center;
+    color:var(--muted2);
+    font-size:13px;
+    border-top:1px solid var(--border);
+}
+
+footer .foot-credit{
+    display:block;
+    margin:0 0 14px;
+    font-family:var(--font-head);
+    font-size:17px;
+    font-weight:700;
+    color:#c9d7ef;
+}
+
+footer .foot-credit b{
+    background:linear-gradient(120deg,#8fc0ff,#39d0e4);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+footer strong{
+    color:#a9bad8;
+}
+
+/* CUSTOM SUPPORT BUTTON (replaces default Tawk.to bubble) */
+
+.support-btn{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:999;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 20px;
+    border-radius:100px;
+    color:#04101f;
+    font-size:14px;
+    font-weight:800;
+    font-family:var(--font-body);
+    background:linear-gradient(135deg,#6db5ff,#3d7bff 55%,#2f6ae8);
+    border:1px solid rgba(160,200,255,.55);
+    box-shadow:
+        0 14px 36px var(--glow),
+        inset 0 1px rgba(255,255,255,.65);
+    cursor:pointer;
+    transition:.25s;
+    opacity:0;
+    transform:translateY(16px);
+    animation:support-in .6s .4s ease forwards;
+}
+
+.support-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:
+        0 20px 46px rgba(61,123,255,.4),
+        inset 0 1px rgba(255,255,255,.65);
+}
+
+.support-btn .support-ico{
+    width:20px;
+    height:20px;
+    display:grid;
+    place-items:center;
+}
+
+.support-dot{
+    width:8px;
+    height:8px;
+    margin-left:2px;
+    border-radius:50%;
+    background:#1c7a4a;
+    box-shadow:0 0 0 2px rgba(4,16,31,.25);
+    animation:pulse 1.6s infinite;
+}
+
+@keyframes support-in{
+    to{opacity:1;transform:none}
+}
+
+@media(max-width:600px){
+    .support-btn span.support-label{
+        display:none;
+    }
+    .support-btn{
+        padding:15px;
+        border-radius:50%;
+    }
+}
+
+
+/* COOKIE CONSENT */
+
+.ck-banner{
+    position:fixed;
+    left:20px;
+    bottom:20px;
+    z-index:1000;
+    width:min(430px,calc(100% - 40px));
+    padding:20px;
+    border-radius:var(--radius);
+    background:rgba(10,17,32,.94);
+    border:1px solid var(--border-strong);
+    box-shadow:0 24px 60px rgba(0,0,0,.55),0 0 0 1px rgba(61,123,255,.08);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    opacity:0;
+    transform:translateY(20px);
+    visibility:hidden;
+    transition:opacity .35s ease,transform .35s ease,visibility .35s;
+}
+
+.ck-banner.show{
+    opacity:1;
+    transform:none;
+    visibility:visible;
+}
+
+.ck-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:8px;
+    font-family:var(--font-head);
+    font-size:17px;
+    font-weight:700;
+}
+
+.ck-head svg{color:var(--cyan);flex:none}
+
+.ck-text{
+    font-size:13.5px;
+    line-height:1.6;
+    color:var(--muted);
+}
+
+.ck-text a{
+    color:var(--blue2);
+    text-decoration:underline;
+}
+
+.ck-actions{
+    display:flex;
+    gap:10px;
+    margin-top:16px;
+}
+
+.ck-btn{
+    flex:1;
+    padding:12px 14px;
+    border-radius:12px;
+    font-family:var(--font-body);
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.ck-accept{
+    color:#04101f;
+    border:1px solid rgba(160,200,255,.55);
+    background:linear-gradient(135deg,#6db5ff,#3d7bff 55%,#2f6ae8);
+}
+
+.ck-accept:hover{transform:translateY(-2px)}
+
+.ck-decline{
+    color:var(--white);
+    background:var(--surface);
+    border:1px solid var(--border-strong);
+}
+
+.ck-decline:hover{background:var(--surface2)}
+
+.ck-link{
+    background:none;
+    border:0;
+    padding:0;
+    color:inherit;
+    font:inherit;
+    text-decoration:underline;
+    cursor:pointer;
+}
+
+@media(max-width:600px){
+    .ck-banner{
+        left:10px;
+        right:10px;
+        bottom:10px;
+        width:auto;
+    }
+}
+
+
+/* COOKIE PREFERENCES + LEGAL MODALS */
+
+body.ck-lock{overflow:hidden}
+
+.ck-overlay{
+    position:fixed;
+    inset:0;
+    z-index:1100;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    background:rgba(3,6,12,.72);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .25s ease,visibility .25s;
+}
+
+.ck-overlay.show{opacity:1;visibility:visible}
+
+.ck-modal{
+    width:min(760px,100%);
+    max-height:min(86vh,780px);
+    display:flex;
+    flex-direction:column;
+    border-radius:var(--radius);
+    background:#0a1120;
+    border:1px solid var(--border-strong);
+    box-shadow:0 30px 80px rgba(0,0,0,.6);
+    transform:translateY(14px) scale(.985);
+    transition:transform .25s ease;
+    outline:none;
+}
+
+.ck-overlay.show .ck-modal{transform:none}
+
+.ck-modal-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:18px 22px;
+    border-bottom:1px solid var(--border);
+}
+
+.ck-modal-head h2{
+    font-family:var(--font-head);
+    font-size:20px;
+    letter-spacing:-.01em;
+}
+
+.ck-close{
+    width:36px;
+    height:36px;
+    flex:none;
+    border-radius:11px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--white);
+    font-size:20px;
+    line-height:1;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.ck-close:hover{background:var(--surface2)}
+
+.ck-modal-body{
+    padding:20px 22px;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+}
+
+.ck-modal-foot{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:flex-end;
+    padding:16px 22px;
+    border-top:1px solid var(--border);
+}
+
+.ck-modal-foot .ck-btn{flex:0 1 auto;min-width:130px}
+
+.ck-tabs{
+    display:flex;
+    gap:6px;
+    padding:12px 22px 0;
+    overflow-x:auto;
+    border-bottom:1px solid var(--border);
+}
+
+.ck-tab{
+    flex:none;
+    padding:10px 14px;
+    border:0;
+    border-bottom:2px solid transparent;
+    background:none;
+    color:var(--muted);
+    font-family:var(--font-body);
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.ck-tab:hover{color:var(--white)}
+
+.ck-tab.active{
+    color:var(--white);
+    border-bottom-color:var(--blue2);
+}
+
+.ck-panel{display:none}
+.ck-panel.active{display:block}
+
+.ck-doc{
+    font-size:14px;
+    line-height:1.75;
+    color:#b6c4dd;
+}
+
+.ck-doc h3{
+    margin:24px 0 8px;
+    font-family:var(--font-head);
+    font-size:16px;
+    color:var(--white);
+}
+
+.ck-doc h3:first-of-type{margin-top:14px}
+
+.ck-doc p{margin-bottom:10px}
+
+.ck-doc ul{
+    margin:0 0 12px 20px;
+}
+
+.ck-doc li{margin-bottom:5px}
+
+.ck-doc a,.ck-doc .ck-link{color:var(--blue2)}
+
+.ck-meta{
+    font-size:12px;
+    color:var(--muted2);
+    letter-spacing:.02em;
+}
+
+.ck-table-wrap{
+    overflow-x:auto;
+    margin:10px 0 14px;
+    border:1px solid var(--border);
+    border-radius:14px;
+}
+
+.ck-table{
+    width:100%;
+    min-width:560px;
+    border-collapse:collapse;
+    font-size:13px;
+}
+
+.ck-table th,.ck-table td{
+    padding:10px 12px;
+    text-align:left;
+    vertical-align:top;
+    border-bottom:1px solid var(--border);
+}
+
+.ck-table th{
+    color:var(--white);
+    background:var(--surface);
+    font-weight:700;
+}
+
+.ck-table tr:last-child td{border-bottom:0}
+
+.ck-cat{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:16px;
+    padding:16px;
+    margin-bottom:12px;
+    border-radius:16px;
+    background:var(--surface);
+    border:1px solid var(--border);
+}
+
+.ck-cat h3{
+    margin:0 0 6px;
+    font-family:var(--font-head);
+    font-size:16px;
+    color:var(--white);
+}
+
+.ck-cat p{
+    margin:0;
+    font-size:13px;
+    line-height:1.65;
+    color:var(--muted);
+}
+
+.ck-always{
+    flex:none;
+    padding:5px 10px;
+    border-radius:100px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:#43e08f;
+    background:rgba(67,224,143,.1);
+    border:1px solid rgba(67,224,143,.25);
+}
+
+.ck-switch{
+    position:relative;
+    flex:none;
+    width:48px;
+    height:28px;
+    margin-top:2px;
+}
+
+.ck-switch input{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    margin:0;
+    opacity:0;
+    cursor:pointer;
+    z-index:2;
+}
+
+.ck-switch span{
+    position:absolute;
+    inset:0;
+    border-radius:100px;
+    background:rgba(148,170,215,.25);
+    transition:.2s;
+}
+
+.ck-switch span::after{
+    content:"";
+    position:absolute;
+    top:3px;
+    left:3px;
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    background:#fff;
+    transition:.2s;
+}
+
+.ck-switch input:checked + span{background:var(--blue)}
+.ck-switch input:checked + span::after{transform:translateX(20px)}
+.ck-switch input:focus-visible + span{outline:2px solid var(--cyan);outline-offset:2px}
+
+.ck-links{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:6px 18px;
+    margin-top:14px;
+}
+
+.ck-links .ck-link{color:var(--muted)}
+.ck-links .ck-link:hover{color:var(--white)}
+
+.ck-btn:focus-visible,.ck-link:focus-visible,.ck-close:focus-visible,.ck-tab:focus-visible{
+    outline:2px solid var(--cyan);
+    outline-offset:2px;
+}
+
+@media(max-width:600px){
+    .ck-overlay{padding:0;align-items:flex-end}
+    .ck-modal{max-height:92vh;border-radius:20px 20px 0 0}
+    .ck-modal-foot .ck-btn{flex:1 1 100%}
+    .ck-actions{flex-wrap:wrap}
+    .ck-actions .ck-btn{flex:1 1 40%}
+    .ck-actions .ck-custom{flex:1 1 100%;order:3}
+}
+
+
+/* ===== MORE PROJECTS (Supabase) ===== */
+.proj-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:38px;
+}
+.proj-card{
+    display:flex;
+    flex-direction:column;
+    border-radius:24px;
+    overflow:hidden;
+    transition:transform .3s ease,border-color .3s ease;
+}
+.proj-card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(61,123,255,.4);
+}
+.proj-thumb{
+    aspect-ratio:16/9;
+    width:100%;
+    background:linear-gradient(135deg,rgba(61,123,255,.18),rgba(57,208,228,.1));
+    display:grid;
+    place-items:center;
+    font-family:var(--font-head);
+    font-size:42px;
+    font-weight:700;
+    color:rgba(238,243,251,.55);
+    overflow:hidden;
+    border-bottom:1px solid var(--border);
+}
+.proj-thumb img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+.proj-body{
+    padding:22px 24px 26px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    flex:1;
+}
+.proj-body h3{
+    font-family:var(--font-head);
+    font-size:20px;
+    letter-spacing:-.01em;
+}
+.proj-body p{
+    color:var(--muted);
+    font-size:14.5px;
+    line-height:1.65;
+    white-space:pre-line;
+}
+.proj-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+}
+.proj-tags span{
+    padding:4px 10px;
+    border-radius:100px;
+    font-size:11.5px;
+    font-weight:600;
+    color:#9fd4ff;
+    background:rgba(61,123,255,.1);
+    border:1px solid rgba(61,123,255,.22);
+}
+.proj-link{
+    margin-top:auto;
+    padding-top:6px;
+    color:var(--cyan);
+    font-size:14px;
+    font-weight:700;
+}
+.proj-link:hover{
+    color:#fff;
+}
+@media(max-width:980px){
+    .proj-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:620px){
+    .proj-grid{grid-template-columns:1fr}
+}
+
+
+/* ===== TOP "MORE PROJECTS" HINT ===== */
+.proj-hint{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:10px 14px;
+    text-align:center;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:.01em;
+    color:#fff;
+    background:linear-gradient(120deg,#3d7bff,#39d0e4);
+    box-shadow:0 6px 22px rgba(61,123,255,.28);
+    cursor:pointer;
+}
+.proj-hint[hidden]{display:none}
+.proj-hint .arrows{
+    display:inline-block;
+    animation:hintBounce 1.1s ease-in-out infinite;
+}
+@keyframes hintBounce{
+    0%,100%{transform:translateY(-2px)}
+    50%{transform:translateY(4px)}
+}
+@media(max-width:620px){
+    .proj-hint{font-size:13px}
+}
+
+/* ANIMATION */
+
+
+
+.reveal{
+    opacity:0;
+    transform:translateY(30px);
+    transition:opacity .7s ease,transform .7s ease;
+}
+
+.reveal.show{
+    opacity:1;
+    transform:none;
+}
+
+.shine{
+    position:relative;
+    overflow:hidden;
+}
+
+.shine::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:60%;
+    height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);
+    transform:skewX(-20deg);
+}
+
+@keyframes shine{
+    0%,60%{left:-120%}
+    100%{left:160%}
+}
+
+.live-dot{
+    display:inline-block;
+    width:7px;
+    height:7px;
+    margin-right:5px;
+    border-radius:50%;
+    background:#43e08f;
+    box-shadow:0 0 10px #43e08f;
+    animation:pulse 1.6s infinite;
+}
+
+:focus-visible{
+    outline:2px solid var(--blue2);
+    outline-offset:3px;
+    border-radius:8px;
+}
+
+/* BONUS CHIP */
+
+.bonus-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:16px;
+    padding:10px 16px;
+    border-radius:100px;
+    font-size:14px;
+    font-weight:600;
+    color:#bff5e1;
+    background:rgba(67,224,143,.10);
+    border:1px solid rgba(67,224,143,.25);
+}
+
+.bonus-chip b{
+    color:#43e08f;
+}
+
+/* STORY (Apple-style scroll how-to) */
+
+.story-grid{
+    display:grid;
+    grid-template-columns:.9fr 1.1fr;
+    gap:60px;
+    align-items:start;
+}
+
+.story-visual{
+    position:sticky;
+    top:110px;
+    display:grid;
+    place-items:center;
+    min-height:440px;
+}
+
+.story-phone{
+    width:250px;
+    aspect-ratio:.52;
+    padding:11px;
+    border-radius:38px;
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(160deg,rgba(148,170,215,.28),rgba(148,170,215,.06));
+    border:1px solid rgba(148,170,215,.25);
+    box-shadow:0 30px 70px rgba(2,6,16,.6);
+}
+
+.story-screen{
+    position:absolute;
+    inset:11px;
+    border-radius:30px;
+    display:grid;
+    place-items:center;
+    text-align:center;
+    padding:24px;
+    opacity:0;
+    transform:translateY(14px) scale(.97);
+    transition:.5s ease;
+    background:
+        radial-gradient(circle at 50% 18%,rgba(61,123,255,.20),transparent 55%),
+        linear-gradient(165deg,#0c1526,#070c18);
+}
+
+.story-screen.active{
+    opacity:1;
+    transform:none;
+}
+
+.story-ico{
+    font-size:34px;
+    margin-bottom:8px;
+}
+
+.story-screen .big{
+    font-family:var(--font-head);
+    font-size:32px;
+    font-weight:700;
+    background:linear-gradient(120deg,#8fc0ff,#39d0e4);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.story-screen small{
+    display:block;
+    margin-top:10px;
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.6;
+}
+
+.story-file{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin-top:16px;
+    padding:10px 16px;
+    border-radius:14px;
+    background:var(--surface2);
+    border:1px solid var(--border-strong);
+    font-size:13px;
+    font-weight:600;
+}
+
+.story-step{
+    padding:34px 30px;
+    border-radius:22px;
+    margin-bottom:16px;
+    opacity:.35;
+    transform:translateX(10px);
+    transition:.45s ease;
+    background:linear-gradient(150deg,rgba(148,170,215,.08),rgba(148,170,215,.03));
+    border:1px solid var(--border);
+}
+
+.story-step.active{
+    opacity:1;
+    transform:none;
+    border-color:rgba(61,123,255,.45);
+    box-shadow:0 14px 40px rgba(61,123,255,.10);
+}
+
+.story-num{
+    display:inline-block;
+    font-family:var(--font-head);
+    font-size:13px;
+    font-weight:700;
+    color:var(--cyan);
+    letter-spacing:.12em;
+    margin-bottom:10px;
+}
+
+.story-step h3{
+    font-family:var(--font-head);
+    font-size:22px;
+    margin-bottom:10px;
+    letter-spacing:-.01em;
+}
+
+.story-step p{
+    color:var(--muted);
+    line-height:1.7;
+    font-size:15px;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+    .hero-grid{
+        grid-template-columns:1fr;
+    }
+
+    .phone-area{
+        min-height:510px;
+        order:-1;
+    }
+
+    .phone{
+        width:300px;
+    }
+
+    .steps{
+        grid-template-columns:1fr;
+    }
+
+    .step{
+        min-height:0;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .stat{
+        border-right:0;
+        border-bottom:1px solid var(--border);
+    }
+
+    .stat:last-child{
+        border-bottom:0;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .story-grid{
+        grid-template-columns:1fr;
+        gap:26px;
+    }
+
+    .story-visual{
+        position:static;
+        min-height:0;
+    }
+
+    .story-phone{
+        width:210px;
+    }
+
+    .story-step{
+        opacity:1;
+        transform:none;
+    }
+}
+
+@media(max-width:700px){
+    .nav-links{display:none}
+}
+
+@media(max-width:520px){
+    .container{
+        width:calc(100% - 22px);
+    }
+
+    .logo-by{display:none}
+
+    .rating{font-size:12px;padding:8px 11px}
+
+    h1{
+        font-size:52px;
+        letter-spacing:-.03em;
+    }
+
+    .hero-text{
+        font-size:16px;
+    }
+
+    .buttons{
+        display:grid;
+    }
+
+    .download,
+    .how-btn{
+        width:100%;
+    }
+
+    .phone-area{
+        min-height:470px;
+    }
+
+    .phone{
+        width:270px;
+        border-radius:40px;
+    }
+
+    .phone-screen{
+        border-radius:31px;
+    }
+
+    .float-card{
+        right:0;
+    }
+
+    .quote{
+        padding:28px;
+    }
+
+    .quote p{
+        font-size:19px;
+    }
+
+    .download-box{
+        padding:42px 20px;
+    }
+
+    .download-box .download{
+        min-width:0;
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+
+    .reveal{transition:none}
+
+    .phone{transform:none}
+
+    .shine::after,
+    .float-card,
+    .badge i,
+    .live-dot{
+        animation:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP HINT: shown only when projects exist -->
+<a class="proj-hint" id="projHint" href="#projects" hidden>
+<span>For more projects, scroll down</span>
+<span class="arrows" aria-hidden="true">👇👇</span>
+</a>
+
+<!-- HEADER -->
+
+<header>
+<div class="container">
+
+<nav class="nav">
+
+<div class="logo-area">
+
+<div class="logo">E</div>
+
+<div>
+<span class="logo-name">EarnApp</span>
+<span class="logo-by">Designed by <b>MeharRUFI1</b></span>
+</div>
+
+</div>
+
+<div class="nav-links">
+<a href="#how">How it works</a>
+<a href="#features">Features</a>
+<a href="#faq">FAQ</a>
+</div>
+
+<div class="rating">
+<span>★</span> 4.8 rating
+</div>
+
+</nav>
+
+</div>
+</header>
+
+
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="container hero-grid">
+
+
+<div class="reveal">
+
+<div class="badge">
+<span class="live-dot"></span> 20,000+ downloads and growing
+</div>
+
+
+<h1>
+Turn spare<br>
+minutes into<br>
+<em>Rupees.</em>
+</h1>
+
+
+<p class="hero-text">
+Complete simple tasks, check in daily, and cash out straight to your account — no laptop, no catch.
+</p>
+
+
+<div class="buttons">
+
+<!-- APK DOWNLOAD -->
+<a href="EarnApp.apk"
+   class="download shine"
+   download>
+
+<svg viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2.5">
+
+<path d="M12 3v12"/>
+<path d="m8 11 4 4 4-4"/>
+<path d="M5 21h14"/>
+
+</svg>
+
+Download for Android
+
+</a>
+
+
+<a href="#how" class="how-btn">
+How it works ↓
+</a>
+
+</div>
+
+
+<div class="bonus-chip">
+🎁 Sign up free — get a <b>Rs 100 bonus</b> instantly
+</div>
+
+
+<div class="version">
+Free · v2.0 · Android 6.0+ · <b>Designed by MeharRUFI1</b>
+</div>
+
+</div>
+
+
+
+<!-- PHONE -->
+
+<div class="phone-area reveal" id="phoneArea">
+
+<div class="phone-glow"></div>
+
+
+<div class="phone" id="phone">
+
+<div class="phone-screen">
+
+<div class="notch"></div>
+
+
+<div class="phone-top">
+<span>EarnApp</span>
+<span><i class="live-dot"></i>Online</span>
+</div>
+
+
+<div class="balance-label">
+YOUR BALANCE
+</div>
+
+
+<div class="balance">
+Rs <span id="bal" data-to="2450">2,450</span>
+</div>
+
+
+<div class="phone-grid">
+
+<div class="phone-box">
+<strong>Day 4</strong>
+streak
+</div>
+
+<div class="phone-box">
+<strong>Rs 100</strong>
+signup bonus
+</div>
+
+</div>
+
+
+<div class="check">
+
+<div class="check-icon"></div>
+
+<div>
+<strong>Daily check-in</strong>
+<small>+3,000 pts ready</small>
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="float-card" id="floatCard">
+
+<strong>+300 pts</strong>
+
+<small>
+Daily reward
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- STATS -->
+
+<section class="reveal">
+
+<div class="container">
+
+<div class="stats">
+
+<div class="stat">
+<strong data-count="20000" data-suffix="+">20,000+</strong>
+<span>
+app downloads<br>
+and counting
+</span>
+</div>
+
+
+<div class="stat">
+<strong data-count="100000" data-suffix="+">1,00,000+</strong>
+<span>
+Rs daily<br>
+withdrawal cap
+</span>
+</div>
+
+
+<div class="stat">
+<strong data-count="0">0</strong>
+<span>
+Rs to<br>
+install
+</span>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- HOW IT WORKS -->
+
+<section id="how">
+
+<div class="container">
+
+<div class="section-title reveal">
+
+<div class="eyebrow">
+Simple process
+</div>
+
+<h2>
+How it works
+</h2>
+
+<p class="section-description">
+Everything is designed to stay simple on mobile. Install, earn points, then redeem your balance once approved.
+</p>
+
+</div>
+
+
+<div class="steps">
+
+
+<div class="step glass reveal">
+
+<div class="number">01</div>
+
+<div class="dot"></div>
+
+<h3>
+Install the app
+</h3>
+
+<p>
+Install the app and open it — no sign-up forms, your device is your account.
+</p>
+
+</div>
+
+
+<div class="step glass reveal">
+
+<div class="number">02</div>
+
+<div class="dot"></div>
+
+<h3>
+Complete simple tasks
+</h3>
+
+<p>
+Complete offers or check in daily to earn points and build your streak.
+</p>
+
+</div>
+
+
+<div class="step glass reveal">
+
+<div class="number">03</div>
+
+<div class="dot"></div>
+
+<h3>
+Redeem your balance
+</h3>
+
+<p>
+Redeem your balance to your preferred account once your withdrawal is approved.
+</p>
+
+</div>
+
+
+</div>
+
+
+<div class="quote glass reveal">
+
+<p>
+“Mainay first week mein hi apna pehla withdrawal receive kar liya. Bilkul asaan hai — bas thora sa waqt lagta hai.”
+</p>
+
+<small>
+— Early EarnApp user
+</small>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- DOWNLOAD STORY (scroll like Apple) -->
+
+<section id="download-guide" class="story">
+
+<div class="container">
+
+<div class="section-title reveal">
+
+<div class="eyebrow">
+Step by step
+</div>
+
+<h2>
+Downloading takes<br>under a minute
+</h2>
+
+<p class="section-description">
+Scroll down — this is exactly what you will see on your phone.
+</p>
+
+</div>
+
+
+<div class="story-grid">
+
+<div class="story-visual">
+
+<div class="story-phone">
+
+<div class="story-screen" data-step="1">
+<div>
+<div class="story-ico">🌐</div>
+<div class="big">Tap Download</div>
+<small>The EarnApp.apk file starts downloading in your browser.</small>
+<div class="story-file">⬇ EarnApp.apk</div>
+</div>
+</div>
+
+<div class="story-screen" data-step="2">
+<div>
+<div class="story-ico">🛡️</div>
+<div class="big">Allow install</div>
+<small>Tap Settings → allow “Install unknown apps” → Install.</small>
+</div>
+</div>
+
+<div class="story-screen" data-step="3">
+<div>
+<div class="story-ico">🎁</div>
+<div class="big">Rs 100 free</div>
+<small>Sign up in the app and your welcome bonus is added instantly.</small>
+</div>
+</div>
+
+<div class="story-screen" data-step="4">
+<div>
+<div class="story-ico">🎧</div>
+<div class="big">We're here 24/7</div>
+<small>Stuck anywhere? Message support and we'll help you right away.</small>
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="story-steps">
+
+<div class="story-step" data-step="1">
+<span class="story-num">STEP 01</span>
+<h3>
+Tap “Download for Android”
+</h3>
+<p>
+Tap the download button on this page. The EarnApp.apk file downloads straight to your phone — no laptop needed.
+</p>
+</div>
+
+<div class="story-step" data-step="2">
+<span class="story-num">STEP 02</span>
+<h3>
+Allow the install
+</h3>
+<p>
+Your phone may ask for permission. Open Settings, allow “Install unknown apps” for your browser, then tap Install.
+</p>
+</div>
+
+<div class="story-step" data-step="3">
+<span class="story-num">STEP 03</span>
+<h3>
+Sign up & claim Rs 100
+</h3>
+<p>
+Open EarnApp, create your free account and your Rs 100 welcome bonus lands in your balance instantly — completely free, no deposit needed.
+</p>
+</div>
+
+<div class="story-step" data-step="4">
+<span class="story-num">STEP 04</span>
+<h3>
+Need help? We're here 24/7
+</h3>
+<p>
+Our support team is available around the clock. If anything goes wrong at any step, message us anytime and we'll get you earning again.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- FEATURES -->
+
+<section id="features">
+
+<div class="container">
+
+<div class="section-title reveal">
+
+<div class="eyebrow">
+Why EarnApp
+</div>
+
+<h2>
+Made for every device,<br>designed by MeharRUFI1
+</h2>
+
+<p class="section-description">
+A simple experience for users who want to complete tasks, collect points and manage their rewards directly from their phone.
+</p>
+
+</div>
+
+
+<div class="features">
+
+<div class="feature glass reveal">
+
+<div class="feature-icon">
+✓
+</div>
+
+<h3>
+Simple tasks
+</h3>
+
+<p>
+Complete available offers and activities from your Android device without needing a laptop.
+</p>
+
+</div>
+
+
+<div class="feature glass reveal">
+
+<div class="feature-icon">
+★
+</div>
+
+<h3>
+Daily rewards
+</h3>
+
+<p>
+Check in every day and keep your streak active to unlock the available daily rewards.
+</p>
+
+</div>
+
+
+<div class="feature glass reveal">
+
+<div class="feature-icon">
+₨
+</div>
+
+<h3>
+Easy redemption
+</h3>
+
+<p>
+Once your balance is eligible, submit your withdrawal and wait for approval.
+</p>
+
+</div>
+
+
+<div class="feature glass reveal">
+
+<div class="feature-icon">
+⚡
+</div>
+
+<h3>
+Fast mobile experience
+</h3>
+
+<p>
+The website and app experience are designed around Android users and mobile screens.
+</p>
+
+</div>
+
+
+<div class="feature glass reveal">
+
+<div class="feature-icon">
+💰
+</div>
+
+<h3>
+How you get paid
+</h3>
+
+<p>
+EarnApp earns revenue from advertising companies — Adsterra and many other ad networks — plus sponsored offers. That ad income is what funds every reward: once your withdrawal is approved, your balance is paid straight to your preferred account.
+</p>
+
+</div>
+
+
+<div class="feature glass reveal">
+
+<div class="feature-icon">
+🎧
+</div>
+
+<h3>
+24/7 support
+</h3>
+
+<p>
+Stuck on install, earning or withdrawal? Our support team is available around the clock — message us anytime and we will help you sort it out.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- FAQ -->
+
+<section id="faq">
+
+<div class="container">
+
+<div class="section-title reveal">
+
+<div class="eyebrow">
+Questions
+</div>
+
+<h2>
+Frequently asked
+</h2>
+
+</div>
+
+
+<div class="faq">
+
+
+<details class="reveal">
+
+<summary>
+How do I download the app?
+</summary>
+
+<p>
+Tap the “Download for Android” button. The EarnApp.apk file will be downloaded to your device.
+</p>
+
+</details>
+
+
+<details class="reveal">
+
+<summary>
+Which Android version is supported?
+</summary>
+
+<p>
+EarnApp supports Android 6.0 and above. Most modern Android phones can install and run the app.
+</p>
+
+</details>
+
+
+<details class="reveal">
+
+<summary>
+Do I need to create an account?
+</summary>
+
+<p>
+Signing up is free and takes seconds — and every new user instantly receives a Rs 100 welcome bonus in their balance.
+</p>
+
+</details>
+
+
+<details class="reveal">
+
+<summary>
+How does withdrawal work?
+</summary>
+
+<p>
+Complete available activities, build your balance and submit a redemption request. Withdrawals are processed after approval.
+</p>
+
+</details>
+
+
+<details class="reveal">
+
+<summary>
+What is the daily withdrawal cap?
+</summary>
+
+<p>
+EarnApp supports withdrawals of up to Rs 1,00,000+ (1 lakh) per day once your balance is approved.
+</p>
+
+</details>
+
+
+<details class="reveal">
+
+<summary>
+How will you pay me?
+</summary>
+
+<p>
+EarnApp earns its revenue from advertising companies — Adsterra and many other ad networks. That advertising income is what funds your rewards: your balance is paid straight to your preferred account once your withdrawal is approved.
+</p>
+
+</details>
+
+
+<details class="reveal">
+
+<summary>
+How do I get the Rs 100 free bonus?
+</summary>
+
+<p>
+Simply sign up in the app after installing — the Rs 100 welcome bonus is added to your balance automatically, completely free.
+</p>
+
+</details>
+
+
+<details class="reveal">
+
+<summary>
+Is support available if I need help?
+</summary>
+
+<p>
+Yes. Our support team is available 24/7 — if you face any problem with installing, earning or withdrawing, message us anytime and we will help you.
+</p>
+
+</details>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- MAIN DOWNLOAD -->
+
+<section>
+
+<div class="container">
+
+<div class="download-box glass reveal">
+
+<div class="credit-line">
+Designed by <b>MeharRUFI1</b>
+</div>
+
+<div class="eyebrow">
+Android application
+</div>
+
+<h2>
+Ready to start?
+</h2>
+
+<p>
+Join 20,000+ users already earning. Sign up free and instantly claim your Rs 100 welcome bonus — then turn your spare minutes into rewards. Free · v2.0 · Android 6.0+.
+</p>
+
+
+<a href="EarnApp.apk"
+   class="download shine"
+   download>
+
+<svg viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2.5">
+
+<path d="M12 3v12"/>
+<path d="m8 11 4 4 4-4"/>
+<path d="M5 21h14"/>
+
+</svg>
+
+Download for Android
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- INSTALLATION HELP -->
+
+<section>
+
+<div class="container">
+
+<div class="install glass reveal">
+
+<div class="eyebrow">
+Installation help
+</div>
+
+<h2>
+Having trouble installing?
+</h2>
+
+<p>
+If Android blocks the installation, allow
+<strong>
+“Install unknown apps”
+</strong>
+for the browser or file manager you used to download the APK.
+</p>
+
+<p>
+Only install APK files that you trust and make sure the APK comes from your own official download source.
+</p>
+
+<p>
+Need help at any step? Our support team is available <strong>24/7</strong> — message us anytime and we will help you install and start earning.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- MORE PROJECTS (loaded from Supabase) -->
+
+<section id="projects" hidden>
+
+<div class="container">
+
+<div class="section-title">
+<div class="eyebrow">
+More from MeharRUFI1
+</div>
+<h2>
+My other projects
+</h2>
+<p class="section-description">
+A few more things I have designed and built.
+</p>
+</div>
+
+<div class="proj-grid" id="projGrid"></div>
+
+</div>
+
+</section>
+
+</main>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="container">
+
+<span class="foot-credit">
+Designed by <b>MeharRUFI1</b>
+</span>
+
+<strong>
+earnpkrauf.shop
+</strong>
+
+<br><br>
+
+EarnApp · Android Application · 20,000+ downloads · Support available 24/7
+
+<br>
+
+© <span id="year"></span> Number1Company. All rights reserved.
+
+<br>
+
+<div class="ck-links">
+<button type="button" class="ck-link" data-legal="cookies">Cookie Policy</button>
+<button type="button" class="ck-link" data-legal="privacy">Privacy Policy</button>
+<button type="button" class="ck-link" data-legal="terms">Terms of Service</button>
+<button type="button" class="ck-link" id="ckSettings">Cookie Settings</button>
+</div>
+
+</div>
+
+</footer>
+
+
+<!-- CUSTOM SUPPORT BUTTON -->
+<button type="button" class="support-btn" id="supportBtn" aria-label="Chat with support">
+<span class="support-ico">
+<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+</svg>
+</span>
+<span class="support-label">Support 24/7</span>
+<span class="support-dot"></span>
+</button>
+
+
+
+<!-- COOKIE CONSENT BANNER -->
+<div class="ck-banner" id="ckBanner" role="dialog" aria-modal="false" aria-labelledby="ckTitle" aria-describedby="ckText">
+<div class="ck-head" id="ckTitle">
+<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a4.5 4.5 0 0 0 5 5 4.5 4.5 0 0 0 4.8 4.8z"/><circle cx="8.5" cy="11" r="1"/><circle cx="12" cy="16" r="1"/><circle cx="15.5" cy="12.5" r=".6"/></svg>
+We value your privacy
+</div>
+<p class="ck-text" id="ckText">
+We use essential cookies to make this site work and, with your permission, functional cookies to power our live support chat. You can accept all, decline optional cookies, or choose your own settings. Read our <button type="button" class="ck-link" data-legal="cookies" style="color:var(--blue2)">Cookie Policy</button> and <button type="button" class="ck-link" data-legal="privacy" style="color:var(--blue2)">Privacy Policy</button>.
+</p>
+<div class="ck-actions">
+<button type="button" class="ck-btn ck-decline" id="ckDecline">Decline</button>
+<button type="button" class="ck-btn ck-accept" id="ckAccept">Accept all</button>
+<button type="button" class="ck-btn ck-decline ck-custom" id="ckCustomize">Customize</button>
+</div>
+</div>
+
+<!-- COOKIE PREFERENCES MODAL -->
+<div class="ck-overlay" id="ckPrefs" aria-hidden="true">
+<div class="ck-modal" role="dialog" aria-modal="true" aria-labelledby="ckPrefsTitle" tabindex="-1">
+<div class="ck-modal-head">
+<h2 id="ckPrefsTitle">Cookie preferences</h2>
+<button type="button" class="ck-close" data-close="prefs" aria-label="Close">&times;</button>
+</div>
+<div class="ck-modal-body ck-doc">
+<p>Choose which cookies you allow. You can change this at any time using <b>Cookie Settings</b> in the footer. Learn more in our <button type="button" class="ck-link" data-legal="cookies">Cookie Policy</button>.</p>
+
+<div class="ck-cat">
+<div>
+<h3>Strictly necessary</h3>
+<p>Required for the site to work and to remember your cookie choice. These cannot be switched off.</p>
+</div>
+<span class="ck-always">Always on</span>
+</div>
+
+<div class="ck-cat">
+<div>
+<h3>Functional (live support chat)</h3>
+<p>Loads our 24/7 live support chat, provided by Tawk.to. It sets cookies so your conversation can continue and so we can recognise returning visitors. If switched off, the chat is unavailable.</p>
+</div>
+<label class="ck-switch">
+<input type="checkbox" id="ckFuncToggle" aria-label="Allow functional cookies (live support chat)">
+<span></span>
+</label>
+</div>
+
+<div class="ck-cat">
+<div>
+<h3>Analytics &amp; advertising</h3>
+<p>We do not use analytics, advertising or tracking cookies on this site.</p>
+</div>
+<span class="ck-always" style="color:var(--muted);background:var(--surface);border-color:var(--border)">Not used</span>
+</div>
+</div>
+<div class="ck-modal-foot">
+<button type="button" class="ck-btn ck-decline" id="ckRejectAll">Reject optional</button>
+<button type="button" class="ck-btn ck-decline" id="ckSave">Save choices</button>
+<button type="button" class="ck-btn ck-accept" id="ckAcceptAll2">Accept all</button>
+</div>
+</div>
+</div>
+
+<!-- LEGAL MODAL -->
+<div class="ck-overlay" id="ckLegal" aria-hidden="true">
+<div class="ck-modal" role="dialog" aria-modal="true" aria-labelledby="ckLegalTitle" tabindex="-1">
+<div class="ck-modal-head">
+<h2 id="ckLegalTitle">Legal</h2>
+<button type="button" class="ck-close" data-close="legal" aria-label="Close">&times;</button>
+</div>
+<div class="ck-tabs" role="tablist">
+<button type="button" class="ck-tab" role="tab" data-tab="cookies">Cookie Policy</button>
+<button type="button" class="ck-tab" role="tab" data-tab="privacy">Privacy Policy</button>
+<button type="button" class="ck-tab" role="tab" data-tab="terms">Terms of Service</button>
+</div>
+<div class="ck-modal-body">
+
+<!-- COOKIE POLICY -->
+<div class="ck-panel ck-doc" data-panel="cookies" role="tabpanel">
+<p class="ck-meta">Last updated: November 13, 2026</p>
+
+<h3>1. What are cookies?</h3>
+<p>Cookies are small text files placed on your device when you visit a website. They are widely used to make websites work, to remember your choices and to provide information to the site owner. Similar technologies, such as local storage, work in much the same way, and we refer to all of them as &ldquo;cookies&rdquo; in this policy.</p>
+
+<h3>2. Who we are</h3>
+<p>This website, earnpkrauf.shop, and the EarnApp Android application (&ldquo;EarnApp&rdquo;) are operated by <b>Number1Company</b> (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;). This policy explains which cookies the website uses, why, and how you can control them.</p>
+
+<h3>3. How we use cookies</h3>
+<p>We keep cookie use to a minimum. We use two categories:</p>
+<ul>
+<li><b>Strictly necessary</b> &ndash; needed to remember your cookie choice. These do not require consent.</li>
+<li><b>Functional</b> &ndash; used only by our live support chat, and only after you give consent.</li>
+</ul>
+<p>We do <b>not</b> use analytics, advertising, profiling or social-media tracking cookies on this website.</p>
+
+<h3>4. Cookies we use</h3>
+<div class="ck-table-wrap">
+<table class="ck-table">
+<thead><tr><th>Name</th><th>Provider</th><th>Purpose</th><th>Type</th><th>Duration</th></tr></thead>
+<tbody>
+<tr><td>cookie_consent_v2</td><td>This site (first party)</td><td>Stores your cookie choice so we do not ask you on every visit.</td><td>Strictly necessary</td><td>6 months</td></tr>
+<tr><td>cookie_consent_v2 (local storage)</td><td>This site (first party)</td><td>A copy of your cookie choice kept in your browser storage.</td><td>Strictly necessary</td><td>Until cleared</td></tr>
+<tr><td>__tawkuuid, TawkConnectionTime, twk_uuid_*, twk_idm_key and similar</td><td>Tawk.to (third party)</td><td>Runs the live support chat, keeps your conversation going between pages and recognises returning visitors.</td><td>Functional (consent required)</td><td>Session to about 1 year</td></tr>
+</tbody>
+</table>
+</div>
+<p>Cookie names and lifetimes set by third parties can change. Please see Tawk.to&rsquo;s own privacy information for the latest details. The Tawk.to chat is only loaded after you accept functional cookies.</p>
+
+<h3>5. Your consent</h3>
+<p>When you first visit, we ask for your choice. You may accept all cookies, decline optional cookies, or customise your choice. Optional cookies are never set before you agree. If you decline, the support chat will not load and no functional cookies are placed.</p>
+
+<h3>6. Managing or withdrawing consent</h3>
+<ul>
+<li>Click <button type="button" class="ck-link" data-open-prefs>Cookie Settings</button> at any time (also in the footer) to change your choice. Withdrawing consent is as easy as giving it.</li>
+<li>You can also block or delete cookies in your browser settings. Doing so may stop parts of the site, such as the chat, from working.</li>
+<li>Withdrawing consent does not affect the lawfulness of any processing carried out before you withdrew it.</li>
+</ul>
+
+<h3>7. Third-party services</h3>
+<p>The live chat is provided by Tawk.to. When enabled, your browser connects to Tawk.to servers and they may process technical information such as your IP address, browser type and the content of messages you send. Their handling of data is described in their own policies.</p>
+
+<h3>8. Changes to this policy</h3>
+<p>We may update this policy from time to time, for example when we change the cookies we use. The &ldquo;Last updated&rdquo; date above shows when it was last changed. Where required, we will ask for your consent again.</p>
+
+<h3>9. Contact</h3>
+<p>For questions about cookies, contact Number1Company. <span data-contact>Use the Support 24/7 chat on this website (available once functional cookies are enabled) or the support options inside the EarnApp application.</span></p>
+</div>
+
+<!-- PRIVACY POLICY -->
+<div class="ck-panel ck-doc" data-panel="privacy" role="tabpanel">
+<p class="ck-meta">Last updated: November 13, 2026</p>
+
+<h3>1. Introduction</h3>
+<p>Number1Company (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) respects your privacy and is responsible for the personal information described here. This Privacy Policy explains what information we collect when you visit earnpkrauf.shop or use the EarnApp Android application, how we use it, and the choices you have.</p>
+
+<h3>2. Information we collect</h3>
+<ul>
+<li><b>Information you give us</b> &ndash; for example the messages and details you share when you contact support.</li>
+<li><b>Technical information</b> &ndash; such as IP address, browser and device type, operating system and pages viewed, which are generally received automatically when you load a website or use an app.</li>
+<li><b>Cookie and storage data</b> &ndash; as described in our Cookie Policy.</li>
+<li><b>Application and account information</b> &ndash; information needed to operate your EarnApp account, such as task activity, check-ins and balance or redemption requests.</li>
+</ul>
+<p>This website itself does not contain sign-up forms and does not use analytics or advertising trackers.</p>
+
+<h3>3. How we use information</h3>
+<ul>
+<li>To provide, operate and maintain the website and the app.</li>
+<li>To respond to support requests and resolve problems.</li>
+<li>To process task completions, rewards and redemption requests.</li>
+<li>To detect, prevent and investigate fraud, abuse and security incidents.</li>
+<li>To improve reliability and user experience.</li>
+<li>To comply with legal obligations.</li>
+</ul>
+
+<h3>4. Legal bases</h3>
+<p>Where data protection law requires a legal basis, we rely on your <b>consent</b> (for functional cookies and the live chat), the <b>performance of a contract</b> (providing the app and rewards you request), our <b>legitimate interests</b> (security, fraud prevention and improving our service) and <b>legal obligations</b>.</p>
+
+<h3>5. Sharing of information</h3>
+<p>We do not sell your personal information. We may share information with:</p>
+<ul>
+<li><b>Service providers</b> that help us run the service, such as the live chat provider (Tawk.to) and hosting providers, who may only use it to provide services to us.</li>
+<li><b>Authorities or advisers</b> where required by law or to protect our rights, users or the public.</li>
+<li><b>A successor</b> in the event of a merger, acquisition or sale of assets, subject to this policy.</li>
+</ul>
+
+<h3>6. International transfers</h3>
+<p>Our service providers may process data in countries other than your own. Where we do so, we take reasonable steps to ensure your information remains protected.</p>
+
+<h3>7. Retention</h3>
+<p>We keep information only for as long as needed for the purposes described above, including legal, accounting and fraud-prevention needs, and then delete or anonymise it.</p>
+
+<h3>8. Your rights</h3>
+<p>Depending on where you live, you may have the right to access, correct, delete or export your personal information, to object to or restrict certain processing, and to withdraw consent at any time. To exercise these rights, contact us using the details in the Contact section below. You may also have the right to lodge a complaint with your local data protection authority.</p>
+
+<h3>9. Security</h3>
+<p>We use reasonable technical and organisational measures to protect information. No method of transmission or storage is completely secure, so we cannot guarantee absolute security.</p>
+
+<h3>10. Children</h3>
+<p>EarnApp and this website are not directed to children under 18. We do not knowingly collect information from children. If you believe a child has given us information, please contact us and we will delete it.</p>
+
+<h3>11. Third-party links</h3>
+<p>The site may link to third-party websites or app stores. We are not responsible for their content or privacy practices.</p>
+
+<h3>12. Changes</h3>
+<p>We may update this Privacy Policy from time to time. We will post the updated version here with a new &ldquo;Last updated&rdquo; date.</p>
+
+<h3>13. Contact</h3>
+<p>Questions about this policy, or want to exercise your privacy rights? Contact Number1Company. <span data-contact>Use the Support 24/7 chat on this website or the support options inside the EarnApp application.</span></p>
+</div>
+
+<!-- TERMS -->
+<div class="ck-panel ck-doc" data-panel="terms" role="tabpanel">
+<p class="ck-meta">Last updated: November 13, 2026</p>
+
+<h3>1. Acceptance of terms</h3>
+<p>These terms are between you and Number1Company, the operator of earnpkrauf.shop and the EarnApp application. By accessing the website or using the app, you agree to these Terms of Service and our Privacy and Cookie Policies. If you do not agree, please do not use the website or the app.</p>
+
+<h3>2. Eligibility</h3>
+<p>You must be at least 18 years old (or the age of majority where you live) and legally able to enter into this agreement. You are responsible for making sure your use of the service is lawful where you live.</p>
+
+<h3>3. The service</h3>
+<p>EarnApp is a free Android application that lets users complete simple tasks, check in daily and redeem eligible balances. Features, tasks, reward amounts and redemption methods may change, be limited or be withdrawn at any time.</p>
+
+<h3>4. No guarantee of earnings</h3>
+<p>Any amounts shown on this website are examples. We do not promise that you will earn any particular amount, that tasks will always be available, or that earnings are a source of regular income. Download counts, ratings and similar figures are provided for information only.</p>
+
+<h3>5. Your account</h3>
+<ul>
+<li>Provide accurate information and keep your login details confidential.</li>
+<li>You are responsible for activity carried out through your account.</li>
+<li>Each person may hold only one account unless we expressly allow otherwise.</li>
+</ul>
+
+<h3>6. Rewards and redemption</h3>
+<p>Balances may only be redeemed once any minimum threshold and verification requirements are met. Redemptions may take time to process and may be delayed, reviewed or refused where we suspect fraud, error or a breach of these terms. Any taxes on rewards are your responsibility.</p>
+
+<h3>7. Acceptable use</h3>
+<p>You agree not to:</p>
+<ul>
+<li>use bots, scripts, emulators, VPN or proxy abuse, or any automated means to complete tasks;</li>
+<li>create multiple or false accounts, or manipulate check-ins, referrals or tasks;</li>
+<li>reverse engineer, copy, modify or interfere with the app, website or its security;</li>
+<li>use the service for anything unlawful, fraudulent or harmful, or harass other users or our staff.</li>
+</ul>
+
+<h3>8. Suspension and termination</h3>
+<p>We may suspend or end your access, and cancel unredeemed balances obtained in breach of these terms, at any time and with or without notice. You may stop using the app at any time by uninstalling it.</p>
+
+<h3>9. Intellectual property</h3>
+<p>The EarnApp name, logo, website design, text and software are owned by us or our licensors and are protected by law. You receive a limited, personal, non-transferable licence to use the app and website as permitted by these terms. The website design credit &ldquo;Designed by MeharRUFI1&rdquo; is retained.</p>
+
+<h3>10. Third-party services</h3>
+<p>The service may rely on or link to third-party services, such as the live chat provider or app stores. We are not responsible for them, and your use of them is subject to their own terms.</p>
+
+<h3>11. Disclaimers</h3>
+<p>The website and app are provided &ldquo;as is&rdquo; and &ldquo;as available&rdquo;, without warranties of any kind, to the fullest extent permitted by law. We do not warrant that the service will be uninterrupted, secure or error free.</p>
+
+<h3>12. Limitation of liability</h3>
+<p>To the fullest extent permitted by law, we are not liable for any indirect, incidental, special or consequential loss, or for loss of profits, data or goodwill, arising from your use of the website or app. Nothing in these terms excludes liability that cannot be excluded by law.</p>
+
+<h3>13. Changes to these terms</h3>
+<p>We may update these terms from time to time. Continued use of the website or app after changes take effect means you accept the updated terms.</p>
+
+<h3>14. Governing law</h3>
+<p>These terms are governed by the laws applicable in the country where the operator of EarnApp is based, without regard to conflict-of-law rules. Mandatory consumer rights in your country of residence are not affected.</p>
+
+<h3>15. Contact</h3>
+<p>For questions about these terms, contact Number1Company. <span data-contact>Use the Support 24/7 chat on this website or the support options inside the EarnApp application.</span></p>
+</div>
+
+</div>
+<div class="ck-modal-foot">
+<button type="button" class="ck-btn ck-decline" data-open-prefs>Cookie Settings</button>
+<button type="button" class="ck-btn ck-accept" data-close="legal">Close</button>
+</div>
+</div>
+</div>
+
+<script>
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+const observer =
+new IntersectionObserver(
+entries => {
+
+entries.forEach(entry => {
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+observer.unobserve(entry.target);
+
+}
+
+});
+
+},
+{
+threshold:.12
+}
+);
+
+
+document
+.querySelectorAll(".reveal")
+.forEach(element => {
+
+observer.observe(element);
+
+});
+
+
+
+/* =========================
+   YEAR
+========================= */
+
+document.getElementById("year")
+.textContent =
+new Date().getFullYear();
+
+
+
+/* =========================
+   SUBTLE PHONE TILT (desktop only)
+========================= */
+
+(function(){
+if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+if(!window.matchMedia("(pointer:fine)").matches)return;
+
+const phone=document.getElementById("phone");
+const area=document.getElementById("phoneArea");
+if(!phone||!area)return;
+
+area.addEventListener("mousemove",e=>{
+  const r=area.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width-.5;
+  const y=(e.clientY-r.top)/r.height-.5;
+  phone.style.transform=
+    `perspective(1200px) rotateY(${-11+x*8}deg) rotateX(${4-y*6}deg)`;
+});
+
+area.addEventListener("mouseleave",()=>{
+  phone.style.transform="";
+});
+
+})();
+
+
+
+/* =========================
+   STORY STEPS (Apple-style scroll)
+========================= */
+
+(function(){
+const steps=[...document.querySelectorAll(".story-step")];
+const screens=[...document.querySelectorAll(".story-screen")];
+if(!steps.length)return;
+function setActive(i){
+  steps.forEach((s,j)=>s.classList.toggle("active",j===i));
+  screens.forEach((sc,j)=>sc.classList.toggle("active",j===i));
+}
+setActive(0);
+const io=new IntersectionObserver(es=>{
+  es.forEach(en=>{
+    if(en.isIntersecting){
+      setActive(steps.indexOf(en.target));
+    }
+  });
+},{rootMargin:"-45% 0px -45% 0px",threshold:0});
+steps.forEach(s=>io.observe(s));
+})();
+
+
+
+/* =========================
+   NUMBER COUNT-UP
+========================= */
+
+(function(){
+const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function count(el,to){
+  const suffix=el.dataset.suffix||"";
+  if(reduce||to===0){el.textContent=to.toLocaleString("en-IN")+suffix;return;}
+  const t0=performance.now(),dur=1500;
+  (function tick(now){
+    const k=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-k,3);
+    el.textContent=Math.round(to*e).toLocaleString("en-IN")+suffix;
+    if(k<1)requestAnimationFrame(tick);
+  })(t0);
+}
+const io=new IntersectionObserver(es=>{
+  es.forEach(en=>{
+    if(en.isIntersecting){
+      const el=en.target;
+      count(el,+(el.dataset.count||el.dataset.to));
+      io.unobserve(el);
+    }
+  });
+},{threshold:.5});
+document.querySelectorAll("[data-count],[data-to]").forEach(el=>io.observe(el));
+})();
+
+</script>
+
+
+<!--Cookie consent + Tawk.to (loads only after consent)-->
+<script type="text/javascript">
+(function(){
+/* ===== COMPANY DETAILS — edit here ===== */
+var COMPANY_EMAIL="";   /* full address, e.g. "support@yourdomain.com" */
+/* ======================================== */
+var KEY="cookie_consent_v2";          /* value: "f1" = functional allowed, "f0" = necessary only */
+var banner=document.getElementById("ckBanner");
+var prefs=document.getElementById("ckPrefs");
+var legal=document.getElementById("ckLegal");
+var toggle=document.getElementById("ckFuncToggle");
+var tawkLoaded=false;
+var lastFocus=null;
+
+/* ---------- storage ---------- */
+function getConsent(){
+  try{var v=localStorage.getItem(KEY);if(v)return v;}catch(e){}
+  var m=document.cookie.match(new RegExp("(?:^|; )"+KEY+"=([^;]*)"));
+  return m?m[1]:null;
+}
+function setConsent(v){
+  try{localStorage.setItem(KEY,v);}catch(e){}
+  try{document.cookie=KEY+"="+v+"; max-age=15552000; path=/; SameSite=Lax"+(location.protocol==="https:"?"; Secure":"");}catch(e){}
+}
+function functionalAllowed(){return getConsent()==="f1";}
+
+/* ---------- tawk ---------- */
+function loadTawk(cb){
+  if(tawkLoaded){if(cb)cb();return;}
+  tawkLoaded=true;
+  window.Tawk_API=window.Tawk_API||{};
+  window.Tawk_LoadStart=new Date();
+  /* hide the default round widget launcher — we use our own styled button instead */
+  Tawk_API.onLoad=function(){
+    Tawk_API.hideWidget();
+    if(cb)cb();
+  };
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src="https://embed.tawk.to/6ae55f64c2effa3471a23b66/default";
+  s1.charset="UTF-8";
+  s1.setAttribute("crossorigin","*");
+  s0.parentNode.insertBefore(s1,s0);
+}
+function removeTawkData(){
+  /* best-effort cleanup of chat cookies / storage on this domain */
+  document.cookie.split(";").forEach(function(c){
+    var n=c.split("=")[0].trim();
+    if(/^(Tawk|__tawk|twk)/i.test(n)){
+      document.cookie=n+"=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+    }
+  });
+  try{
+    Object.keys(localStorage).forEach(function(k){
+      if(/^(Tawk|__tawk|twk)/i.test(k))localStorage.removeItem(k);
+    });
+  }catch(e){}
+}
+
+/* ---------- decisions ---------- */
+function decide(functional){
+  var was=functionalAllowed();
+  setConsent(functional?"f1":"f0");
+  hideBanner();
+  closeOverlay(prefs);
+  if(functional){loadTawk();}
+  else if(was){removeTawkData();location.reload();}
+}
+
+/* ---------- banner ---------- */
+function showBanner(){banner.classList.add("show");}
+function hideBanner(){banner.classList.remove("show");}
+
+/* ---------- overlays ---------- */
+function openOverlay(el){
+  lastFocus=document.activeElement;
+  el.classList.add("show");
+  el.setAttribute("aria-hidden","false");
+  document.body.classList.add("ck-lock");
+  var m=el.querySelector(".ck-modal");
+  if(m)m.focus();
+}
+function closeOverlay(el){
+  if(!el.classList.contains("show"))return;
+  el.classList.remove("show");
+  el.setAttribute("aria-hidden","true");
+  if(!document.querySelector(".ck-overlay.show"))document.body.classList.remove("ck-lock");
+  if(lastFocus&&lastFocus.focus){try{lastFocus.focus();}catch(e){}}
+}
+
+function openPrefs(){
+  toggle.checked=functionalAllowed();
+  /* prefs sits above legal modal if opened from it */
+  openOverlay(prefs);
+}
+
+var TITLES={cookies:"Cookie Policy",privacy:"Privacy Policy",terms:"Terms of Service"};
+function openLegal(tab){
+  if(!TITLES[tab])tab="cookies";
+  document.querySelectorAll(".ck-tab").forEach(function(t){
+    var on=t.dataset.tab===tab;
+    t.classList.toggle("active",on);
+    t.setAttribute("aria-selected",on?"true":"false");
+  });
+  document.querySelectorAll(".ck-panel").forEach(function(p){
+    p.classList.toggle("active",p.dataset.panel===tab);
+  });
+  document.getElementById("ckLegalTitle").textContent=TITLES[tab];
+  legal.querySelector(".ck-modal-body").scrollTop=0;
+  if(!legal.classList.contains("show"))openOverlay(legal);
+  try{history.replaceState(null,"","#"+({cookies:"cookie-policy",privacy:"privacy-policy",terms:"terms"})[tab]);}catch(e){}
+}
+function closeLegal(){
+  closeOverlay(legal);
+  try{history.replaceState(null,"",location.pathname+location.search);}catch(e){}
+}
+
+/* ---------- events ---------- */
+document.getElementById("ckAccept").addEventListener("click",function(){decide(true);});
+document.getElementById("ckDecline").addEventListener("click",function(){decide(false);});
+document.getElementById("ckCustomize").addEventListener("click",openPrefs);
+document.getElementById("ckAcceptAll2").addEventListener("click",function(){decide(true);});
+document.getElementById("ckRejectAll").addEventListener("click",function(){decide(false);});
+document.getElementById("ckSave").addEventListener("click",function(){decide(toggle.checked);});
+
+var settings=document.getElementById("ckSettings");
+if(settings)settings.addEventListener("click",openPrefs);
+
+document.addEventListener("click",function(e){
+  var t=e.target.closest("[data-legal]");
+  if(t){e.preventDefault();openLegal(t.dataset.legal);return;}
+  t=e.target.closest("[data-open-prefs]");
+  if(t){e.preventDefault();openPrefs();return;}
+  t=e.target.closest("[data-close]");
+  if(t){
+    if(t.dataset.close==="prefs")closeOverlay(prefs);
+    else closeLegal();
+    return;
+  }
+  t=e.target.closest(".ck-tab");
+  if(t){openLegal(t.dataset.tab);return;}
+  if(e.target===prefs)closeOverlay(prefs);
+  if(e.target===legal)closeLegal();
+});
+
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape"){
+    if(prefs.classList.contains("show"))closeOverlay(prefs);
+    else if(legal.classList.contains("show"))closeLegal();
+    return;
+  }
+  if(e.key==="Tab"){
+    var open=prefs.classList.contains("show")?prefs:(legal.classList.contains("show")?legal:null);
+    if(!open)return;
+    var f=[].slice.call(open.querySelectorAll("button,input,[href],[tabindex]:not([tabindex='-1'])")).filter(function(x){return x.offsetParent!==null;});
+    if(!f.length)return;
+    var first=f[0],last=f[f.length-1];
+    if(e.shiftKey&&(document.activeElement===first||document.activeElement===open.querySelector(".ck-modal"))){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+  }
+});
+
+/* custom support button opens the Tawk chat window */
+document.getElementById("supportBtn").addEventListener("click",function(){
+  if(!functionalAllowed()){
+    /* chat needs functional cookies: ask again */
+    showBanner();
+    return;
+  }
+  loadTawk(function(){
+    if(window.Tawk_API&&Tawk_API.toggle)Tawk_API.toggle();
+  });
+});
+
+/* deep links: #cookie-policy, #privacy-policy, #terms */
+function fromHash(){
+  var h=location.hash.replace("#","");
+  var map={"cookie-policy":"cookies","privacy-policy":"privacy","terms":"terms"};
+  if(map[h])openLegal(map[h]);
+}
+window.addEventListener("hashchange",fromHash);
+
+/* ---------- company contact ---------- */
+if(COMPANY_EMAIL){
+  document.querySelectorAll("[data-contact]").forEach(function(el){
+    el.innerHTML='Email us at <a href="mailto:'+COMPANY_EMAIL+'">'+COMPANY_EMAIL+'</a>, or use the Support 24/7 chat on this website.';
+  });
+}
+
+/* ---------- initial state ---------- */
+var c=getConsent();
+if(c==="f1"){loadTawk();}
+else if(!c){setTimeout(showBanner,600);}
+fromHash();
+})();
+</script>
+<!--End of cookie consent / Tawk.to-->
+
+<script>
+/* ===== MORE PROJECTS — loads from Supabase ===== */
+(function(){
+  var SB_URL="https://mfmtelqbrjrhguglkhtx.supabase.co";
+  var SB_KEY="sb_publishable_FbmR9omlHWTvp3ukFgAXAQ_5EiPfXLY";
+  var sec=document.getElementById("projects");
+  var grid=document.getElementById("projGrid");
+  if(!sec||!grid)return;
+
+  function safeUrl(u){return /^https?:\/\//i.test(u||"")?u:null;}
+  function safeImg(u){return /^(https?:\/\/|data:image\/(png|jpe?g|webp|gif);base64,)/i.test(u||"")?u:null;}
+
+  function card(p){
+    var a=document.createElement("article");
+    a.className="proj-card glass reveal";
+
+    var th=document.createElement("div");
+    th.className="proj-thumb";
+    var img=safeImg(p.thumbnail_url);
+    if(img){
+      var i=document.createElement("img");
+      i.src=img;i.alt=p.title+" thumbnail";i.loading="lazy";i.decoding="async";
+      i.onerror=function(){th.textContent=(p.title||"?").charAt(0).toUpperCase();};
+      th.appendChild(i);
+    }else{
+      th.textContent=(p.title||"?").charAt(0).toUpperCase();
+    }
+    a.appendChild(th);
+
+    var b=document.createElement("div");
+    b.className="proj-body";
+    var h=document.createElement("h3");h.textContent=p.title;b.appendChild(h);
+    if(p.description){var d=document.createElement("p");d.textContent=p.description;b.appendChild(d);}
+    if(p.tags&&p.tags.length){
+      var t=document.createElement("div");t.className="proj-tags";
+      p.tags.forEach(function(x){var s=document.createElement("span");s.textContent=x;t.appendChild(s);});
+      b.appendChild(t);
+    }
+    var link=safeUrl(p.project_url);
+    if(link){
+      var l=document.createElement("a");
+      l.className="proj-link";l.href=link;l.target="_blank";l.rel="noopener noreferrer";
+      l.textContent="View project \u2192";
+      b.appendChild(l);
+    }
+    a.appendChild(b);
+    return a;
+  }
+
+  fetch(SB_URL+"/rest/v1/site_projects?select=id,title,description,thumbnail_url,project_url,tags&published=eq.true&order=sort_order.asc,created_at.desc",{
+    headers:{apikey:SB_KEY}
+  }).then(function(r){return r.ok?r.json():[];}).then(function(rows){
+    if(!rows||!rows.length)return;
+    rows.forEach(function(p){
+      var c=card(p);grid.appendChild(c);
+      if(typeof observer!=="undefined"){observer.observe(c);}else{c.classList.add("show");}
+    });
+    sec.hidden=false;
+    var hint=document.getElementById("projHint");
+    if(hint){hint.hidden=false;}
+  }).catch(function(){});
+})();
+</script>
+
+</body>
+</html>
